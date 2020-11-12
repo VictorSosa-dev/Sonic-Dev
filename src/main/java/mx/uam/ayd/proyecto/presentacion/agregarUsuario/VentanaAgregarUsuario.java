@@ -29,25 +29,7 @@ public class VentanaAgregarUsuario extends JFrame {
 	private JTextField textFieldApellido;
 	private JComboBox <String> comboBoxGrupo;
 
-	/**
-	 * Launch the application.
-	 *
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaAgregarUsuario frame = new VentanaAgregarUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
-	/**
-	 * Create the frame.
-	 */
 	public VentanaAgregarUsuario() {
 		
 		

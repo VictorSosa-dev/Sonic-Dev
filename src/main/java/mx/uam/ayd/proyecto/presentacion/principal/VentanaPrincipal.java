@@ -47,7 +47,7 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel lblMiAplicacin = new JLabel("Mi Aplicación");
+		JLabel lblMiAplicacin = new JLabel("Mi aplicación ");
 		lblMiAplicacin.setBounds(5, 5, 440, 16);
 		contentPane.add(lblMiAplicacin);
 		
@@ -57,7 +57,7 @@ public class VentanaPrincipal extends JFrame {
 				control.agregarUsuario();
 			}
 		});
-		btnAgregarUsuario.setBounds(15, 33, 178, 29);
+		btnAgregarUsuario.setBounds(227, 132, 178, 29);
 		contentPane.add(btnAgregarUsuario);
 		
 		JButton btnListarUsuarios = new JButton("Listar usuarios");
@@ -68,7 +68,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		
-		btnListarUsuarios.setBounds(15, 88, 178, 29);
+		btnListarUsuarios.setBounds(26, 132, 178, 29);
 		contentPane.add(btnListarUsuarios);
 	}
 	
@@ -77,5 +77,6 @@ public class VentanaPrincipal extends JFrame {
 		this.control = control;
 		
 		setVisible(true);
+
 	}
 }

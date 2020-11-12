@@ -61,5 +61,7 @@ public class ControlAgregarUsuario {
 	public void termina() {
 		ventana.setVisible(false);		
 	}
+	
+	
 
 }
