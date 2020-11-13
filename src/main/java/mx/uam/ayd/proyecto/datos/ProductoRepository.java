@@ -12,9 +12,5 @@ import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 public interface ProductoRepository extends CrudRepository <Producto, Long> {
 	
-	
-	//Producto findByNombreandCompuestoandRecetaandUbicacionandPrecioandPiezas(String nombre,
-		//	String compuesto,String receta,String ubicacion,float precio,int piezas);
-
 	Producto findByNombre(String nombre);
 }

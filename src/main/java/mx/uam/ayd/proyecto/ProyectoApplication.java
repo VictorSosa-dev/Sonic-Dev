@@ -8,6 +8,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import mx.uam.ayd.proyecto.datos.GrupoRepository;
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
+import mx.uam.ayd.proyecto.datos.VentaRepository;
+import mx.uam.ayd.proyecto.datos.DetalleVentaRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Grupo;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
@@ -28,6 +30,12 @@ public class ProyectoApplication {
 	
 	@Autowired
 	ProductoRepository productoRepository;
+	
+	@Autowired
+	DetalleVentaRepository detalleVentaRepository;
+	
+	@Autowired
+	VentaRepository ventaRepository;
 	
 	@Autowired
 	ControlPrincipal controlPrincipal;
@@ -87,7 +95,8 @@ public class ProyectoApplication {
 		Producto producto5 = new Producto("Dualgos","Paracetamol-Ubuprofeno",
 				"No","Estante 2, segundo anaquel",29,10);
 		productoRepository.save(producto5);
-				
+		
+		
 		Grupo grupoAdmin = new Grupo();
 		grupoAdmin.setNombre("Administradores");
 		grupoRepository.save(grupoAdmin);

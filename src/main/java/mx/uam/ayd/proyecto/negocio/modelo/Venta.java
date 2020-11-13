@@ -15,48 +15,21 @@ import javax.persistence.OneToMany;
 
 import lombok.Data;
 
-/**
- * Entidad de negocio Producto
- * @author VictorSosa
- *
- */
-
 @Entity
 @Data
-public class Producto {
+public class Venta {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long idProducto;
-	private String nombre;
-	private String compuesto;
-	private String receta;
-	private String ubicacion;
-	private float precio;
-	private int piezas;
+	private long idVenta;
+	private String fecha;
+	private float total;
 	
 	@OneToMany(targetEntity = DetalleVenta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "idProducto")
+	@JoinColumn(name = "idVenta")
 	private final List <DetalleVenta> ventas = new ArrayList <> ();
 
-	
-	public Producto () {}
-	public Producto(String nombre, String compuesto, String receta, String ubicacion, float precio,
-			int piezas) {
-		this.nombre = nombre;
-		this.compuesto = compuesto;
-		this.receta = receta;
-		this.ubicacion = ubicacion;
-		this.precio = precio;
-		this.piezas = piezas;
-	}
-	
 	public boolean addDetalleVenta(DetalleVenta detalleVenta) {
 		return ventas.add(detalleVenta);
 	}
-	
-	
-	
-	
-	
 	
 }

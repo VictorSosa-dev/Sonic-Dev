@@ -29,21 +29,36 @@ public class ServicioProducto {
 	}
 
 
-	public void Actualiza(String nombre) {
+	public void actualizaMenos(String nombre) {
 		int piezas;
-		Producto producto1 = productoRepository.findByNombre(nombre);
-		piezas = producto1.getPiezas();
-		producto1.setPiezas(piezas-1);
-		producto1.getNombre();
-		producto1.getPiezas();
-		producto1.getCompuesto();
-		producto1.getReceta();
-		producto1.getUbicacion();
-		producto1.getPrecio();
+		Producto producto = productoRepository.findByNombre(nombre);
+		piezas = producto.getPiezas();
+		producto.setPiezas(piezas-1);
+		producto.getNombre();
+		producto.getPiezas();
+		producto.getCompuesto();
+		producto.getReceta();
+		producto.getUbicacion();
+		producto.getPrecio();
 		
-		productoRepository.save(producto1);
-		System.out.print(piezas);
-		System.out.print(producto1);
+		productoRepository.save(producto);
+		
+	}
+
+
+	public void actualizaMas(String nombre) {
+		int piezas;
+		Producto producto = productoRepository.findByNombre(nombre);
+		piezas = producto.getPiezas();
+		producto.setPiezas(piezas+1);
+		producto.getNombre();
+		producto.getPiezas();
+		producto.getCompuesto();
+		producto.getReceta();
+		producto.getUbicacion();
+		producto.getPrecio();
+		
+		productoRepository.save(producto);		
 	}
 
 

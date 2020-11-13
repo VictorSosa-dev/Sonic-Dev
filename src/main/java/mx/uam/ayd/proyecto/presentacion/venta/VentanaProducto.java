@@ -61,21 +61,27 @@ public class VentanaProducto extends JFrame {
 		
 		
 		textFieldNombre = new JTextField();
+		textFieldNombre.setEditable(false);
 		textFieldNombre.setColumns(10);
 		
 		textFieldCompuesto = new JTextField();
+		textFieldCompuesto.setEditable(false);
 		textFieldCompuesto.setColumns(10);
 		
 		textFieldReceta = new JTextField();
+		textFieldReceta.setEditable(false);
 		textFieldReceta.setColumns(10);
 		
 		textFieldUbicacion = new JTextField();
+		textFieldUbicacion.setEditable(false);
 		textFieldUbicacion.setColumns(10);
 		
 		textFieldPrecio = new JTextField();
+		textFieldPrecio.setEditable(false);
 		textFieldPrecio.setColumns(10);
 		
 		textFieldPiezas = new JTextField();
+		textFieldPiezas.setEditable(false);
 		textFieldPiezas.setColumns(10);
 	
 		
@@ -162,7 +168,7 @@ public class VentanaProducto extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			
 				controlVenta.agregarTabla(producto);
-				controlVenta.actulizaInventario(producto.getNombre());
+				controlVenta.actulizaInventario1(producto.getNombre());
 				controlVenta.total(producto.getPrecio());
 			}
 		});
