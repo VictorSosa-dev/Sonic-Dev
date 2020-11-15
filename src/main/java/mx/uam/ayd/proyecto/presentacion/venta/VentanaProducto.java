@@ -177,7 +177,6 @@ public class VentanaProducto extends JFrame {
 
 	public void muestra(ControlVenta controlVenta) {
 		this.controlVenta = controlVenta;
-		
 		setVisible(true);
 		
 	}

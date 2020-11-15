@@ -72,27 +72,27 @@ public class ProyectoApplication {
 	 */
 	public void inicializaBD() {
 		
-		Producto producto = new Producto("Ajolotius","Miel de abeja",
+		Producto producto = new Producto("AJOLOTIUS","Miel de abeja",
 				"No","Estante 2, segundo anaquel",50,10);
 		productoRepository.save(producto);
 		
-		Producto producto1 = new Producto("Diclofenaco","Diclofenaco Sodico",
+		Producto producto1 = new Producto("DICLOFENACO","Diclofenaco Sodico",
 				"No","Estante 2, tercer anaquel",45,10);
 		productoRepository.save(producto1);
 		
-		Producto producto2 = new Producto("XL3xtra","Parecetamol-fenilefina-clorfenamina",
+		Producto producto2 = new Producto("XL3XTRA","Parecetamol-fenilefina-clorfenamina",
 				"No","Estante 2, primer anaquel",48,10);
 		productoRepository.save(producto2);
 		
-		Producto producto3 = new Producto("Cloranfenicol","Cloranfenicol",
+		Producto producto3 = new Producto("CLORANFENICOL","Cloranfenicol",
 				"No","Estante 1, segundo anaquel",22,10);
 		productoRepository.save(producto3);
 		
-		Producto producto4 = new Producto("Diurmessel","furosemina",
+		Producto producto4 = new Producto("DIURMESSEL","furosemina",
 				"Si","Estante 1, cuarto anaquel",35,10);
 		productoRepository.save(producto4);
 
-		Producto producto5 = new Producto("Dualgos","Paracetamol-Ubuprofeno",
+		Producto producto5 = new Producto("DUALGOS","Paracetamol-Ubuprofeno",
 				"No","Estante 2, segundo anaquel",29,10);
 		productoRepository.save(producto5);
 		

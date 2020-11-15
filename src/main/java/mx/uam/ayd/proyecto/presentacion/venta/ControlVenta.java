@@ -1,5 +1,8 @@
 package mx.uam.ayd.proyecto.presentacion.venta;
 
+/**
+ * @author VictorSosa
+ */
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,130 +17,160 @@ import mx.uam.ayd.proyecto.negocio.ServicioProducto;
 import mx.uam.ayd.proyecto.negocio.ServicioVenta;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.negocio.modelo.Venta;
-import mx.uam.ayd.proyecto.negocio.modelo.DetalleVenta;
 import mx.uam.ayd.proyecto.presentacion.cobro.ControlCobro;
-import mx.uam.ayd.proyecto.presentacion.cobro.VentanaCobro;
 
 /*
  * Esta clase lleva el flujo de la ventana de venta
  */
 
-@Component 
+@Component
 public class ControlVenta {
-	
-	
+
 	@Autowired
 	private VentanaVenta ventanaVenta;
-	
+
 	@Autowired
 	private VentanaProducto ventanaProducto;
-	
+
 	@Autowired
 	private ControlCobro controlCobro;
-	
+
 	@Autowired
 	private ServicioProducto servicioProducto;
-	
-	@Autowired
-	private ServicioVenta servicioVenta;
-	
+
 	@Autowired
 	private ServicioDetalleVenta servicioDetalleVenta;
-	
+
 	/**
-	 * Inicia la historia de usuario
+	 * Inicia la historia de usuario: Agregar prodcutos para la venta
 	 * 
 	 */
 	public void inicia() {
-		
 		ventanaVenta.muestra(this);
-		
 	}
-	
-	
+
+	/**
+	 * Método que busca invoca al servio de producto para duscar el producto por
+	 * nombre.
+	 * 
+	 * @param nombre
+	 */
 	public void buscarProducto(String nombre) {
-		
+
 		try {
 			ventanaProducto.muestra(this);
 			ventanaProducto.llena(servicioProducto.buscarProducto(nombre));
 
-		} catch(Exception ex) {
-			cerrarVentana();
-			ventanaVenta.muestraDialogoConMensaje("Error al buscar el Producto: "+ex.getMessage());
-			
+		} catch (Exception ex) {
+			termina();
+			ventanaVenta.muestraDialogoConMensaje("El nombre del producto esta mal escrito o no esta en el sistema");
 		}
 	}
-	
 
+	/**
+	 * Método que invoca al servicio de producto para prodcuto por nombre
+	 * 
+	 * @param nombre
+	 * @return Un objeto de tipo producto si lo encuentra y nulo si lo encuentra.
+	 */
 	public Producto obtenerProducto(String nombre) {
-		
-		try {
-		return	servicioProducto.buscarProducto(nombre);
 
-		} catch(Exception ex) {
-		return null;	
-			
+		try {
+			return servicioProducto.buscarProducto(nombre);
+		} catch (Exception ex) {
+			return null;
 		}
-		
-		
+
 	}
+
+	/**
+	 * Oculta la venta de descripcion del producto
+	 */
 	public void termina() {
-		ventanaProducto.setVisible(false);		
+		ventanaProducto.setVisible(false);
 	}
-	
-	public void cerrarVentana() {
-		ventanaProducto.setVisible(false);		
-	}
-	
+
+	/**
+	 * Método que llena la tabla de la ventana venta.
+	 * 
+	 * @param producto
+	 */
+
 	public void agregarTabla(Producto producto) {
-		
-		try{
+
+		try {
 			ventanaVenta.llenaTabla(producto);
 			ventanaVenta.muestraDialogoConMensaje("Producto agregado exitosamente");
-		} catch(Exception ex){
-			ventanaVenta.muestraDialogoConMensaje("Error al buscar el Producto: "+ex.getMessage());
-		
+		} catch (Exception ex) {
+			ventanaVenta.muestraDialogoConMensaje("Error al buscar el Producto: " + ex.getMessage());
 		}
-		
-		cerrarVentana();
+		termina();
 	}
+
+	/**
+	 * Método que actualiza invoca al servicio para actualizar el inventario de un
+	 * producto
+	 * 
+	 * @param nombre
+	 */
 
 	public void actulizaInventario1(String nombre) {
 		servicioProducto.actualizaMenos(nombre);
-		
+
 	}
-	
+
 	public void actulizaInventario2(String nombre) {
 		servicioProducto.actualizaMas(nombre);
-		
 	}
+
+	/**
+	 * Termina historia de usuario: Agregar prodcutos para la venta.
+	 * 
+	 * 
+	 */
+
+	/**
+	 * 
+	 * Inicia historia de forma de cobro
+	 */
+
+	/**
+	 * Método que se comunica con el control cobro para mostrar la ventana.
+	 * 
+	 * @param total
+	 */
+	public void muentraCobro(float total) {
+		controlCobro.inicia(total);
+	}
+
+	/**
+	 * Método que obtiene el total de la ventana de venta.
+	 * 
+	 * @param precio
+	 */
 	public void total(float precio) {
 		ventanaVenta.textTotal(precio);
 	}
 
-	public void muentraCobro(float total) {
-		controlCobro.inicia(total);
-		
-	}
-
-
+	/**
+	 * Método que obtien los prodcuto de la venta
+	 * 
+	 * @param total
+	 */
 	public void obtenerLista(float total) {
-		
-		List <Producto> listaProductos = new ArrayList <> ();
-		listaProductos=ventanaVenta.recorrerTabla();
+
+		List<Producto> listaProductos = new ArrayList<>();
+		listaProductos = ventanaVenta.recorrerTabla();
 		Venta venta = new Venta();
 		Calendar fecha = new GregorianCalendar();
 		int ano = fecha.get(Calendar.YEAR);
-        int mes = fecha.get(Calendar.MONTH);
-        int dia = fecha.get(Calendar.DAY_OF_MONTH);
-        String fechaF = ano +"/"+ mes+"/"+ dia;
+		int mes = fecha.get(Calendar.MONTH);
+		int dia = fecha.get(Calendar.DAY_OF_MONTH);
+		String fechaF = ano + "/" + mes + "/" + dia;
 		venta.setFecha(fechaF);
 		venta.setTotal(total);
-		servicioDetalleVenta.agregarDetalleVenta(venta,listaProductos);
+		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
 		controlCobro.muestraDialogo();
 	}
 
-	
-	
-	
 }

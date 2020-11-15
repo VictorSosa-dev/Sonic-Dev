@@ -1,8 +1,15 @@
 package mx.uam.ayd.proyecto.presentacion.venta;
 
+/**
+ * VictorSosa
+ * 
+ */
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -35,10 +42,15 @@ public class VentanaVenta extends JFrame {
 	float total = 0;
 	Producto producto;
 
-	DefaultTableModel modelo = new DefaultTableModel();
-
+	private DefaultTableModel modelo = new DefaultTableModel() {
+		@Override 
+		public boolean isCellEditable(int row, int column) { 
+			return false; 
+			} 
+	};
+	
 	public VentanaVenta() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Venta");
 		setBounds(100, 100, 619, 342);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -61,8 +73,9 @@ public class VentanaVenta extends JFrame {
 		contentPane.add(txtIngresaProducto);
 		txtIngresaProducto.setColumns(10);
 
-		JLabel lblTotal = new JLabel("Total");
-		lblTotal.setBounds(424, 232, 39, 14);
+		JLabel lblTotal = new JLabel("Total:");
+		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTotal.setBounds(412, 232, 51, 14);
 		contentPane.add(lblTotal);
 
 		textTotal = new JTextField();
@@ -76,7 +89,7 @@ public class VentanaVenta extends JFrame {
 		contentPane.add(btnCobrar);
 
 		JButton btnQuitarDeLista = new JButton("Quitar de lista");
-		btnQuitarDeLista.setBounds(154, 228, 143, 23);
+		btnQuitarDeLista.setBounds(154, 228, 155, 23);
 		contentPane.add(btnQuitarDeLista);
 
 		JButton btnRecarga = new JButton("Recarga");
@@ -88,6 +101,7 @@ public class VentanaVenta extends JFrame {
 		contentPane.add(scrollPane);
 
 		table = new JTable(modelo);
+		
 
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Compuesto");
@@ -99,7 +113,7 @@ public class VentanaVenta extends JFrame {
 		// listener
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlVenta.buscarProducto(txtIngresaProducto.getText());
+				controlVenta.buscarProducto(txtIngresaProducto.getText().toUpperCase());
 
 			}
 		});
@@ -128,13 +142,43 @@ public class VentanaVenta extends JFrame {
 
 		btnCobrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// List <DetalleVenta> detalleVenta = new ArrayList <> ();
-				// venta = recorrerTabla();
-				// controlVenta.agregarVenta(venta);
 				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()));
 
 			}
 		});
+		
+		table.addComponentListener(new ComponentListener() {
+			@Override
+			public void componentResized(ComponentEvent e) {
+				if(table.getRowCount() == 0){
+					btnQuitarDeLista.setEnabled(false);
+					btnCobrar.setEnabled(false);
+				}else {
+					btnQuitarDeLista.setEnabled(true);
+					btnCobrar.setEnabled(true);
+				}
+			}
+
+			@Override
+			public void componentMoved(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void componentShown(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void componentHidden(ComponentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+	
 
 	}
 
