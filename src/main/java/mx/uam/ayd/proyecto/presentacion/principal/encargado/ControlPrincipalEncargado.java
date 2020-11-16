@@ -1,4 +1,4 @@
-package mx.uam.ayd.proyecto.presentacion.principal.empleado;
+package mx.uam.ayd.proyecto.presentacion.principal.encargado;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -7,14 +7,15 @@ import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
+
 @Component
-public class ControlPrincipalEmpleados {
+public class ControlPrincipalEncargado {
 
 	@Autowired
 	private ControlVenta controlVenta;
 
 	@Autowired
-	private VentanaPrincipalEmpleados ventana;
+	private VentanaPrincipalEncargado ventana;
 	
 	@Autowired
 	private ControlCierreVenta controlCierreVenta;

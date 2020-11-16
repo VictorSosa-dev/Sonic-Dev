@@ -15,21 +15,26 @@ public class Empleado {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idEmpleado;
-	private String nombres;
+	private String nombre;
 	private String apellidoP;
 	private String apellidoM;
 	private String correo;
 	private String celular;
 	private String nivel;
+	private String usuario;
+	private String password;
 	public Empleado() {}
-	public Empleado(String nombres, String apellidoP, String apellidoM, String correo, String celular, String nivel) {
-		this.nombres = nombres;
+	public Empleado(String nombre, String apellidoP, String apellidoM, String correo, String celular, String nivel,
+			String usuario, String password) {
+		this.nombre = nombre;
 		this.apellidoP = apellidoP;
 		this.apellidoM = apellidoM;
 		this.correo = correo;
 		this.celular = celular;
 		this.nivel = nivel;
-		
+		this.usuario = usuario;
+		this.password = password;
 	}
+	
 	
 }

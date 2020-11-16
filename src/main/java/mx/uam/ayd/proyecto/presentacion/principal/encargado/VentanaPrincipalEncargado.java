@@ -1,32 +1,37 @@
-package mx.uam.ayd.proyecto.presentacion.principal.empleado;
+package mx.uam.ayd.proyecto.presentacion.principal.encargado;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.EtchedBorder;
 
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
+import java.awt.Color;
 
 @SuppressWarnings("serial")
 @Component
-public class VentanaPrincipalEmpleados extends JFrame {
+public class VentanaPrincipalEncargado extends JFrame {
 
 	private JPanel contentPane;
-	private ControlPrincipalEmpleados control;
+	private ControlPrincipalEncargado control;
 	private Empleado empleado;
 	private JTextField txtNombreEmpleado;
 	private JTextField txtNivel;
 
-	public VentanaPrincipalEmpleados() {
+	public VentanaPrincipalEncargado() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 395, 272);
 		contentPane = new JPanel();
@@ -93,7 +98,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		panel_2.add(btnCerrarSesion);
 	}
 
-	public void muestra(ControlPrincipalEmpleados control, Empleado empleado) {
+	public void muestra(ControlPrincipalEncargado control, Empleado empleado) {
 		this.control = control;
 		this.empleado = empleado;
 		this.txtNombreEmpleado
