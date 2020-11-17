@@ -1,5 +1,7 @@
 package mx.uam.ayd.proyecto.presentacion.cobro;
 
+import javax.swing.JFrame;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +41,11 @@ public class ControlCobro {
 
 	public void muestraDialogo() {
 		ventanaCobro.muestraDialogo();
+	}
+
+	public void limpiarTabla() {
+		controlVenta.limpiarTabla();
+		
 	}
 
 	/**

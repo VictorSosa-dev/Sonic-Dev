@@ -40,7 +40,8 @@ public class ControlVenta {
 
 	@Autowired
 	private ServicioDetalleVenta servicioDetalleVenta;
-
+	
+	private List<Producto> listaProductos = new ArrayList<>();
 	/**
 	 * Inicia la historia de usuario: Agregar prodcutos para la venta
 	 * 
@@ -114,21 +115,22 @@ public class ControlVenta {
 	 * @param nombre
 	 */
 
-	public void actulizaInventario1(String nombre) {
-		servicioProducto.actualizaMenos(nombre);
-
+	public void actulizaInventarioMenos(List<Producto> listaProductos) {
+		servicioProducto.actualizaInventarioMenos(listaProductos);
 	}
 
-	public void actulizaInventario2(String nombre) {
-		servicioProducto.actualizaMas(nombre);
+	public void actulizaInventarioMas(String nombre) {
+		servicioProducto.actualizaInventarioMas(nombre);
 	}
 
 	/**
-	 * Termina historia de usuario: Agregar prodcutos para la venta.
+	 * Termina historia de usuario: Agregar productos para la venta.
 	 * 
 	 * 
 	 */
 
+	
+	
 	/**
 	 * 
 	 * Inicia historia de forma de cobro
@@ -159,7 +161,6 @@ public class ControlVenta {
 	 */
 	public void obtenerLista(float total) {
 
-		List<Producto> listaProductos = new ArrayList<>();
 		listaProductos = ventanaVenta.recorrerTabla();
 		Venta venta = new Venta();
 		Calendar fecha = new GregorianCalendar();
@@ -169,8 +170,14 @@ public class ControlVenta {
 		String fechaF = ano + "/" + mes + "/" + dia;
 		venta.setFecha(fechaF);
 		venta.setTotal(total);
+		actulizaInventarioMenos(listaProductos);
 		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
 		controlCobro.muestraDialogo();
+	}
+
+	public void limpiarTabla() {
+		ventanaVenta.limpia();
+		
 	}
 
 }

@@ -130,12 +130,17 @@ public class VentanaVenta extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int x = table.getSelectedRow();
 				int y = table.getSelectedColumn();
-				Object a = table.getValueAt(x, y - 1);
-				float r = Float.parseFloat(a.toString());
-				total -= r;
-				textTotal.setText(String.valueOf(total));
-				modelo.removeRow(x);
-				controlVenta.actulizaInventario2(producto.getNombre());
+				
+				try {
+					Object a = table.getValueAt(x, y - 1);
+					float r = Float.parseFloat(a.toString());
+					total -= r;
+					textTotal.setText(String.valueOf(total));
+					modelo.removeRow(x);
+				} catch (Exception e2) {
+					JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun producto para quitar");
+				}
+				
 
 			}
 		});
@@ -223,16 +228,35 @@ public class VentanaVenta extends JFrame {
 	public List<Producto> recorrerTabla() {
 		List<Producto> lista = new ArrayList<>();
 		Producto producto;
-
-		for (int i = 0; i < table.getRowCount(); i++) {
-
-			producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
-
-			lista.add(producto);
-		}
+		
+		try {
+			for (int i = 0; i < table.getRowCount(); i++) {
+	
+				producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
+	
+				lista.add(producto);
+			}
+		} catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al leer la tabla.");
+        }	
 
 		return lista;
 
 	}
+
+	public void limpia() {
+		textTotal.setText("");
+		txtIngresaProducto.setText("");
+		total=0;
+		int filas = table.getRowCount();
+		try {
+			for (int i = 0; filas>i ; i++) {
+				modelo.removeRow(0);
+			}
+		} catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }	
+	}
+
 
 }

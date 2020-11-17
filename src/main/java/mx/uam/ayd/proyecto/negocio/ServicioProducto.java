@@ -1,5 +1,7 @@
 package mx.uam.ayd.proyecto.negocio;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +21,7 @@ public class ServicioProducto {
 	 * 
 	 * @param nombre
 	 * @return Regresa un producto si lo encontro y null si no está
-	 *
+	 * @throws IllegalArgumentException si se pasa un null.
 	 */
 	public Producto buscarProducto(String nombre) {
 
@@ -27,32 +29,11 @@ public class ServicioProducto {
 
 		System.out.print(producto);
 		if (producto == null) {
-			throw new IllegalArgumentException("Ese usuario ya existe");
-		} else {
-			return producto;
-		}
-	}
-
-	/**
-	 * Método que decrementa la cantidad de piezas de un producto.
-	 * 
-	 * @param nombre
-	 */
-
-	public void actualizaMenos(String nombre) {
-		int piezas;
-		Producto producto = productoRepository.findByNombre(nombre);
-		piezas = producto.getPiezas();
-		producto.setPiezas(piezas - 1);
-		producto.getNombre();
-		producto.getPiezas();
-		producto.getCompuesto();
-		producto.getReceta();
-		producto.getUbicacion();
-		producto.getPrecio();
-
-		productoRepository.save(producto);
-
+			throw new IllegalArgumentException("No se encontro el producto");
+		} 
+		
+		return producto;
+		
 	}
 
 	/**
@@ -61,19 +42,33 @@ public class ServicioProducto {
 	 * @param nombre
 	 */
 
-	public void actualizaMas(String nombre) {
+	public void actualizaInventarioMas(String nombre) {
 		int piezas;
-		Producto producto = productoRepository.findByNombre(nombre);
-		piezas = producto.getPiezas();
-		producto.setPiezas(piezas + 1);
-		producto.getNombre();
-		producto.getPiezas();
-		producto.getCompuesto();
-		producto.getReceta();
-		producto.getUbicacion();
-		producto.getPrecio();
+		Producto producto1 = productoRepository.findByNombre(nombre);
+		piezas = producto1.getPiezas();
+		producto1.setPiezas(piezas + 1);
+		producto1.getNombre();
+		producto1.getPiezas();
+		producto1.getCompuesto();
+		producto1.getReceta();
+		producto1.getUbicacion();
+		producto1.getPrecio();
 
-		productoRepository.save(producto);
+		productoRepository.save(producto1);
+	}
+	
+	/**
+	 * Método que decrementa la cantidad de piezas de un producto.
+	 * 
+	 * @param lista de productos de la venta
+	 */
+	public void actualizaInventarioMenos(List<Producto> listaProductos) {
+		
+		for (Producto producto : listaProductos) {
+			producto.setPiezas(producto.getPiezas()-1);
+			productoRepository.save(producto);
+		}
 	}
 
+	
 }

@@ -186,6 +186,7 @@ public class VentanaCobro extends JFrame {
 			public void keyReleased(KeyEvent e) {
 				if(textFieldRecibi.getText().length() == 0){
 					textFieldCambio.setText(" ");
+					btnFinalizar.setEnabled(false);
 				}else {
 					if(textFieldRecibi.getText().length() != 0){
 						btnFinalizar.setEnabled(true);
@@ -275,6 +276,10 @@ public class VentanaCobro extends JFrame {
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlCobro.obtenerLista(total);
+				textFieldRecibi.setText("");
+				textFieldCambio.setText("");
+				controlCobro.limpiarTabla();
+				controlCobro.termina();
 			}
 		});
 		
@@ -288,7 +293,7 @@ public class VentanaCobro extends JFrame {
 	}
 
 	public void muestraDialogo() {
-		JOptionPane.showMessageDialog(null,"La se realizó con exito");
+		JOptionPane.showMessageDialog(null,"La venta se realizó con exito");
 		
 	}
 }
