@@ -189,8 +189,10 @@ public class VentanaCobro extends JFrame {
 					btnFinalizar.setEnabled(false);
 				}else {
 					if(textFieldRecibi.getText().length() != 0){
-						btnFinalizar.setEnabled(true);
 						cambio();
+						float a = Float.parseFloat(textFieldCambio.getText());
+						if(a>=0)
+							btnFinalizar.setEnabled(true);
 					}
 				}	
 			}
@@ -278,11 +280,17 @@ public class VentanaCobro extends JFrame {
 		
 		btnFinalizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlCobro.obtenerLista(total);
-				textFieldRecibi.setText("");
-				textFieldCambio.setText("");
-				controlCobro.limpiarTabla();
-				controlCobro.termina();
+				float a = Float.parseFloat(textFieldCambio.getText());
+				if(a<0) {
+					JOptionPane.showMessageDialog(null, "La venta no se puede realizar porque la cantidad Recida es incorrecta");
+				}else {
+					controlCobro.obtenerLista(total);
+					textFieldRecibi.setText("");
+					textFieldCambio.setText("");
+					controlCobro.limpiarTabla();
+					controlCobro.termina();
+				}
+				
 			}
 		});
 		
