@@ -40,8 +40,9 @@ public class ControlVenta {
 
 	@Autowired
 	private ServicioDetalleVenta servicioDetalleVenta;
-	
+
 	private List<Producto> listaProductos = new ArrayList<>();
+
 	/**
 	 * Inicia la historia de usuario: Agregar prodcutos para la venta
 	 * 
@@ -103,7 +104,7 @@ public class ControlVenta {
 			ventanaVenta.llenaTabla(producto);
 			ventanaVenta.muestraDialogoConMensaje("Producto agregado exitosamente");
 		} catch (Exception ex) {
-			ventanaVenta.muestraDialogoConMensaje("Error al buscar el Producto: " + ex.getMessage());
+			ventanaVenta.muestraDialogoConMensaje("Error al buscar el Producto");
 		}
 		termina();
 	}
@@ -119,18 +120,12 @@ public class ControlVenta {
 		servicioProducto.actualizaInventarioMenos(listaProductos);
 	}
 
-	public void actulizaInventarioMas(String nombre) {
-		servicioProducto.actualizaInventarioMas(nombre);
-	}
-
 	/**
 	 * Termina historia de usuario: Agregar productos para la venta.
 	 * 
 	 * 
 	 */
 
-	
-	
 	/**
 	 * 
 	 * Inicia historia de forma de cobro
@@ -177,7 +172,7 @@ public class ControlVenta {
 
 	public void limpiarTabla() {
 		ventanaVenta.limpia();
-		
+
 	}
 
 }

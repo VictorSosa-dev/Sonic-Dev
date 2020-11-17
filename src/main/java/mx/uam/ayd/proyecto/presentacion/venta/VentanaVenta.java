@@ -148,7 +148,7 @@ public class VentanaVenta extends JFrame {
 		btnCobrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()));
-
+				btnBuscar.setEnabled(false);
 			}
 		});
 		

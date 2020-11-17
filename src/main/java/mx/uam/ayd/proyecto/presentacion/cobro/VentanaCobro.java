@@ -268,7 +268,10 @@ public class VentanaCobro extends JFrame {
 		});
 		
 		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
+				textFieldRecibi.setText("");
+				textFieldCambio.setText("");
+				btnFinalizar.setEnabled(false);
 				controlCobro.termina();
 			}
 		});

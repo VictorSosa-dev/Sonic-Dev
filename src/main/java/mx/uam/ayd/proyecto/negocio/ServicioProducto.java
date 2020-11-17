@@ -2,6 +2,8 @@ package mx.uam.ayd.proyecto.negocio;
 
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,37 +26,16 @@ public class ServicioProducto {
 	 * @throws IllegalArgumentException si se pasa un null.
 	 */
 	public Producto buscarProducto(String nombre) {
-
+		
 		Producto producto = productoRepository.findByNombre(nombre);
-
-		System.out.print(producto);
+		
 		if (producto == null) {
 			throw new IllegalArgumentException("No se encontro el producto");
-		} 
+		} else{
+			log.info("Producto encontrado:" +nombre);
+			return producto;
+		}
 		
-		return producto;
-		
-	}
-
-	/**
-	 * Método que incrementa la cantidad de piezas de un producto.
-	 * 
-	 * @param nombre
-	 */
-
-	public void actualizaInventarioMas(String nombre) {
-		int piezas;
-		Producto producto1 = productoRepository.findByNombre(nombre);
-		piezas = producto1.getPiezas();
-		producto1.setPiezas(piezas + 1);
-		producto1.getNombre();
-		producto1.getPiezas();
-		producto1.getCompuesto();
-		producto1.getReceta();
-		producto1.getUbicacion();
-		producto1.getPrecio();
-
-		productoRepository.save(producto1);
 	}
 	
 	/**
@@ -63,11 +44,15 @@ public class ServicioProducto {
 	 * @param lista de productos de la venta
 	 */
 	public void actualizaInventarioMenos(List<Producto> listaProductos) {
-		
-		for (Producto producto : listaProductos) {
-			producto.setPiezas(producto.getPiezas()-1);
-			productoRepository.save(producto);
+		try {
+			for (Producto producto : listaProductos) {
+				producto.setPiezas(producto.getPiezas()-1);
+				productoRepository.save(producto);
+			}
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se actualizaron las piezas");
 		}
+		
 	}
 
 	

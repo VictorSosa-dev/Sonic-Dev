@@ -1,11 +1,10 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import static org.assertj.core.api.Assertions.assertThatObject;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
-import java.util.List;
+
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -18,15 +17,12 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
-import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
 
 @ExtendWith(MockitoExtension.class)
 class ServicioProductoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-
-		
 	}
 
 	@AfterEach
@@ -35,23 +31,55 @@ class ServicioProductoTest {
 	
 	@Mock
 	private ProductoRepository productoRepository;
-	
+
 	// Esta anotación hace que se inyecten todos los Mocks al módulo que quiero
 	// probar para que no haya nullPointerException por que las dependencias
 	// no están satisfechas en tiempo de pruebas
 	@InjectMocks
 	private ServicioProducto servicio;
+
 	
 	@Test
 	void testBuscarProductos() {
-	
-		//Prueba 1: El método regresa nul la busqueda null
+
+		// Prueba 1: El método regresa null la busqueda null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 
 			servicio.buscarProducto("aspirina");
-	
-		});
-		
-	}	
 
+		});
+
+
+	}
+
+
+	@Test
+	void testActulizaInventarioMenos() {
+		//Prueba 1: Se actualiza la cantidad de piezas de un producto
+		LinkedList<Producto> lista = new LinkedList<>();
+		Producto producto = new Producto();
+		Producto p1 = new Producto();
+		p1.setNombre("aspirina");
+		p1.setCompuesto("ff");
+		p1.setReceta("Si");
+		p1.setUbicacion("aqui");
+		p1.setPrecio(20);
+		p1.setPiezas(5);
+		
+		lista.add(p1);
+		
+		servicio.actualizaInventarioMenos(lista);
+		
+		int p = p1.getPiezas();
+		
+		assertEquals(4,p);
+		
+		//Prueba 2: No se actualizó el inventario
+		
+		servicio.actualizaInventarioMenos(lista);
+		
+		int o = p1.getPiezas();
+		
+		assertNotEquals(8,0);
+	}
 }

@@ -28,15 +28,19 @@ public class ServicioDetalleVenta {
 	private DetalleVentaRepository detalleDeVentaRepository;
 
 	/**
-	 * Método que registra los detalles la venta y la venta.
+	 * Método que registra los detalles la venta de cada producto 
+	 * y las  caracteristicas de la venta.
 	 * 
 	 * @param venta
 	 * @param listaProductos
 	 */
 
 	public void agregarDetalleVenta(Venta venta, List<Producto> listaProductos) {
-
-		System.out.println(venta.getTotal());
+		
+		if(venta == null && listaProductos.size()==0) {
+			throw new NullPointerException("Se recibió una venta null y una lista vacia");
+		}
+		
 		ventaRepository.save(venta);
 		for (Producto producto : listaProductos) {
 			DetalleVenta detalle = new DetalleVenta();
@@ -44,7 +48,6 @@ public class ServicioDetalleVenta {
 			venta.addDetalleVenta(detalle);
 			producto.addDetalleVenta(detalle);
 			ventaRepository.save(venta);
-			System.out.println(producto);
 			productoRepository.save(producto);
 		}
 
