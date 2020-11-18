@@ -6,17 +6,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
+import mx.uam.ayd.proyecto.datos.DetalleVentaRepository;
+import mx.uam.ayd.proyecto.datos.EmpleadoRepository;
 import mx.uam.ayd.proyecto.datos.GrupoRepository;
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
 import mx.uam.ayd.proyecto.datos.VentaRepository;
-import mx.uam.ayd.proyecto.datos.DetalleVentaRepository;
-import mx.uam.ayd.proyecto.datos.EmpleadoRepository;
+import mx.uam.ayd.proyecto.negocio.ServicioCliente;
+import mx.uam.ayd.proyecto.negocio.ServicioDetallePedidoCliente;
+import mx.uam.ayd.proyecto.negocio.ServicioPedidoCliente;
+import mx.uam.ayd.proyecto.negocio.modelo.Cliente;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Grupo;
+import mx.uam.ayd.proyecto.negocio.modelo.PedidoCliente;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
-import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmpleados;
 
 /**
  * 
@@ -48,6 +52,15 @@ public class ProyectoApplication {
 
 	@Autowired
 	GrupoRepository grupoRepository;
+	
+	@Autowired
+	ServicioDetallePedidoCliente servicioDetallePedidoCliente;
+	
+	@Autowired
+	ServicioPedidoCliente servicioPedidoCliente;
+	
+	@Autowired
+	ServicioCliente servicioCliente;
 
 	public static void main(String[] args) {
 
@@ -63,6 +76,7 @@ public class ProyectoApplication {
 
 		inicializaBD();
 		controlInicioSesion.inicia();
+		//controlPrincipal.inicia();
 	}
 
 	/**
@@ -81,13 +95,13 @@ public class ProyectoApplication {
 		productoRepository.save(producto1);
 
 		Producto producto2 = new Producto("XL3XTRA", "Parecetamol-fenilefina-clorfenamina", "No",
-				"Estante 2, primer anaquel", 48, 10);
+				"Estante 2, primer anaquel", 48, 5);
 		productoRepository.save(producto2);
 
 		Producto producto3 = new Producto("CLORANFENICOL", "Cloranfenicol", "No", "Estante 1, segundo anaquel", 22, 10);
 		productoRepository.save(producto3);
 
-		Producto producto4 = new Producto("DIURMESSEL", "furosemina", "Si", "Estante 1, cuarto anaquel", 35, 10);
+		Producto producto4 = new Producto("DIURMESSEL", "furosemina", "Si", "Estante 1, cuarto anaquel", 35, 5);
 		productoRepository.save(producto4);
 
 		Producto producto5 = new Producto("DUALGOS", "Paracetamol-Ubuprofeno", "No", "Estante 2, segundo anaquel", 29,
@@ -100,7 +114,20 @@ public class ProyectoApplication {
 				"encargado", "alma", "987654321");
 		empleadoRepository.save(pruebaEmpleado);
 		empleadoRepository.save(pruebaEncargado);
-
+		
+		Cliente pruebaCliente = new Cliente("Joana", "Hernandez", "Ruiz", "joana@gmail.com", "5544332211");
+		servicioCliente.guardarCliente(pruebaCliente);
+		PedidoCliente pruebaPedidoCliente = new PedidoCliente("2020/10/17", 2, 119);
+		servicioPedidoCliente.guardar(pruebaPedidoCliente);
+		
+		pruebaEmpleado.addPedidoCliente(pruebaPedidoCliente);
+		empleadoRepository.save(pruebaEmpleado);
+		pruebaCliente.addPedidoCliente(pruebaPedidoCliente);
+		servicioCliente.guardarCliente(pruebaCliente);
+		
+		servicioDetallePedidoCliente.agregarDetallePedidoCliente(pruebaPedidoCliente, producto1, 2);
+		servicioDetallePedidoCliente.agregarDetallePedidoCliente(pruebaPedidoCliente, producto5, 1);
+		
 		Grupo grupoAdmin = new Grupo();
 		grupoAdmin.setNombre("Administradores");
 		grupoRepository.save(grupoAdmin);

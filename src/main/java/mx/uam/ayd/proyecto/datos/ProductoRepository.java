@@ -1,7 +1,10 @@
 package mx.uam.ayd.proyecto.datos;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
+import mx.uam.ayd.proyecto.negocio.modelo.DetalleVenta;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 /**
@@ -12,5 +15,9 @@ import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 public interface ProductoRepository extends CrudRepository <Producto, Long> {
 	
-	Producto findByNombre(String nombre);
+	public Producto findByNombre(String nombre);
+
+	public List<Producto> findByVentas(DetalleVenta detalleVenta);
+
+	public List<Producto> findByReceta(String receta);
 }

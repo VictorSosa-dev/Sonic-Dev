@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.DetalleVenta;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 @Slf4j
@@ -53,6 +54,29 @@ public class ServicioProducto {
 			JOptionPane.showMessageDialog(null, "No se actualizaron las piezas");
 		}
 		
+	}
+	
+	/**
+	 * Obtiene los productos de una venta
+	 * @param detalleVenta detalle de los productos en la venta
+	 * @return lista de productos segun la venta. 
+	 */
+	public List<Producto> obtenerProductoPorVenta(DetalleVenta detalleVenta) {
+		return productoRepository.findByVentas(detalleVenta);
+
+	}
+
+	public List<Producto> obtenerProductos() {
+		return (List<Producto>) productoRepository.findAll();
+	}
+
+	public void guardar(Producto producto) {
+		productoRepository.save(producto);
+	}
+
+	public List<Producto> obtenerProductosConReceta() {
+		String receta = "Si";
+		return productoRepository.findByReceta(receta);
 	}
 
 	

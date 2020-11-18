@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.presentacion.PedidoCliente.ControlPedidoCliente;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
@@ -21,6 +22,9 @@ public class ControlPrincipalEmpleados {
 	
 	@Autowired
 	private ControlInicioSesion controlInicioSesion;
+	
+	@Autowired
+	private ControlPedidoCliente controlPedidoCliente;
 
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -46,6 +50,12 @@ public class ControlPrincipalEmpleados {
 
 	public void cerrarSesion() {
 		controlInicioSesion.inicia();
+		ventana.oculta();
+		
+	}
+
+	public void agregaPedidoCliente(Empleado empleado) {
+		controlPedidoCliente.inicia(empleado);
 		ventana.oculta();
 		
 	}

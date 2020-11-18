@@ -36,14 +36,14 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(5, 5, 369, 34);
 		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(5, 45, 369, 123);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(5, 174, 369, 52);
 		panel_2.setLayout(null);
-		
+
 		JButton btnCierreVenta = new JButton("Inicia cierre de venta");
 		btnCierreVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -54,16 +54,16 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		btnCierreVenta.setBackground(new Color(255, 0, 0));
 		btnCierreVenta.setBounds(203, 11, 156, 23);
 		panel_2.add(btnCierreVenta);
-				panel_1.setLayout(null);
-		
-				JButton btnVenta = new JButton("Venta");
-				btnVenta.setBounds(10, 30, 97, 23);
-				panel_1.add(btnVenta);
-				btnVenta.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						control.agregarProductos();
-					}
-				});
+		panel_1.setLayout(null);
+
+		JButton btnVenta = new JButton("Venta");
+		btnVenta.setBounds(10, 44, 97, 23);
+		panel_1.add(btnVenta);
+		btnVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.agregarProductos();
+			}
+		});
 		contentPane.setLayout(null);
 		panel.setLayout(null);
 
@@ -73,7 +73,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		txtNombreEmpleado.setBounds(106, 6, 254, 22);
 		panel.add(txtNombreEmpleado);
 		txtNombreEmpleado.setColumns(10);
-		
+
 		txtNivel = new JTextField();
 		txtNivel.setEditable(false);
 		txtNivel.setBounds(10, 7, 86, 20);
@@ -81,8 +81,17 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		txtNivel.setColumns(10);
 		contentPane.add(panel);
 		contentPane.add(panel_1);
-		contentPane.add(panel_2);
 		
+		JButton btnNuevoPedidoCliente = new JButton("Pedido cliente");
+		btnNuevoPedidoCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.agregaPedidoCliente(empleado);
+			}
+		});
+		btnNuevoPedidoCliente.setBounds(117, 44, 130, 23);
+		panel_1.add(btnNuevoPedidoCliente);
+		contentPane.add(panel_2);
+
 		JButton btnCerrarSesion = new JButton("Cerrar sesion");
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
