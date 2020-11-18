@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.PedidoCliente;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -17,6 +18,12 @@ import javax.swing.border.EtchedBorder;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import javax.swing.JTable;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
 @Component
@@ -32,7 +39,12 @@ public class VentanaPedidoCliente extends JFrame {
 	private JTextField txtAMaterno;
 	private JTextField txtCorreo;
 	private JTextField txtTelefono;
-	private JComboBox comboProductosReceta;
+
+	private JComboBox<String> comboProductos = new JComboBox<String>();
+	JLabel lblNewLabel = new JLabel("Producto:");
+
+	JPanel panelProducto = new JPanel();
+	private JTextField txtPiezas;
 
 	public VentanaPedidoCliente() {
 		setBounds(100, 100, 513, 420);
@@ -54,7 +66,7 @@ public class VentanaPedidoCliente extends JFrame {
 		JButton btnCrear = new JButton("Crear pedido");
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//control.iniciaCierreVenta(empleado);
+				// control.iniciaCierreVenta(empleado);
 			}
 		});
 		btnCrear.setForeground(new Color(255, 255, 255));
@@ -79,57 +91,57 @@ public class VentanaPedidoCliente extends JFrame {
 		txtNivel.setColumns(10);
 		contentPane.add(panel);
 		contentPane.add(panel_datosCliente);
-		
+
 		JLabel lblDatosCliente = new JLabel("DATOS DEL CLIENTE");
 		lblDatosCliente.setHorizontalAlignment(SwingConstants.CENTER);
 		lblDatosCliente.setBounds(0, 0, 483, 14);
 		panel_datosCliente.add(lblDatosCliente);
-		
+
 		txtNombreCliente = new JTextField();
 		txtNombreCliente.setBounds(93, 25, 140, 20);
 		panel_datosCliente.add(txtNombreCliente);
 		txtNombreCliente.setColumns(10);
-		
+
 		txtAPaterno = new JTextField();
-		txtAPaterno.setBounds(93, 56, 140, 20);
+		txtAPaterno.setBounds(103, 56, 130, 20);
 		panel_datosCliente.add(txtAPaterno);
 		txtAPaterno.setColumns(10);
-		
+
 		txtAMaterno = new JTextField();
 		txtAMaterno.setColumns(10);
-		txtAMaterno.setBounds(333, 56, 140, 20);
+		txtAMaterno.setBounds(373, 56, 100, 20);
 		panel_datosCliente.add(txtAMaterno);
-		
+
 		JLabel lblClienteNombre = new JLabel("Nombre(s):");
 		lblClienteNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClienteNombre.setBounds(0, 28, 83, 14);
 		panel_datosCliente.add(lblClienteNombre);
-		
+
 		JLabel lblClienteAPaterno = new JLabel("Apellido Paterno:");
 		lblClienteAPaterno.setHorizontalAlignment(SwingConstants.CENTER);
-		lblClienteAPaterno.setBounds(0, 59, 83, 14);
+		lblClienteAPaterno.setBounds(0, 59, 93, 14);
 		panel_datosCliente.add(lblClienteAPaterno);
-		
+
 		JLabel lblApellidoMaterno = new JLabel("Apellido Materno:");
 		lblApellidoMaterno.setHorizontalAlignment(SwingConstants.CENTER);
-		lblApellidoMaterno.setBounds(243, 59, 83, 14);
+		lblApellidoMaterno.setBounds(243, 59, 120, 14);
 		panel_datosCliente.add(lblApellidoMaterno);
-		
+
 		txtCorreo = new JTextField();
 		txtCorreo.setColumns(10);
 		txtCorreo.setBounds(93, 87, 140, 20);
 		panel_datosCliente.add(txtCorreo);
-		
+
 		txtTelefono = new JTextField();
 		txtTelefono.setColumns(10);
 		txtTelefono.setBounds(333, 87, 140, 20);
 		panel_datosCliente.add(txtTelefono);
-		
+
 		JLabel lblCorreo = new JLabel("Correo:");
 		lblCorreo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCorreo.setBounds(0, 90, 83, 14);
 		panel_datosCliente.add(lblCorreo);
-		
+
 		JLabel lblTelefono = new JLabel("Telefono:");
 		lblTelefono.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTelefono.setBounds(243, 90, 83, 14);
@@ -141,33 +153,53 @@ public class VentanaPedidoCliente extends JFrame {
 		btnCancelar.setBackground(new Color(255, 0, 0));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//control.cerrarSesion();
+				comboProductos.removeAllItems();
+				control.cancelarPedidoCliente(empleado);
 			}
 		});
 		btnCancelar.setBounds(183, 18, 124, 23);
 		panel_botones.add(btnCancelar);
+
+		panelProducto.setBounds(5, 188, 483, 65);
+		contentPane.add(panelProducto);
+		panelProducto.setLayout(null);
+
+		comboProductos.setBounds(89, 25, 140, 20);
+		lblNewLabel.setBounds(10, 28, 69, 14);
+		panelProducto.add(lblNewLabel);
+		panelProducto.add(comboProductos);
 		
-		JButton btnElegirProducto = new JButton("Elegir producto");
-		btnElegirProducto.addActionListener(new ActionListener() {
+		JLabel lblPiezas = new JLabel("Piezas:");
+		lblPiezas.setBounds(239, 28, 45, 14);
+		panelProducto.add(lblPiezas);
+		
+		txtPiezas = new JTextField();
+		txtPiezas.setBounds(294, 25, 45, 20);
+		panelProducto.add(txtPiezas);
+		txtPiezas.setColumns(10);
+		
+		JLabel lblProducto = new JLabel("PRODUCTO");
+		lblProducto.setHorizontalAlignment(SwingConstants.CENTER);
+		lblProducto.setBounds(0, 0, 483, 14);
+		panelProducto.add(lblProducto);
+		
+		JButton btnAgregarProducto = new JButton("Agregar");
+		btnAgregarProducto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				despliegaListaProductosConReceta();
+				agregarProductosTabla();
 			}
 		});
-		btnElegirProducto.setBounds(5, 184, 130, 23);
-		contentPane.add(btnElegirProducto);
+		btnAgregarProducto.setBounds(384, 24, 89, 23);
+		panelProducto.add(btnAgregarProducto);
 		
-		JButton btnNewButton = new JButton("Agregar producto");
-		btnNewButton.setBounds(145, 184, 130, 23);
-		contentPane.add(btnNewButton);
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(5, 264, 482, 43);
+		contentPane.add(panel_1);
+		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JPanel panelProducto = new JPanel();
-		panelProducto.setBounds(5, 218, 483, 52);
-		contentPane.add(panelProducto);
-	}
-	
-	private void despliegaListaProductosConReceta() {
-		control.obtenerProductosConReceta();
-		
+		JScrollPane scrollPane = new JScrollPane();
+		panel_1.add(scrollPane);
+
 	}
 
 	public void muestra(ControlPedidoCliente control, Empleado empleado) {
@@ -176,11 +208,25 @@ public class VentanaPedidoCliente extends JFrame {
 		this.txtNombreEmpleado
 				.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
 		this.txtNivel.setText(empleado.getNivel() + ":");
+		despliegaListaProductosConReceta();
 		setVisible(true);
 
 	}
 
 	public void oculta() {
 		setVisible(false);
+	}
+	
+	private void despliegaListaProductosConReceta() {
+		comboProductos.addItem("Selecciona un producto");
+		List<Producto> productos = control.obtenerProductosConReceta();
+		for (Producto producto : productos) {
+			comboProductos.addItem(producto.getNombre());
+		}
+	}
+	
+	private void agregarProductosTabla() {
+		comboProductos.getSelectedItem();
+		
 	}
 }

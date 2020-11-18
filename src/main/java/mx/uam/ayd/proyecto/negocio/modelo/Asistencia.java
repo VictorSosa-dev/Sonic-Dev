@@ -1,9 +1,12 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
@@ -19,9 +22,9 @@ public class Asistencia {
 	private String horaFinal;
 	private String fecha;
 	private String nombre;
-//	private int hora;
-//	private int minuto;
-//	private int segundo;
+	
+	@ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+	private Empleado empleado;
 	
 	public Asistencia() {}
 	public Asistencia(String horaInicial, String horaFinal,String fecha) {

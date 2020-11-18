@@ -8,8 +8,8 @@ import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.negocio.ServicioProducto;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
-import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
-import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
+import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmpleados;
+import mx.uam.ayd.proyecto.presentacion.principal.encargado.ControlPrincipalEncargado;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 @Component
 public class ControlPedidoCliente {
@@ -24,10 +24,10 @@ public class ControlPedidoCliente {
 	private ServicioProducto servicioProducto;
 	
 	@Autowired
-	private ControlCierreVenta controlCierreVenta;
+	private ControlPrincipalEmpleados controlPrincipalEmpleado;
 	
 	@Autowired
-	private ControlInicioSesion controlInicioSesion;
+	private ControlPrincipalEncargado controlPrincipalEncargado;
 
 	/**
 	 * Inicia el flujo de control de la ventana crear pedido cliente
@@ -40,6 +40,17 @@ public class ControlPedidoCliente {
 	public List<Producto> obtenerProductosConReceta() {
 		return servicioProducto.obtenerProductosConReceta();
 		
+		
+	}
+
+	public void cancelarPedidoCliente(Empleado empleado) {
+		if(empleado.getNivel().equals("empleado")) {
+			controlPrincipalEmpleado.inicia(empleado);
+			ventana.oculta();
+		} else if (empleado.getNivel().equals("encargado")) {
+			controlPrincipalEncargado.inicia(empleado);
+			ventana.oculta();
+		}
 		
 	}
 

@@ -8,6 +8,7 @@ import mx.uam.ayd.proyecto.negocio.ServicioEmpleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.agregarUsuario.ControlAgregarUsuario;
 import mx.uam.ayd.proyecto.presentacion.listarUsuarios.ControlListarUsuarios;
+import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmpleados;
 import mx.uam.ayd.proyecto.presentacion.principal.encargado.ControlPrincipalEncargado;
 
@@ -37,6 +38,9 @@ public class ControlInicioSesion {
 	
 	@Autowired
 	private ControlPrincipalEncargado controlPrincipalEncargado;
+	
+	@Autowired
+	private ControlMonitoreo controlmonitoreo;
 
 	
 	
@@ -71,9 +75,11 @@ public class ControlInicioSesion {
 		try {
 			Empleado empleado = servicioEmpleado.validaUsuario(usuario, password);
 			if(empleado.getNivel().equals("empleado")) {
+				controlmonitoreo.registrarInicio(empleado);
 				controlPrincipalEmpleados.inicia(empleado);
 				ventana.oculta();
 			} if(empleado.getNivel().equals("encargado")) {
+				controlmonitoreo.registrarInicio(empleado);
 				controlPrincipalEncargado.inicia(empleado);
 				ventana.oculta();
 			}

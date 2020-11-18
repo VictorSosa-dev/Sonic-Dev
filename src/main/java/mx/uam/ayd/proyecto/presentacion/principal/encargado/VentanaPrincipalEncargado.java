@@ -62,7 +62,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 				panel_1.setLayout(null);
 		
 				JButton btnVenta = new JButton("Venta");
-				btnVenta.setBounds(10, 30, 97, 23);
+				btnVenta.setBounds(10, 47, 97, 23);
 				panel_1.add(btnVenta);
 				btnVenta.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -86,12 +86,30 @@ public class VentanaPrincipalEncargado extends JFrame {
 		txtNivel.setColumns(10);
 		contentPane.add(panel);
 		contentPane.add(panel_1);
+		
+		JButton btnNewButtonMonitoreo = new JButton("Monitoreo");
+		btnNewButtonMonitoreo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.monitoreo();
+			}
+		});
+		btnNewButtonMonitoreo.setBounds(117, 47, 89, 23);
+		panel_1.add(btnNewButtonMonitoreo);
+		
+		JButton btnNewButtonBusqueda = new JButton("Busqueda");
+		btnNewButtonBusqueda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.busqueda();
+			}
+		});
+		btnNewButtonBusqueda.setBounds(10, 11, 349, 23);
+		panel_1.add(btnNewButtonBusqueda);
 		contentPane.add(panel_2);
 		
 		JButton btnCerrarSesion = new JButton("Cerrar sesion");
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				control.cerrarSesion();
+				control.cerrarSesion(empleado);
 			}
 		});
 		btnCerrarSesion.setBounds(10, 11, 124, 23);

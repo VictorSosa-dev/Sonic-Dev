@@ -5,8 +5,10 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.PedidoCliente.ControlPedidoCliente;
+import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
+import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 @Component
 public class ControlPrincipalEmpleados {
@@ -25,7 +27,13 @@ public class ControlPrincipalEmpleados {
 	
 	@Autowired
 	private ControlPedidoCliente controlPedidoCliente;
-
+	
+	@Autowired
+	private ControlBusqueda controlBusqueda;
+	
+	@Autowired
+	private ControlMonitoreo controlMonitoreo;
+	
 	/**
 	 * Inicia el flujo de control de la ventana principal
 	 * 
@@ -48,7 +56,8 @@ public class ControlPrincipalEmpleados {
 		
 	}
 
-	public void cerrarSesion() {
+	public void cerrarSesion(Empleado empleado) {
+		controlMonitoreo.registrarCerrar(empleado);
 		controlInicioSesion.inicia();
 		ventana.oculta();
 		
@@ -58,6 +67,10 @@ public class ControlPrincipalEmpleados {
 		controlPedidoCliente.inicia(empleado);
 		ventana.oculta();
 		
+	}
+
+	public void busqueda() {
+		controlBusqueda.inicia();
 	}
 
 }

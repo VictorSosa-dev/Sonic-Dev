@@ -90,12 +90,21 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		});
 		btnNuevoPedidoCliente.setBounds(117, 44, 130, 23);
 		panel_1.add(btnNuevoPedidoCliente);
+		
+		JButton btnNewButtonBusqueda = new JButton("Busqueda");
+		btnNewButtonBusqueda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.busqueda();
+			}
+		});
+		btnNewButtonBusqueda.setBounds(10, 11, 349, 23);
+		panel_1.add(btnNewButtonBusqueda);
 		contentPane.add(panel_2);
 
 		JButton btnCerrarSesion = new JButton("Cerrar sesion");
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				control.cerrarSesion();
+				control.cerrarSesion(empleado);
 			}
 		});
 		btnCerrarSesion.setBounds(10, 11, 124, 23);
