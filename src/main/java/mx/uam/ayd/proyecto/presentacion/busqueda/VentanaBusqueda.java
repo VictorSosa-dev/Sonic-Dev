@@ -89,11 +89,6 @@ public class VentanaBusqueda extends JFrame {
 		btnNewButtonRegresar.setBounds(170, 355, 89, 23);
 		contentPane.add(btnNewButtonRegresar);
 		
-		JButton btnNewButtonAgregaralaventa = new JButton("Agregar ala venta");
-		btnNewButtonAgregaralaventa.setForeground(Color.BLACK);
-		btnNewButtonAgregaralaventa.setBounds(314, 354, 160, 24);
-		contentPane.add(btnNewButtonAgregaralaventa);
-		
 		
 		textFieldNombre = new JTextField();
 		textFieldNombre.setBounds(169, 133, 217, 20);
@@ -150,7 +145,7 @@ public class VentanaBusqueda extends JFrame {
 		lblNewLabelNombre.setBounds(101, 136, 46, 14);
 		contentPane.add(lblNewLabelNombre);
 		
-		//Accion del boton Bucar
+		//Accion del boton Buscar
 				btnNewButtonBuscar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 					//Limpio los campos inicalmente para un nueva busqueda
@@ -172,23 +167,13 @@ public class VentanaBusqueda extends JFrame {
 					}
 
 				});
-				//Accion del boton Regresar
+		 //Accion del boton Regresar
 				btnNewButtonRegresar.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						setVisible(false);
 						
 					}
 				});
-				//Accion del boton AgregarAlaVenta
-				btnNewButtonAgregaralaventa.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						
-						controlbusqueda.agregarVenta(producto);
-					}
-				});
-		
-		
-		
 	}
 
 	//Metodo que muestra la venta Busqueda

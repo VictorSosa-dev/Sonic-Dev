@@ -10,9 +10,14 @@ import javax.persistence.ManyToOne;
 
 import lombok.Data;
 
+
+/**
+ * Entidad de negocio Asistencias
+ * 
+ *
+ */
 @Entity
 @Data
-
 
 public class Asistencia {
 	@Id
@@ -21,7 +26,6 @@ public class Asistencia {
 	private String horaInicial;
 	private String horaFinal;
 	private String fecha;
-	private String nombre;
 	
 	@ManyToOne(optional = false, cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
 	private Empleado empleado;
@@ -31,10 +35,7 @@ public class Asistencia {
 		this.horaInicial= horaInicial;
 		this.horaFinal= horaFinal;
 		this.fecha=fecha;
-	//this.nombre = nombre;
-//		this.hora= hora;
-//		this.minuto= minuto;
-//		this.segundo= segundo;
+		
 	}
 	
 }

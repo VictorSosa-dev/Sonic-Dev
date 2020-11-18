@@ -55,13 +55,4 @@ public class ControlBusqueda {
 		    }
 	}
     
-   
-    //Metodo que le pasa el producto al control de venta
-    public void agregarVenta(Producto producto) {
-    	controlventa.agregarTabla(producto);
-		controlventa.total(producto.getPrecio());
-		controlventa.inicia();
-    	
-    }
-    
 }//Fin del metodo controlBusqueda

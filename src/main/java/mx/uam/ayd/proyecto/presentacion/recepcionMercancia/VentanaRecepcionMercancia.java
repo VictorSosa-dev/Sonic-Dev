@@ -88,7 +88,7 @@ public class VentanaRecepcionMercancia extends JFrame {
 		lblCierreVenta.setBounds(0, 50, 434, 16);
 		contentPane.add(lblCierreVenta);
 
-		btnEnviar = new JButton("Siguiente");
+		btnEnviar = new JButton("Finalizar");
 		btnEnviar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 

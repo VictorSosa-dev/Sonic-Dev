@@ -1,16 +1,18 @@
 package mx.uam.ayd.proyecto.presentacion.monitoreo;
 
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 //import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.negocio.ServicioAsistencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Asistencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+//import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 
 @Component
@@ -51,6 +53,7 @@ public class ControlMonitoreo {
 	}//Fin del metodo registrarInicio
 	
 	
+	//Metodo que modifica la hora final de la asistencia del empleado
 	public void registrarCerrar(Empleado empleado) {
 		LocalDateTime ahora= LocalDateTime.now();
 
@@ -60,9 +63,7 @@ public class ControlMonitoreo {
 		
 		String horafinal= hora+":"+minuto+":"+segundo;
 		Asistencia asistenciaAEditar = null;
-		System.out.println(empleado);
 	    List<Asistencia> asistenciasPorEmpleado = servicioAsistencia.obtenerAsistenciasPorEmpleado(empleado);
-	    
 	    for (Asistencia asistencia : asistenciasPorEmpleado) {
 			if(asistencia.getHoraFinal() == null) {
 				asistenciaAEditar = asistencia;
@@ -72,24 +73,14 @@ public class ControlMonitoreo {
 	    	asistenciaAEditar.setHoraFinal(horafinal);
 	    	servicioAsistencia.actualizar(asistenciaAEditar);
 	    }
-	    
-	    
-	   // servicioasistencia.registroAsistencia("", horafinal, fech, empleado.getNombre());
-		
-		
-		
+	    	
 	}
 
 	//Metodo que me recupera las asistencias y me las guarda en una lista
 	public void iniciaAsistencias() {
 		List <Asistencia> asistencias = servicioAsistencia.recuperarasistencia();
-		//asistencias= asistencias.get(0);
 		for(Asistencia asistencia:asistencias) {
-			//log.info("Asistencia: "+asistencia);
-			//System.out.println(asistencia.getHoraInicial());
-			//if(asistencias.get(0) !=asistencia)
 			ventanamonitoreo.llenaTabla(asistencia);
-			//asistencias.clear();
 		}
 		
 	}//Fin del metodo iniciaAsistencias

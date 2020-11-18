@@ -12,9 +12,10 @@ import javax.swing.table.DefaultTableModel;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Asistencia;
-
+import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -36,8 +37,6 @@ public class VentanaMonitoreo extends JFrame {
 			return false; 
 			} 
 	};
-	
-	
 	
 	//Metodo de presentacion de la ventana MOnitoreo
 	public VentanaMonitoreo() {
@@ -62,12 +61,13 @@ public class VentanaMonitoreo extends JFrame {
 		contentPane.add(scrollPane);
 		
 		JButton btnNewButtonRegresar = new JButton("Regresar");
-		btnNewButtonRegresar.setBounds(262, 335, 89, 23);
+		btnNewButtonRegresar.setBounds(232, 319, 89, 23);
 		contentPane.add(btnNewButtonRegresar);
 		
 		btnNewButtonRegresar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
+				limpiaTabla();
 				//controlmonitoreo.vaciarList();
 			}
 		});
@@ -94,8 +94,7 @@ public class VentanaMonitoreo extends JFrame {
 	
 	public void llenaTabla(Asistencia asistencia) {
 		String a[] = new String[4];
-		int i=1;
-		a[0] =""+( i+1);
+		a[0] = String.valueOf(asistencia.getIdAsistencia());
 		a[1] = asistencia.getHoraInicial();
 		a[2] = asistencia.getHoraFinal();
 		a[3] = asistencia.getFecha();
@@ -103,5 +102,17 @@ public class VentanaMonitoreo extends JFrame {
 		table.setModel(modelo);
 		this.asistencia = asistencia;
 	}//Fin del metodo llenaTabla
+	
+	
+	public void limpiaTabla() {
+		int filas = table.getRowCount();
+		try {
+			for (int i = 0; filas>i ; i++) {
+				modelo.removeRow(0);
+			}
+		} catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+        }	
+	}
 
 }//Fin de la clase VentanaMonitoreo
