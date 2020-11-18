@@ -1,5 +1,7 @@
 package mx.uam.ayd.proyecto.presentacion.venta;
-
+/**
+ * @author VictorSosa
+ */
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -83,13 +85,8 @@ public class VentanaProducto extends JFrame {
 		textFieldPiezas.setColumns(10);
 
 		JButton btnAgregar = new JButton("Agregar");
-
-		JButton btnRegresar = new JButton("regresar");
-		btnRegresar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				controlVenta.termina();
-			}
-		});
+		JButton btnRegresar = new JButton("Regresar");
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING).addGroup(gl_contentPane
 				.createSequentialGroup()
@@ -153,9 +150,16 @@ public class VentanaProducto extends JFrame {
 				controlVenta.total(producto.getPrecio());
 			}
 		});
-
+		
+		
+		btnRegresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controlVenta.termina();
+			}
+		});
 	}
-
+		
+	//Muestra la ventana
 	public void muestra(ControlVenta controlVenta) {
 		this.controlVenta = controlVenta;
 		setVisible(true);

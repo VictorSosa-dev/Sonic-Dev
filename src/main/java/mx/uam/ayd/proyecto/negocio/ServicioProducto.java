@@ -1,5 +1,9 @@
 package mx.uam.ayd.proyecto.negocio;
 
+/**
+ * @author VictorSosa
+ */
+
 import java.util.List;
 
 import javax.swing.JOptionPane;

@@ -180,7 +180,7 @@ public class VentanaCobro extends JFrame {
 		panel.setLayout(gl_panel);
 		contentPane.setLayout(gl_contentPane);
 		
-		//Listener de efectivo
+		//Listener de  la opción efectivo
 		
 		textFieldRecibi.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
@@ -210,7 +210,7 @@ public class VentanaCobro extends JFrame {
 		});
 		
 		
-		//Listener de tarjeta
+		//Listener de la opción tarjeta
 		
 		chckbxEfectivo.addItemListener(new ItemListener (){
 			@Override
@@ -295,7 +295,9 @@ public class VentanaCobro extends JFrame {
 		});
 		
 	}
-
+	
+	
+	//Métodos que ocupa la ventana
 	public void muestra(ControlCobro controlCobro, float total) {
 		textFieldTotal.setText(String.valueOf(total));
 		this.controlCobro = controlCobro;

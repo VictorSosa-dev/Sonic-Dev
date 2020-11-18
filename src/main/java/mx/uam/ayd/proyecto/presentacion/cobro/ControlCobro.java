@@ -1,5 +1,9 @@
 package mx.uam.ayd.proyecto.presentacion.cobro;
 
+/**
+ * @author VictorSosa
+ */
+
 import javax.swing.JFrame;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +42,16 @@ public class ControlCobro {
 	public void obtenerLista(float total) {
 		controlVenta.obtenerLista(total);
 	}
-
+	/**
+	 * Método que muestra los dialogos de la ventana
+	 */
 	public void muestraDialogo() {
 		ventanaCobro.muestraDialogo();
 	}
-
+	/**
+	 * Método que invoca al método limpiar tabla del control venta, 
+	 * para limpiar la tabla de la ventana venta,
+	 */
 	public void limpiarTabla() {
 		controlVenta.limpiarTabla();
 		

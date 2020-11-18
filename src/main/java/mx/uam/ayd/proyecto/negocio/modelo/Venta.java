@@ -1,5 +1,8 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
-
+/**
+ * Entidad del negocio: venta
+ * @author VictorSosa
+ */
 import java.util.ArrayList;
 import java.util.List;
 

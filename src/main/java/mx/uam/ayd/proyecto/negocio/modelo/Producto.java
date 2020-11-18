@@ -1,5 +1,9 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
+/**
+ * @author VictorSosa
+ */
+
 import java.util.ArrayList;
 import java.util.List;
 

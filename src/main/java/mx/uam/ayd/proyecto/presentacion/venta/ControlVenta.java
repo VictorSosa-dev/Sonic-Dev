@@ -44,7 +44,7 @@ public class ControlVenta {
 	private List<Producto> listaProductos = new ArrayList<>();
 
 	/**
-	 * Inicia la historia de usuario: Agregar prodcutos para la venta
+	 * Inicia la historia de usuario: Agregar productos para la venta
 	 * 
 	 */
 	public void inicia() {
@@ -52,7 +52,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que busca invoca al servio de producto para duscar el producto por
+	 * Método que busca invoca al servio de producto para buscar el producto por
 	 * nombre.
 	 * 
 	 * @param nombre
@@ -70,7 +70,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que invoca al servicio de producto para prodcuto por nombre
+	 * Método que invoca al servicio de producto para producto por nombre
 	 * 
 	 * @param nombre
 	 * @return Un objeto de tipo producto si lo encuentra y nulo si lo encuentra.
@@ -150,7 +150,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que obtien los prodcuto de la venta
+	 * Método que obtien los producto de la venta
 	 * 
 	 * @param total
 	 */
