@@ -30,5 +30,9 @@ public class ServicioEmpleado {
 			return false;
 		}
 	}
+	
+	public Empleado guardarEmpleado(Empleado empleado) {
+		return empleadoRepository.save(empleado);
+	}
 
 }

@@ -1,18 +1,16 @@
 package mx.uam.ayd.proyecto.presentacion.monitoreo;
 
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 //import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.negocio.ServicioAsistencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Asistencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
-//import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
-import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 
 @Component
@@ -62,7 +60,9 @@ public class ControlMonitoreo {
 		
 		String horafinal= hora+":"+minuto+":"+segundo;
 		Asistencia asistenciaAEditar = null;
+		System.out.println(empleado);
 	    List<Asistencia> asistenciasPorEmpleado = servicioAsistencia.obtenerAsistenciasPorEmpleado(empleado);
+	    
 	    for (Asistencia asistencia : asistenciasPorEmpleado) {
 			if(asistencia.getHoraFinal() == null) {
 				asistenciaAEditar = asistencia;

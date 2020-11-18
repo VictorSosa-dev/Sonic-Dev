@@ -9,6 +9,7 @@ import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
+import mx.uam.ayd.proyecto.presentacion.recepcionMercancia.ControlRecepcionMercancia;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 @Component
 public class ControlPrincipalEmpleados {
@@ -34,6 +35,9 @@ public class ControlPrincipalEmpleados {
 	@Autowired
 	private ControlMonitoreo controlMonitoreo;
 	
+	@Autowired
+	private ControlRecepcionMercancia controlRecepcionMercancia;
+	
 	/**
 	 * Inicia el flujo de control de la ventana principal
 	 * 
@@ -53,6 +57,7 @@ public class ControlPrincipalEmpleados {
 
 	public void iniciaCierreVenta(Empleado empleado) {
 		controlCierreVenta.inicia(empleado);
+		ventana.oculta();
 		
 	}
 
@@ -71,6 +76,12 @@ public class ControlPrincipalEmpleados {
 
 	public void busqueda() {
 		controlBusqueda.inicia();
+	}
+
+	public void iniciaRecepcionMercancia(Empleado empleado) {
+		controlRecepcionMercancia.inicia(empleado);
+		ventana.oculta();
+		
 	}
 
 }

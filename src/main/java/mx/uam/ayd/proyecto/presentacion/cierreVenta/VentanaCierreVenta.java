@@ -53,6 +53,7 @@ public class VentanaCierreVenta extends JFrame {
 	private int mes = fecha.get(Calendar.MONTH);
 	private int dia = fecha.get(Calendar.DAY_OF_MONTH);
 	private String fechaF = ano + "/" + mes + "/" + dia;
+	private JTextField txtError;
 
 	public VentanaCierreVenta() {
 		setBounds(100, 100, 500, 351);
@@ -144,6 +145,13 @@ public class VentanaCierreVenta extends JFrame {
 					.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
 					.addContainerGap())
 		);
+		
+		txtError = new JTextField();
+		txtError.setHorizontalAlignment(SwingConstants.CENTER);
+		txtError.setEditable(false);
+		txtError.setBounds(0, 0, 474, 135);
+		panel.add(txtError);
+		txtError.setColumns(10);
 
 		txtNivel = new JTextField();
 		txtNivel.setEditable(false);
@@ -164,6 +172,11 @@ public class VentanaCierreVenta extends JFrame {
 		panel_4.add(btnCancelar);
 
 		btnFinalizar = new JButton("Finalizar");
+		btnFinalizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.cerrarSesion(empleado);
+			}
+		});
 		btnFinalizar.setBounds(375, 11, 89, 23);
 		panel_4.add(btnFinalizar);
 		panel_3.setLayout(null);
@@ -245,9 +258,6 @@ public class VentanaCierreVenta extends JFrame {
 
 	public void agregarPedido(PedidoCliente pedidoCliente, List<Producto> productos, List<Cliente> cliente) {
 		String a[] = new String[5];
-		System.out.println(">>>> PEDIDO: " + pedidoCliente);
-		System.out.println(">>>> PRODUCTOS: " + productos);
-		System.out.println(">>>> CLIENTE: " + cliente);
 		a[0] = cliente.get(0).getNombre() + " " + cliente.get(0).getApellidoPaterno() + " " + cliente.get(0).getApellidoMaterno();
 		a[1] = pedidoCliente.getFechaDeCreacion();
 		a[2] = cliente.get(0).getTelefono();
@@ -300,5 +310,10 @@ public class VentanaCierreVenta extends JFrame {
 
 	public void oculta() {
 		setVisible(false);
+	}
+
+	public void sinProductos(String mensaje) {
+		txtError.setText(mensaje);
+		
 	}
 }

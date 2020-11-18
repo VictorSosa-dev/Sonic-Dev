@@ -52,12 +52,12 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		});
 		btnCierreVenta.setForeground(new Color(255, 255, 255));
 		btnCierreVenta.setBackground(new Color(255, 0, 0));
-		btnCierreVenta.setBounds(203, 11, 156, 23);
+		btnCierreVenta.setBounds(10, 11, 156, 23);
 		panel_2.add(btnCierreVenta);
 		panel_1.setLayout(null);
 
 		JButton btnVenta = new JButton("Venta");
-		btnVenta.setBounds(10, 44, 97, 23);
+		btnVenta.setBounds(10, 44, 349, 23);
 		panel_1.add(btnVenta);
 		btnVenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,12 +83,13 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		contentPane.add(panel_1);
 		
 		JButton btnNuevoPedidoCliente = new JButton("Pedido cliente");
+		btnNuevoPedidoCliente.setEnabled(false);
 		btnNuevoPedidoCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.agregaPedidoCliente(empleado);
 			}
 		});
-		btnNuevoPedidoCliente.setBounds(117, 44, 130, 23);
+		btnNuevoPedidoCliente.setBounds(199, 89, 160, 23);
 		panel_1.add(btnNuevoPedidoCliente);
 		
 		JButton btnNewButtonBusqueda = new JButton("Busqueda");
@@ -99,16 +100,16 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		});
 		btnNewButtonBusqueda.setBounds(10, 11, 349, 23);
 		panel_1.add(btnNewButtonBusqueda);
-		contentPane.add(panel_2);
-
-		JButton btnCerrarSesion = new JButton("Cerrar sesion");
-		btnCerrarSesion.addActionListener(new ActionListener() {
+		
+		JButton btnRecepcionMercancia = new JButton("Recepcion de Mercancia");
+		btnRecepcionMercancia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				control.cerrarSesion(empleado);
+				control.iniciaRecepcionMercancia(empleado);
 			}
 		});
-		btnCerrarSesion.setBounds(10, 11, 124, 23);
-		panel_2.add(btnCerrarSesion);
+		btnRecepcionMercancia.setBounds(10, 89, 179, 23);
+		panel_1.add(btnRecepcionMercancia);
+		contentPane.add(panel_2);
 	}
 
 	public void muestra(ControlPrincipalEmpleados control, Empleado empleado) {

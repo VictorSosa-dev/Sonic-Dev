@@ -19,7 +19,7 @@ public class ServicioCliente {
 	 * @param cliente entidad de cliente a guardar
 	 */
 	public void guardarCliente(Cliente cliente) {
-		clienteRepository.save(cliente);
+		clienteRepository.save(cliente); 
 	}
 
 	public List<Cliente> obtenerClientePorPedido(PedidoCliente pedidoCliente) {

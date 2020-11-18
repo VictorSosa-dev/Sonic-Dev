@@ -17,6 +17,8 @@ import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.PedidoCliente;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.negocio.modelo.Venta;
+import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
+import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmpleados;
 import mx.uam.ayd.proyecto.presentacion.principal.encargado.ControlPrincipalEncargado;
 
@@ -49,6 +51,12 @@ public class ControlCierreVenta {
 	
 	@Autowired
 	private ControlPrincipalEncargado controlPrincipalEncargado;
+	
+	@Autowired
+	private ControlMonitoreo controlMonitoreo;
+	
+	@Autowired
+	private ControlInicioSesion controlInicioSesion;
 
 	/**
 	 * Inicia el flujo de control de la ventana de cierre de venta
@@ -62,36 +70,44 @@ public class ControlCierreVenta {
 
 	public void obtenerVentasDia(String fechaF) {
 		List<Venta> ventasDia = servicioVenta.obtenerVentasPorFecha(fechaF);
-
-		for (Venta venta : ventasDia) {
-			List<Producto> productos = new ArrayList<Producto>();
-			for (DetalleVenta detalleVenta : venta.getVentas()) {
-				productos.add(servicioProducto.obtenerProductoPorVenta(detalleVenta).get(0));
+		if(ventasDia.isEmpty()) {
+			ventana.sinProductos("No hay ventas para mostrar");
+		} else {
+			for (Venta venta : ventasDia) {
+				List<Producto> productos = new ArrayList<Producto>();
+				for (DetalleVenta detalleVenta : venta.getVentas()) {
+					productos.add(servicioProducto.obtenerProductoPorVenta(detalleVenta).get(0));
+				}
+				ventana.agregaVentas(venta, productos.size());
 			}
-			ventana.agregaVentas(venta, productos.size());
+
 		}
 	}
 
 	public void obtenerProductos() {
 		List<Producto> productos = servicioProducto.obtenerProductos();
-		for (Producto producto : productos) {
-			ventana.agregaProductos(producto);
+		if(productos.isEmpty()) {
+			ventana.sinProductos("No hay productos para mostrar");
+		} else {
+			for (Producto producto : productos) {
+				ventana.agregaProductos(producto);
+			}
 		}
 	}
 
 	public void obtenerPedidosClienteDelDia(String fechaF) {
-		System.out.println("######### FECHA PARAMETRO: " + fechaF);
 		List<PedidoCliente> pedidosClienteDia = servicioPedidoCliente.obtenerPedidosPorFechaCreacion(fechaF);
-		//System.out.println("#### PEDIDOS CLIENTE X DIA: " + pedidosClienteDia);
-		for (PedidoCliente pedidoCliente : pedidosClienteDia) {
-			List<Cliente> cliente = servicioCliente.obtenerClientePorPedido(pedidoCliente);
-			List<Producto> productos = new ArrayList<Producto>();
-			for (DetallePedidoCliente detallePedidoCliente : pedidoCliente.getDetallesPedidoCliente()) {
-				productos.add(detallePedidoCliente.getProducto());
+		if(pedidosClienteDia.isEmpty()) {
+			ventana.sinProductos("No hay pedidos para mostrar");
+		} else {
+			for (PedidoCliente pedidoCliente : pedidosClienteDia) {
+				List<Cliente> cliente = servicioCliente.obtenerClientePorPedido(pedidoCliente);
+				List<Producto> productos = new ArrayList<Producto>();
+				for (DetallePedidoCliente detallePedidoCliente : pedidoCliente.getDetallesPedidoCliente()) {
+					productos.add(detallePedidoCliente.getProducto());
+				}
+				ventana.agregarPedido(pedidoCliente, productos, cliente);
 			}
-			//System.out.println("#### CLIENTE: " + cliente);
-			//System.out.println("#### PRODUCTOS: " + productos);
-			ventana.agregarPedido(pedidoCliente, productos, cliente);
 		}
 	}
 
@@ -103,6 +119,12 @@ public class ControlCierreVenta {
 			controlPrincipalEncargado.inicia(empleado);
 			ventana.oculta();
 		}
+		
+	}
+
+	public void cerrarSesion(Empleado empleado) {
+		controlInicioSesion.inicia();
+		ventana.oculta();
 		
 	}
 }

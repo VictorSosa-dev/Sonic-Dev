@@ -30,6 +30,12 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlBusqueda controlBusqueda;
+	
+	@Autowired
+	private ControlCierreVenta controlPedidoCliente;
+	
+	@Autowired
+	private ControlCierreVenta controlRecepcionMercancia;
 
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -50,6 +56,7 @@ public class ControlPrincipalEncargado {
 
 	public void iniciaCierreVenta(Empleado empleado) {
 		controlCierreVenta.inicia(empleado);
+		ventana.oculta();
 		
 	}
 
@@ -67,6 +74,18 @@ public class ControlPrincipalEncargado {
 
 	public void busqueda() {
 		controlBusqueda.inicia();
+		
+	}
+
+	public void agregaPedidoCliente(Empleado empleado) {
+		controlPedidoCliente.inicia(empleado);
+		ventana.oculta();
+		
+	}
+
+	public void iniciaRecepcionMercancia(Empleado empleado) {
+		controlRecepcionMercancia.inicia(empleado);
+		ventana.oculta();
 		
 	}
 

@@ -39,4 +39,17 @@ public class ServicioPedidoProveedor {
 		List<PedidoProveedor> pedidos = pedidoProveedorRepository.findByFechaDeCreacion(fechaF);
 		return pedidos;
 	}
+
+
+	public List<PedidoProveedor> obtenerPedidoSinFechaDeRecepcion() {
+		String sinFecha = null;
+		List<PedidoProveedor> listaPedidosSinFecha = new ArrayList<>();
+		List<PedidoProveedor> pedidos = (List<PedidoProveedor>) pedidoProveedorRepository.findAll();
+		for (PedidoProveedor pedidoProveedor : pedidos) {
+			if(pedidoProveedor.getFechaDeRecepcion() == null) {
+				listaPedidosSinFecha.add(pedidoProveedor);
+			}
+		}
+		return listaPedidosSinFecha;
+	}
 }

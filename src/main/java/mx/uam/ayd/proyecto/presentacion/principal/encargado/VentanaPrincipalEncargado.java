@@ -57,7 +57,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnCierreVenta.setForeground(new Color(255, 255, 255));
 		btnCierreVenta.setBackground(new Color(255, 0, 0));
-		btnCierreVenta.setBounds(203, 11, 156, 23);
+		btnCierreVenta.setBounds(10, 11, 156, 23);
 		panel_2.add(btnCierreVenta);
 				panel_1.setLayout(null);
 		
@@ -104,16 +104,26 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnNewButtonBusqueda.setBounds(10, 11, 349, 23);
 		panel_1.add(btnNewButtonBusqueda);
-		contentPane.add(panel_2);
 		
-		JButton btnCerrarSesion = new JButton("Cerrar sesion");
-		btnCerrarSesion.addActionListener(new ActionListener() {
+		JButton btnNuevoPedidoCliente = new JButton("Pedido cliente");
+		btnNuevoPedidoCliente.setEnabled(false);
+		btnNuevoPedidoCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				control.cerrarSesion(empleado);
+				control.agregaPedidoCliente(empleado);
 			}
 		});
-		btnCerrarSesion.setBounds(10, 11, 124, 23);
-		panel_2.add(btnCerrarSesion);
+		btnNuevoPedidoCliente.setBounds(216, 47, 143, 23);
+		panel_1.add(btnNuevoPedidoCliente);
+		
+		JButton btnRecepcionMercancia = new JButton("Recepcion de Mercancia");
+		btnRecepcionMercancia.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.iniciaRecepcionMercancia(empleado);
+			}
+		});
+		btnRecepcionMercancia.setBounds(10, 89, 349, 23);
+		panel_1.add(btnRecepcionMercancia);
+		contentPane.add(panel_2);
 	}
 
 	public void muestra(ControlPrincipalEncargado control, Empleado empleado) {

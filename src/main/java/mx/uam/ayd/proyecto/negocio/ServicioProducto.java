@@ -96,4 +96,14 @@ public class ServicioProducto {
 		return productoRepository.findByReceta(receta);
 	}
 
+	public boolean actualizarProducto(Producto producto) {
+		Producto productoN =productoRepository.save(producto);
+		if(productoN == null) {
+			return false;
+		} else {
+			return true;
+		}
+		
+	}
+
 }
