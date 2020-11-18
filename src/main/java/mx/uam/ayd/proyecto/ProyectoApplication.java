@@ -98,7 +98,7 @@ public class ProyectoApplication {
 				"Estante 2, primer anaquel", 48, 5);
 		productoRepository.save(producto2);
 
-		Producto producto3 = new Producto("CLORANFENICOL", "Cloranfenicol", "No", "Estante 1, segundo anaquel", 22, 10);
+		Producto producto3 = new Producto("CLORANFENICOL", "Cloranfenicol", "Si", "Estante 1, segundo anaquel", 22, 10);
 		productoRepository.save(producto3);
 
 		Producto producto4 = new Producto("DIURMESSEL", "furosemina", "Si", "Estante 1, cuarto anaquel", 35, 5);
