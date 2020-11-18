@@ -27,18 +27,18 @@ public class ServicioProducto {
 	 * @throws IllegalArgumentException si se pasa un null.
 	 */
 	public Producto buscarProducto(String nombre) {
-		
+
 		Producto producto = productoRepository.findByNombre(nombre);
-		
+
 		if (producto == null) {
 			throw new IllegalArgumentException("No se encontro el producto");
-		} else{
-			log.info("Producto encontrado:" +nombre);
+		} else {
+			log.info("Producto encontrado:" + nombre);
 			return producto;
 		}
-		
+
 	}
-	
+
 	/**
 	 * Método que decrementa la cantidad de piezas de un producto.
 	 * 
@@ -47,23 +47,36 @@ public class ServicioProducto {
 	public void actualizaInventarioMenos(List<Producto> listaProductos) {
 		try {
 			for (Producto producto : listaProductos) {
-				producto.setPiezas(producto.getPiezas()-1);
+				producto.setPiezas(producto.getPiezas() - 1);
 				productoRepository.save(producto);
 			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se actualizaron las piezas");
 		}
-		
+
 	}
-	
+
 	/**
 	 * Obtiene los productos de una venta
+	 * 
 	 * @param detalleVenta detalle de los productos en la venta
-	 * @return lista de productos segun la venta. 
+	 * @return lista de productos segun la venta.
 	 */
 	public List<Producto> obtenerProductoPorVenta(DetalleVenta detalleVenta) {
 		return productoRepository.findByVentas(detalleVenta);
 
+	}
+
+	public Producto buscarProductoCompuesto(String compuesto) {
+
+		Producto producto = productoRepository.findByCompuesto(compuesto);
+
+		System.out.print(producto);
+		if (producto == null) {
+			throw new IllegalArgumentException("No se encuentra el producto");
+		} else {
+			return producto;
+		}
 	}
 
 	public List<Producto> obtenerProductos() {
@@ -79,5 +92,4 @@ public class ServicioProducto {
 		return productoRepository.findByReceta(receta);
 	}
 
-	
 }
