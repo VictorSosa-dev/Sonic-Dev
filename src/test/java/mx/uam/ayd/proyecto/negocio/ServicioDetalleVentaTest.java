@@ -45,7 +45,7 @@ class ServicioDetalleVentaTest {
 	@Test
 	void testAgregarDetalleVenta() {
 		
-		//Prueba 1: se pasa una lista vacia y un obtento de venta null
+		//Prueba 1: se pasa una lista vacia y un objeto de venta null
 		LinkedList<Producto> lista1 = new LinkedList<>();
 		
 		Assertions.assertThrows(NullPointerException.class, () ->{
@@ -54,7 +54,6 @@ class ServicioDetalleVentaTest {
 
 		//Prueba 2: Se guarda con exito el detalle de venta
 		LinkedList<Producto> lista = new LinkedList<>();
-		Producto producto = new Producto();
 		Producto p1 = new Producto();
 		p1.setNombre("aspirina");
 		p1.setCompuesto("ff");
@@ -75,8 +74,8 @@ class ServicioDetalleVentaTest {
 		
 		Venta venta = new Venta();
 		
-		servicio.agregarDetalleVenta(venta, lista);
-		assertTrue(true);
+		boolean resultado=servicio.agregarDetalleVenta(venta, lista);
+		assertTrue(resultado);
 		
 		
 	}

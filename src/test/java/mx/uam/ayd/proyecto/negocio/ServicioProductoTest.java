@@ -41,17 +41,39 @@ class ServicioProductoTest {
 	
 	@Test
 	void testBuscarProductos() {
-
-		// Prueba 1: El método regresa null la busqueda null
+		
+		Producto producto = new Producto();
+		Producto p1 = new Producto();
+		p1.setNombre("aspirina");
+		p1.setCompuesto("ff");
+		p1.setReceta("Si");
+		p1.setUbicacion("aqui");
+		p1.setPrecio(20);
+		p1.setPiezas(5);
+		
+		when(productoRepository.findByNombre("aspirina")).thenReturn(p1);
+		// Prueba 1: El método regresa el producto 
+		//si lo encuantra
+		Producto p = new Producto(); 
+		p=servicio.buscarProducto("aspirina");
+		
+		assertEquals(p1, p);
+		
+		//Prueba 2: El método regresa null si no encuantra el producto
+		p=servicio.buscarProducto("dualgos");
+		
+		assertNull(p);
+		//Prueba 3: El método se le pase un null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 
-			servicio.buscarProducto("aspirina");
+			servicio.buscarProducto(null);
+			
 
 		});
 
-
 	}
 
+	
 
 	@Test
 	void testActulizaInventarioMenos() {
@@ -80,6 +102,7 @@ class ServicioProductoTest {
 		
 		int o = p1.getPiezas();
 		
-		assertNotEquals(8,0);
+		assertNotEquals(8,o);
 	}
+	
 }

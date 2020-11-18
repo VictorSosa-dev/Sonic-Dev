@@ -34,8 +34,15 @@ public class ServicioDetalleVenta {
 	 * @param venta
 	 * @param listaProductos
 	 */
-
-	public void agregarDetalleVenta(Venta venta, List<Producto> listaProductos) {
+	
+	/**
+	 * El método registra la venta y el detalle de 
+	 * la venta que son los productos que se vendieron.
+	 * 
+	 * @param venta
+	 * @param listaProductos
+	 */
+	public boolean agregarDetalleVenta(Venta venta, List<Producto> listaProductos) {
 		
 		if(venta == null && listaProductos.size()==0) {
 			throw new NullPointerException("Se recibió una venta null y una lista vacia");
@@ -50,6 +57,7 @@ public class ServicioDetalleVenta {
 			ventaRepository.save(venta);
 			productoRepository.save(producto);
 		}
+		return true;
 
 	}
 
