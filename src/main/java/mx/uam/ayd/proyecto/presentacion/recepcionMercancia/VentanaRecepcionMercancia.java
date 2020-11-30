@@ -83,7 +83,7 @@ public class VentanaRecepcionMercancia extends JFrame {
 		
 		
 
-		JLabel lblCierreVenta = new JLabel("RECEPCIÓN DE MERCANCÍA");
+		JLabel lblCierreVenta = new JLabel("RECEPCION DE MERCANCIA");
 		lblCierreVenta.setHorizontalAlignment(SwingConstants.CENTER);
 		lblCierreVenta.setBounds(0, 50, 434, 16);
 		contentPane.add(lblCierreVenta);
