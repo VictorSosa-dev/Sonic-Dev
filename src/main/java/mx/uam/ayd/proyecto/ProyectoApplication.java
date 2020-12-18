@@ -93,7 +93,10 @@ public class ProyectoApplication {
 		Producto producto5 = new Producto("DUALGOS", "Paracetamol-Ubuprofeno", "No", "Estante 2, segundo anaquel", 29,
 				10);
 		productoRepository.save(producto5);
-
+		
+		Producto producto6 = new Producto("ASPIRINA", "Acido acetilsalicilico", "No", "Estante 5, segundo anaquel", 29,
+				10);
+		productoRepository.save(producto6);
 		Empleado pruebaEmpleado = new Empleado("Karina", "Vergara", "Guzman", "karina@gmail.com", "5587388643",
 				"empleado", "anver", "123456789");
 		Empleado pruebaEncargado = new Empleado("Ximena", "Pereda", "Rodriguez", "ximena@gmail.com", "5587388642",
