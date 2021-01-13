@@ -22,7 +22,7 @@ import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmple
  * 
  * Clase principal que arranca la aplicación
  * 
- * @author SosaPiña
+ * @author SosaPiña ingenieria 
  *
  */
 @SpringBootApplication
