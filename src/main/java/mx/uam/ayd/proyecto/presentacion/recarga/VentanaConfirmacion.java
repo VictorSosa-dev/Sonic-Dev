@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import org.springframework.stereotype.Component;
+
 import javax.swing.JTextPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -14,6 +17,8 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
+@Component
 public class VentanaConfirmacion extends JFrame {
 
 	private JPanel contentPane;
@@ -21,25 +26,6 @@ public class VentanaConfirmacion extends JFrame {
 	private JTextField textField_1;
 	private JTextField textField_2;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaConfirmacion frame = new VentanaConfirmacion();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public VentanaConfirmacion() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 626, 396);

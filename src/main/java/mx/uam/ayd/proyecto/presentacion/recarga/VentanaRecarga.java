@@ -1,42 +1,28 @@
 package mx.uam.ayd.proyecto.presentacion.recarga;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+
+import org.springframework.stereotype.Component;
+
+import javax.swing.DefaultComboBoxModel;
+
+@SuppressWarnings("serial")
+@Component
 public class VentanaRecarga extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField textFieldNumero;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					VentanaRecarga frame = new VentanaRecarga();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public VentanaRecarga() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 593, 419);
@@ -45,51 +31,53 @@ public class VentanaRecarga extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setToolTipText("Seleccione compañía");
-		comboBox.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox.setBounds(285, 220, 148, 48);
-		comboBox.addItem("Movistar");
-		comboBox.addItem("Telcel");
-		comboBox.addItem("Unefón");
-		contentPane.add(comboBox);
+		JComboBox comboBoxCompania = new JComboBox();
+		comboBoxCompania.setModel(new DefaultComboBoxModel(new String[] {"Movistar", "Telcel", "AT&T"}));
+		comboBoxCompania.setToolTipText("Seleccione compania");
+		comboBoxCompania.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		comboBoxCompania.setBounds(285, 220, 148, 48);
+		comboBoxCompania.addItem("Movistar");
+		comboBoxCompania.addItem("Telcel");
+		comboBoxCompania.addItem("Unefón");
+		contentPane.add(comboBoxCompania);
 		
-		JComboBox comboBox_1 = new JComboBox();
-		comboBox_1.setToolTipText("Seleccione monto");
-		comboBox_1.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		comboBox_1.setBounds(285, 138, 148, 48);
-		comboBox_1.addItem("...");
-		comboBox_1.addItem("20");
-		comboBox_1.addItem("50");
-		comboBox_1.addItem("100");
-		comboBox_1.addItem("150");
-		contentPane.add(comboBox_1);
+		JComboBox comboBoxMonto = new JComboBox();
+		comboBoxMonto.setModel(new DefaultComboBoxModel(new String[] {"10", "20", "30", "40", "50", "100", "150", "200", "500"}));
+		comboBoxMonto.setToolTipText("Seleccione monto");
+		comboBoxMonto.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		comboBoxMonto.setBounds(285, 138, 148, 48);
+		comboBoxMonto.addItem("...");
+		comboBoxMonto.addItem("20");
+		comboBoxMonto.addItem("50");
+		comboBoxMonto.addItem("100");
+		comboBoxMonto.addItem("150");
+		contentPane.add(comboBoxMonto);
 		
-		JLabel lblNewLabel = new JLabel("Monto");
-		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNewLabel.setBounds(119, 144, 66, 30);
-		contentPane.add(lblNewLabel);
+		JLabel lblMonto = new JLabel("Monto");
+		lblMonto.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblMonto.setBounds(119, 144, 66, 30);
+		contentPane.add(lblMonto);
 		
-		JLabel lblCompaa = new JLabel("Compañía");
-		lblCompaa.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblCompaa.setBounds(119, 231, 95, 21);
-		contentPane.add(lblCompaa);
+		JLabel lblCompania = new JLabel("Compañía");
+		lblCompania.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblCompania.setBounds(119, 231, 95, 21);
+		contentPane.add(lblCompania);
 		
-		JLabel lblNmero = new JLabel("Número");
-		lblNmero.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblNmero.setBounds(119, 68, 66, 30);
-		contentPane.add(lblNmero);
+		JLabel lblNumero = new JLabel("Número");
+		lblNumero.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		lblNumero.setBounds(119, 68, 66, 30);
+		contentPane.add(lblNumero);
 		
-		textField = new JTextField();
-		textField.setToolTipText("Ingrese número");
-		textField.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		textField.setBounds(285, 68, 148, 41);
-		contentPane.add(textField);
-		textField.setColumns(1);
+		textFieldNumero = new JTextField();
+		textFieldNumero.setToolTipText("Ingrese número");
+		textFieldNumero.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		textFieldNumero.setBounds(285, 68, 148, 41);
+		contentPane.add(textFieldNumero);
+		textFieldNumero.setColumns(1);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		btnNewButton.setBounds(442, 316, 95, 30);
-		contentPane.add(btnNewButton);
+		JButton btnAceptar = new JButton("Aceptar");
+		btnAceptar.setBounds(442, 316, 95, 30);
+		contentPane.add(btnAceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(300, 316, 95, 30);
@@ -104,5 +92,9 @@ public class VentanaRecarga extends JFrame {
 		JLabel lblNewLabel_1_1 = new JLabel("Farmapass");
 		lblNewLabel_1_1.setBounds(10, 10, 65, 13);
 		contentPane.add(lblNewLabel_1_1);
+		
+		JButton btnRegresar = new JButton("Regresar");
+		btnRegresar.setBounds(52, 320, 89, 23);
+		contentPane.add(btnRegresar);
 	}
 }

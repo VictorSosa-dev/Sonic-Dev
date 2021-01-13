@@ -110,14 +110,17 @@ public class VentanaVenta extends JFrame {
 
 		scrollPane.setViewportView(table);
 
-		// listener
+		// -------------LISTENER-------------------
+		
+		//Listener para buscar un articulo
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlVenta.buscarProducto(txtIngresaProducto.getText().toUpperCase());
 
 			}
 		});
-
+		
+		//Listener para habilitar el boton de buscar
 		txtIngresaProducto.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				btnBuscar.setEnabled(txtIngresaProducto.getText().length() != 0);
@@ -125,7 +128,8 @@ public class VentanaVenta extends JFrame {
 			}
 
 		});
-
+		
+		
 		btnQuitarDeLista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int x = table.getSelectedRow();
@@ -182,6 +186,13 @@ public class VentanaVenta extends JFrame {
 				
 			}
 			
+		});
+		
+		btnRecarga.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				controlVenta.recarga();
+			}
 		});
 	
 

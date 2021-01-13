@@ -34,6 +34,9 @@ public class ControlVenta {
 
 	@Autowired
 	private ControlCobro controlCobro;
+	
+	@Autowired
+	private ControlRecarga controlRecarga;
 
 	@Autowired
 	private ServicioProducto servicioProducto;
@@ -173,6 +176,10 @@ public class ControlVenta {
 	public void limpiarTabla() {
 		ventanaVenta.limpia();
 
+	}
+
+	public void recarga() {
+		controlRecarga.inicia();
 	}
 
 }
