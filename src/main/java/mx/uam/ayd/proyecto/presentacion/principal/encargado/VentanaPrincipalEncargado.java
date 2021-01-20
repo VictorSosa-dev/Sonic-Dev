@@ -121,8 +121,17 @@ public class VentanaPrincipalEncargado extends JFrame {
 				control.iniciaRecepcionMercancia(empleado);
 			}
 		});
-		btnRecepcionMercancia.setBounds(10, 89, 349, 23);
+		btnRecepcionMercancia.setBounds(10, 89, 169, 23);
 		panel_1.add(btnRecepcionMercancia);
+		
+		JButton btnInventario = new JButton("Inventario");
+		btnInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				control.iniciaInventario(empleado);
+			}
+		});
+		btnInventario.setBounds(201, 89, 158, 23);
+		panel_1.add(btnInventario);
 		contentPane.add(panel_2);
 	}
 
