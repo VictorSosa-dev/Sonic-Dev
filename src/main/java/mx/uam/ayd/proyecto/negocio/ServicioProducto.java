@@ -1,5 +1,7 @@
 package mx.uam.ayd.proyecto.negocio;
 
+import java.util.ArrayList;
+
 /**
  * @author VictorSosa
  */
@@ -31,16 +33,13 @@ public class ServicioProducto {
 	 * @throws IllegalArgumentException si se pasa un null.
 	 */
 	public Producto buscarProducto(String nombre) {
-
 		Producto producto = productoRepository.findByNombre(nombre);
-
 		if (producto == null) {
 			throw new IllegalArgumentException("No se encontro el producto");
 		} else {
 			log.info("Producto encontrado:" + nombre);
 			return producto;
 		}
-
 	}
 
 	/**
@@ -104,6 +103,21 @@ public class ServicioProducto {
 			return true;
 		}
 		
+	}
+	
+	/**
+	 * metodo que recupera los productos que estar por debajo
+	 * del minimo permitido para poder hacer un pedido
+	 * @return lista de productos escazos
+	 */
+	public List<Producto> recuperarProductosEscazes() {
+		List<Producto> productos = new ArrayList<>();
+		for(Producto producto:productoRepository.findAll()) {
+			if(producto.isEscasez()) {
+				productos.add(producto);
+			}
+		}
+		return productos;
 	}
 
 }

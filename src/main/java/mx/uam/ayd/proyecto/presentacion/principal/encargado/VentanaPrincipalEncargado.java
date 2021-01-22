@@ -33,20 +33,20 @@ public class VentanaPrincipalEncargado extends JFrame {
 
 	public VentanaPrincipalEncargado() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 395, 272);
+		setBounds(100, 100, 550, 272);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 
 		JPanel panel = new JPanel();
-		panel.setBounds(5, 5, 369, 34);
+		panel.setBounds(5, 5, 519, 34);
 		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(5, 45, 369, 123);
+		panel_1.setBounds(5, 45, 519, 123);
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(5, 174, 369, 52);
+		panel_2.setBounds(5, 174, 519, 52);
 		panel_2.setLayout(null);
 		
 		JButton btnCierreVenta = new JButton("Inicia cierre de venta");
@@ -123,6 +123,21 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnRecepcionMercancia.setBounds(10, 89, 349, 23);
 		panel_1.add(btnRecepcionMercancia);
+		
+		/*
+		 * Botón que lleva a la ventana Informe Inventario para mostrar
+		 * los productos que están por debajo de la cantidad minima
+		 * establecida
+		 */
+		JButton btnInformeInventario = new JButton("Informe Inventario");
+		btnInformeInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.informeInventario(empleado);
+			}
+		});
+		btnInformeInventario.setBounds(369, 47, 140, 23);
+		panel_1.add(btnInformeInventario);
+		
 		contentPane.add(panel_2);
 	}
 

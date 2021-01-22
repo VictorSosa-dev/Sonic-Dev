@@ -14,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import lombok.Data;
@@ -38,6 +37,8 @@ public class Producto {
 	private String ubicacion;
 	private float precio;
 	private int piezas;
+	
+	static final int MINIMO = 8;
 
 	@OneToMany(targetEntity = DetalleVenta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProducto")
@@ -73,6 +74,14 @@ public class Producto {
 		}
 
 		return ventas.add(detalleVenta);
+	}
+
+	public Boolean isEscasez() {
+		if(this.getPiezas() < MINIMO) { 
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 }

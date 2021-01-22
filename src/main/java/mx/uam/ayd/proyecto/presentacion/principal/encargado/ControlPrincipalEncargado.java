@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
+import mx.uam.ayd.proyecto.presentacion.informeInventario.ControlInformeInventario;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
@@ -36,6 +37,9 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlCierreVenta controlRecepcionMercancia;
+	
+	@Autowired
+	private ControlInformeInventario controlInformeInventario;
 
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -87,6 +91,16 @@ public class ControlPrincipalEncargado {
 		controlRecepcionMercancia.inicia(empleado);
 		ventana.oculta();
 		
+	}
+	
+	/**
+	 * Inicia la ventana para realizar un pedido al proveedor
+	 * HU-04
+	 * @param empleado nombre del empleado encargado de hacer el pedido
+	 */
+	public void informeInventario(Empleado empleado) {
+		controlInformeInventario.inicia(empleado);
+		ventana.oculta();
 	}
 
 }
