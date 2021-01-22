@@ -17,13 +17,23 @@ import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.DetalleVenta;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import mx.uam.ayd.proyecto.presentacion.inventario.ControlCargarArchivo;
 
+/**
+ * Servicio para entidad de producto
+ * 
+ * @author Ana Karina Vergara Guzmán
+ *
+ */
 @Slf4j
 @Service
 public class ServicioProducto {
 
 	@Autowired
 	private ProductoRepository productoRepository;
+
+	@Autowired
+	private ControlCargarArchivo controlCargaArchivo;
 
 	/**
 	 * Método que busca el produco en la base de datos
@@ -35,11 +45,13 @@ public class ServicioProducto {
 	public Producto buscarProducto(String nombre) {
 		Producto producto = productoRepository.findByNombre(nombre);
 		if (producto == null) {
-			throw new IllegalArgumentException("No se encontro el producto");
+			log.warn(">>> EL PRODUCTO: " + nombre + " NO SE ENCONTRÓ.");
 		} else {
-			log.info("Producto encontrado:" + nombre);
-			return producto;
+			log.info(">>> SE OBTIENE EL PRODUCTO: " + producto.getIdProducto() + ": " + producto.getNombre());
 		}
+
+		return producto;
+
 	}
 
 	/**
@@ -67,7 +79,6 @@ public class ServicioProducto {
 	 */
 	public List<Producto> obtenerProductoPorVenta(DetalleVenta detalleVenta) {
 		return productoRepository.findByVentas(detalleVenta);
-
 	}
 
 	public Producto buscarProductoCompuesto(String compuesto) {
@@ -82,8 +93,16 @@ public class ServicioProducto {
 		}
 	}
 
+	/**
+	 * Obtiene una todos los productos existentes en el repositorio
+	 * 
+	 * @return lista con todos los productos, una lista vacia en caso de no haber
+	 *         productos.
+	 */
 	public List<Producto> obtenerProductos() {
-		return (List<Producto>) productoRepository.findAll();
+		List<Producto> listaProductos = (List<Producto>) productoRepository.findAll();
+		log.info(">>> SE LEEN EN INVENTARIO: " + listaProductos.size() + " PRODUCTOS");
+		return listaProductos;
 	}
 
 	public void guardar(Producto producto) {
@@ -95,12 +114,110 @@ public class ServicioProducto {
 		return productoRepository.findByReceta(receta);
 	}
 
+	/**
+	 * Actualiza un producto en el repositorio
+	 * 
+	 * @param producto producto a actualizar
+	 * @return false si el producto no fue actualizado, true si fue actualizado
+	 */
 	public boolean actualizarProducto(Producto producto) {
-		Producto productoN =productoRepository.save(producto);
-		if(productoN == null) {
+		Producto productoN = productoRepository.save(producto);
+		if (productoN == null) {
+			log.warn(">>> NO SE ACTUALIZÓ EL PRODUCTO: " + producto.getIdProducto() + ": " + producto.getNombre());
+			return false;
+		} else {
+			log.info(">>> SE ACTUALIZÓ EL PRODUCTO: " + producto.getIdProducto() + ": " + producto.getNombre());
+			return true;
+		}
+	}
+
+	/**
+	 * Elimina productos del repositorio
+	 * 
+	 * @param listaNombres nombres de los productos a eliminar
+	 * @return true en caso de eliminar todos los productos, false en caso de que
+	 *         alguno no pueda ser eliminado
+	 */
+	public boolean eliminaProductos(List<String> listaNombres) {
+		Producto producto;
+		String nombreActual = null;
+		int contEliminados = 0;
+		try {
+			for (String nombre : listaNombres) {
+				nombreActual = nombre;
+				producto = productoRepository.findByNombre(nombre);
+				productoRepository.delete(producto);
+				contEliminados++;
+			}
+			log.info(">>> SE ELIMINARON: " + contEliminados + " PRODUCTOS.");
+			return true;
+		} catch (IllegalArgumentException e) {
+			log.warn(">>> ERROR AL ENCONTRAR: " + nombreActual + "\nSE ELIMINARON: " + contEliminados
+					+ " PRODUCTOS DE UN TOTAL DE: " + listaNombres.size() + " SOLICITADOS. \nERROR ENCONTRADO: " + e);
+			return false;
+		}
+	}
+
+	/**
+	 * Agrega un producto al repositorio
+	 * 
+	 * @param producto producto que se agrega
+	 * @return true en caso de agregarlo, false si no se agrega
+	 */
+	public boolean agregarProducto(Producto producto) {
+		Producto productoN = productoRepository.save(producto);
+		if (productoN == null) {
 			return false;
 		} else {
 			return true;
+		}
+	}
+
+	/**
+	 * Agrega productos al repositorio
+	 * 
+	 * @param listaProductos lista de productos a agregar
+	 */
+	public void agregarProductos(ArrayList<Producto> listaProductos) {
+		int contFallos = 0;
+		int contExitos = 0;
+		ArrayList<Producto> listaProductosFallo = new ArrayList<Producto>();
+		for (Producto producto : listaProductos) {
+			if (buscarProducto(producto.getNombre()) == null) {
+				productoRepository.save(producto);
+				contExitos++;
+			} else {
+				listaProductosFallo.add(producto);
+				contFallos++;
+			}
+		}
+		log.info(">>> SE ELIMINARON: " + contExitos + " PRODUCTOS.\nHUBO: " + contFallos + " PRODUCTOS DUPLICADOS");
+		for (Producto producto : listaProductosFallo) {
+			log.info(">>>> ERROR AL AGREGAR: " + producto.getIdProducto() + ": " + producto.getNombre());
+		}
+		controlCargaArchivo.muestraResultados(listaProductosFallo, contExitos, contFallos);
+
+	}
+	/**
+	 * Agregar los productos del archivo default en el repositorio
+	 * @param listaProductos lista de productos a agregar
+	 */
+	public void agregarProductosDefault(ArrayList<Producto> listaProductos) {
+		int contFallos = 0;
+		int contExitos = 0;
+		ArrayList<Producto> listaProductosFallo = new ArrayList<Producto>();
+		for (Producto producto : listaProductos) {
+			if (buscarProducto(producto.getNombre()) == null) {
+				productoRepository.save(producto);
+				contExitos++;
+			} else {
+				listaProductosFallo.add(producto);
+				contFallos++;
+			}
+		}
+		log.info(">>> SE ELIMINARON: " + contExitos + " PRODUCTOS.\nHUBO: " + contFallos + " PRODUCTOS DUPLICADOS");
+		for (Producto producto : listaProductosFallo) {
+			log.info(">>>> ERROR AL AGREGAR: " + producto.getIdProducto() + ": " + producto.getNombre());
 		}
 		
 	}

@@ -8,6 +8,7 @@ import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.informeInventario.ControlInformeInventario;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
+import mx.uam.ayd.proyecto.presentacion.inventario.ControlInventario;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 
@@ -40,6 +41,10 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlInformeInventario controlInformeInventario;
+	
+	@Autowired
+	private ControlInventario controlInventario;
+
 
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -101,6 +106,11 @@ public class ControlPrincipalEncargado {
 	public void informeInventario(Empleado empleado) {
 		controlInformeInventario.inicia(empleado);
 		ventana.oculta();
+	}
+
+	public void iniciaInventario(Empleado empleado) {
+		controlInventario.inicia(empleado);
+		ventana.oculta();		
 	}
 
 }
