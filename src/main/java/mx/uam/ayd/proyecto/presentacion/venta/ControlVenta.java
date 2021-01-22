@@ -119,7 +119,7 @@ public class ControlVenta {
 	 * @param nombre
 	 */
 
-	public void actulizaInventarioMenos(List<Producto> listaProductos) {
+	public void actulizaInventario(List<Producto> listaProductos) {
 		servicioProducto.actualizaInventarioMenos(listaProductos);
 	}
 
@@ -168,7 +168,7 @@ public class ControlVenta {
 		String fechaF = ano + "/" + mes + "/" + dia;
 		venta.setFecha(fechaF);
 		venta.setTotal(total);
-		actulizaInventarioMenos(listaProductos);
+		actulizaInventario(listaProductos);
 		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
 		controlCobro.muestraDialogo();
 	}

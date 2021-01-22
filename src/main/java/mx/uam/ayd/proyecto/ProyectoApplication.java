@@ -16,7 +16,6 @@ import mx.uam.ayd.proyecto.datos.VentaRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.inventario.ControlCargarArchivo;
-import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
 
 /**
  * 
@@ -44,8 +43,6 @@ public class ProyectoApplication {
 	@Autowired
 	VentaRepository ventaRepository;
 
-	@Autowired
-	ControlPrincipal controlPrincipal;
 	
 	@Autowired
 	ControlCargarArchivo controlCargarArchivo;

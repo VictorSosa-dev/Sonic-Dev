@@ -1,25 +1,20 @@
 package mx.uam.ayd.proyecto.presentacion.principal.encargado;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingUtilities;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.border.EtchedBorder;
-import java.awt.Color;
 
 @SuppressWarnings("serial")
 @Component
@@ -59,16 +54,16 @@ public class VentanaPrincipalEncargado extends JFrame {
 		btnCierreVenta.setBackground(new Color(255, 0, 0));
 		btnCierreVenta.setBounds(10, 11, 156, 23);
 		panel_2.add(btnCierreVenta);
-				panel_1.setLayout(null);
+		panel_1.setLayout(null);
 		
-				JButton btnVenta = new JButton("Venta");
-				btnVenta.setBounds(10, 47, 97, 23);
-				panel_1.add(btnVenta);
-				btnVenta.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						control.agregarProductos();
-					}
-				});
+		JButton btnVenta = new JButton("Venta");
+		btnVenta.setBounds(10, 11, 97, 23);
+		panel_1.add(btnVenta);
+		btnVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.agregarProductos();
+			}
+		});
 		contentPane.setLayout(null);
 		panel.setLayout(null);
 
@@ -93,7 +88,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 				control.monitoreo();
 			}
 		});
-		btnNewButtonMonitoreo.setBounds(117, 47, 89, 23);
+		btnNewButtonMonitoreo.setBounds(117, 47, 101, 23);
 		panel_1.add(btnNewButtonMonitoreo);
 		
 		JButton btnNewButtonBusqueda = new JButton("Busqueda");
@@ -102,7 +97,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 				control.busqueda();
 			}
 		});
-		btnNewButtonBusqueda.setBounds(10, 11, 349, 23);
+		btnNewButtonBusqueda.setBounds(117, 11, 101, 23);
 		panel_1.add(btnNewButtonBusqueda);
 		
 		JButton btnNuevoPedidoCliente = new JButton("Pedido cliente");
@@ -112,7 +107,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 				control.agregaPedidoCliente(empleado);
 			}
 		});
-		btnNuevoPedidoCliente.setBounds(216, 47, 143, 23);
+		btnNuevoPedidoCliente.setBounds(228, 47, 131, 23);
 		panel_1.add(btnNuevoPedidoCliente);
 		
 		JButton btnRecepcionMercancia = new JButton("Recepcion de Mercancia");
@@ -121,8 +116,17 @@ public class VentanaPrincipalEncargado extends JFrame {
 				control.iniciaRecepcionMercancia(empleado);
 			}
 		});
-		btnRecepcionMercancia.setBounds(10, 89, 349, 23);
+		btnRecepcionMercancia.setBounds(10, 89, 97, 23);
 		panel_1.add(btnRecepcionMercancia);
+		
+		JButton btnActulizar = new JButton("Actulizar Inventario");
+		btnActulizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.muestraVentanaActualiza(empleado);
+			}
+		});
+		btnActulizar.setBounds(228, 11, 131, 23);
+		panel_1.add(btnActulizar);
 		contentPane.add(panel_2);
 	}
 

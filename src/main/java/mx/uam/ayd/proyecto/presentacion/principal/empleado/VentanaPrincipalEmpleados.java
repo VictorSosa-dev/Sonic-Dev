@@ -101,14 +101,14 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		btnNewButtonBusqueda.setBounds(10, 11, 349, 23);
 		panel_1.add(btnNewButtonBusqueda);
 		
-		JButton btnRecepcionMercancia = new JButton("Recepcion de Mercancia");
-		btnRecepcionMercancia.addActionListener(new ActionListener() {
+		JButton btnActualiza = new JButton("Actualiza Inventario");
+		btnActualiza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				control.iniciaRecepcionMercancia(empleado);
+				control.muestraVentanaActualiza(empleado);
 			}
 		});
-		btnRecepcionMercancia.setBounds(10, 89, 179, 23);
-		panel_1.add(btnRecepcionMercancia);
+		btnActualiza.setBounds(10, 89, 143, 23);
+		panel_1.add(btnActualiza);
 		contentPane.add(panel_2);
 	}
 

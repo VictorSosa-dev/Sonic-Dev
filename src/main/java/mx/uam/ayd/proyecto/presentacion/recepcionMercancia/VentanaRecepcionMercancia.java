@@ -1,35 +1,31 @@
 package mx.uam.ayd.proyecto.presentacion.recepcionMercancia;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
-
-import org.springframework.stereotype.Component;
-
-import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
-import mx.uam.ayd.proyecto.negocio.modelo.Producto;
-import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
 import java.awt.Color;
-import javax.swing.JFormattedTextField;
-import javax.swing.table.DefaultTableModel;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-import javax.swing.ListSelectionModel;
-import javax.swing.JTextField;
-import javax.swing.border.EtchedBorder;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
+
+import org.springframework.stereotype.Component;
+
+import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 @SuppressWarnings("serial")
 @Component

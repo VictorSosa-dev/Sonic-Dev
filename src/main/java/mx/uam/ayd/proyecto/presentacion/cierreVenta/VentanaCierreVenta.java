@@ -66,7 +66,6 @@ public class VentanaCierreVenta extends JFrame {
 				return false;
 			}
 		};
-		;
 
 		modeloInventario.addColumn("Nombre");
 		modeloInventario.addColumn("Compuesto");
@@ -103,8 +102,7 @@ public class VentanaCierreVenta extends JFrame {
 		scrollPaneCierreVenta.setBounds(0, 0, 474, 135);
 		panel.add(scrollPaneCierreVenta);
 
-		tabla_inventario = new JTable(
-				new DefaultTableModel(new Object[][] {}, new String[] { "Nombre", "Compuesto", "Precio" }));
+		
 
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
@@ -228,7 +226,7 @@ public class VentanaCierreVenta extends JFrame {
 		this.control = control;
 		this.empleado = empleado;
 		this.txtNombreEmpleado
-				.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+		.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
 		this.txtNivel.setText(empleado.getNivel());
 		setVisible(true);
 	}
