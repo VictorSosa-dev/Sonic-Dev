@@ -8,6 +8,7 @@ import mx.uam.ayd.proyecto.presentacion.actulizaInventario.ControlActualiza;
 import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
+import mx.uam.ayd.proyecto.presentacion.inventario.ControlInventario;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 
@@ -37,6 +38,9 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlCierreVenta controlRecepcionMercancia;
+	
+	@Autowired
+	private ControlInventario controlInventario;
 
 	@Autowired
 	private ControlActualiza controlActualiza;
@@ -94,6 +98,5 @@ public class ControlPrincipalEncargado {
 
 	public void muestraVentanaActualiza(Empleado empleado) {
 		controlActualiza.inicia(empleado);
-	}
 
 }

@@ -116,8 +116,6 @@ public class VentanaPrincipalEncargado extends JFrame {
 				control.iniciaRecepcionMercancia(empleado);
 			}
 		});
-		btnRecepcionMercancia.setBounds(10, 89, 97, 23);
-		panel_1.add(btnRecepcionMercancia);
 		
 		JButton btnActulizar = new JButton("Actulizar Inventario");
 		btnActulizar.addActionListener(new ActionListener() {
