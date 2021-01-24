@@ -14,8 +14,9 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.ServicioDetalleVenta;
 import mx.uam.ayd.proyecto.negocio.ServicioProducto;
-import mx.uam.ayd.proyecto.negocio.ServicioVenta;
+import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import mx.uam.ayd.proyecto.negocio.modelo.Recarga;
 import mx.uam.ayd.proyecto.negocio.modelo.Venta;
 import mx.uam.ayd.proyecto.presentacion.cobro.ControlCobro;
 
@@ -50,12 +51,12 @@ public class ControlVenta {
 	 * Inicia la historia de usuario: Agregar productos para la venta
 	 * 
 	 */
-	public void inicia() {
-		ventanaVenta.muestra(this);
+	public void inicia(Empleado empleado) {
+		ventanaVenta.muestra(this, empleado);
 	}
 
 	/**
-	 * Método que busca invoca al servio de producto para buscar el producto por
+	 * MÃ©todo que busca invoca al servio de producto para buscar el producto por
 	 * nombre.
 	 * 
 	 * @param nombre
@@ -73,7 +74,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que invoca al servicio de producto para producto por nombre
+	 * MÃ©todo que invoca al servicio de producto para producto por nombre
 	 * 
 	 * @param nombre
 	 * @return Un objeto de tipo producto si lo encuentra y nulo si lo encuentra.
@@ -96,7 +97,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que llena la tabla de la ventana venta.
+	 * MÃ©todo que llena la tabla de la ventana venta.
 	 * 
 	 * @param producto
 	 */
@@ -113,7 +114,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que actualiza invoca al servicio para actualizar el inventario de un
+	 * MÃ©todo que actualiza invoca al servicio para actualizar el inventario de un
 	 * producto
 	 * 
 	 * @param nombre
@@ -135,7 +136,7 @@ public class ControlVenta {
 	 */
 
 	/**
-	 * Método que se comunica con el control cobro para mostrar la ventana.
+	 * MÃ©todo que se comunica con el control cobro para mostrar la ventana.
 	 * 
 	 * @param total
 	 */
@@ -144,7 +145,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que obtiene el total de la ventana de venta.
+	 * MÃ©todo que obtiene el total de la ventana de venta.
 	 * 
 	 * @param precio
 	 */
@@ -153,7 +154,7 @@ public class ControlVenta {
 	}
 
 	/**
-	 * Método que obtien los producto de la venta
+	 * MÃ©todo que obtien los producto de la venta
 	 * 
 	 * @param total
 	 */
@@ -177,9 +178,25 @@ public class ControlVenta {
 		ventanaVenta.limpia();
 
 	}
+	
+	/**
+	 * MÃ©todo que llama a iniciar una recarga
+	 * @param empleado
+	 */
+	public void recarga(Empleado empleado) {
+		controlRecarga.inicia(empleado);
+	}
 
-	public void recarga() {
-		controlRecarga.inicia();
+	/**
+	 * MÃ©tdodo que devuelve y muestra la recarga realizada
+	 * en la lista de ventas
+	 * @param recarga
+	 */
+	public void agregaRecargaTabla(Recarga recarga) {
+		// TODO Auto-generated method stub
+		ventanaVenta.agregaRecarga(recarga);
+		
 	}
 
 }
+

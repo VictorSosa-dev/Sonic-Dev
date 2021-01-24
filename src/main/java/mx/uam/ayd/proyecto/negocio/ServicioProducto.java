@@ -223,6 +223,7 @@ public class ServicioProducto {
 	}
 	
 	/**
+<<<<<<< HEAD
 	 * metodo que recupera los productos que estar por debajo
 	 * del minimo permitido para poder hacer un pedido
 	 * @return lista de productos escazos
@@ -237,6 +238,8 @@ public class ServicioProducto {
 		return productos;
 	}
 	/**
+=======
+>>>>>>> f04f6dc9994b990082dc72e247b583475a8fc7bf
 	 * Se actualiza el numero de piezas en el inventario
 	 * @param producto
 	 * @param nuevasPiezas

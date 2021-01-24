@@ -28,7 +28,9 @@ import javax.swing.table.DefaultTableModel;
 
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import mx.uam.ayd.proyecto.negocio.modelo.Recarga;
 
 @SuppressWarnings("serial")
 @Component
@@ -41,63 +43,63 @@ public class VentanaVenta extends JFrame {
 	private JTable table;
 	float total = 0;
 	Producto producto;
-
+	private Empleado empleado;
 	private DefaultTableModel modelo = new DefaultTableModel() {
 		@Override 
 		public boolean isCellEditable(int row, int column) { 
 			return false; 
 			} 
 	};
+	private JTextField txtNivel;
+	private JTextField txtNombreEmpleado;
+	private JTextField txtNumEmpleado;
+	private ControlVenta control;
+	
 	
 	public VentanaVenta() {
 		setTitle("Venta");
-		setBounds(100, 100, 619, 342);
+		setBounds(100, 100, 619, 365);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JLabel lblNewLabel = new JLabel("Venta");
-		lblNewLabel.setFont(new Font("Segoe UI Black", Font.PLAIN, 15));
-		lblNewLabel.setBounds(246, 11, 63, 14);
-		contentPane.add(lblNewLabel);
-
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setEnabled(false);
-		btnBuscar.setBounds(208, 27, 89, 23);
+		btnBuscar.setBounds(208, 48, 89, 23);
 		contentPane.add(btnBuscar);
 
 		txtIngresaProducto = new JTextField();
 		txtIngresaProducto.setText("");
-		txtIngresaProducto.setBounds(21, 28, 171, 20);
+		txtIngresaProducto.setBounds(21, 49, 171, 20);
 		contentPane.add(txtIngresaProducto);
 		txtIngresaProducto.setColumns(10);
 
 		JLabel lblTotal = new JLabel("Total:");
 		lblTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblTotal.setBounds(412, 232, 51, 14);
+		lblTotal.setBounds(412, 253, 51, 14);
 		contentPane.add(lblTotal);
 
 		textTotal = new JTextField();
 		textTotal.setEditable(false);
-		textTotal.setBounds(473, 229, 96, 20);
+		textTotal.setBounds(473, 250, 96, 20);
 		contentPane.add(textTotal);
 		textTotal.setColumns(10);
 
 		JButton btnCobrar = new JButton("Cobrar");
-		btnCobrar.setBounds(480, 271, 89, 23);
+		btnCobrar.setBounds(480, 292, 89, 23);
 		contentPane.add(btnCobrar);
 
 		JButton btnQuitarDeLista = new JButton("Quitar de lista");
-		btnQuitarDeLista.setBounds(154, 228, 155, 23);
+		btnQuitarDeLista.setBounds(154, 249, 155, 23);
 		contentPane.add(btnQuitarDeLista);
 
 		JButton btnRecarga = new JButton("Recarga");
-		btnRecarga.setBounds(10, 228, 89, 23);
+		btnRecarga.setBounds(21, 251, 89, 23);
 		contentPane.add(btnRecarga);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(21, 63, 574, 150);
+		scrollPane.setBounds(21, 84, 574, 150);
 		contentPane.add(scrollPane);
 
 		table = new JTable(modelo);
@@ -109,6 +111,24 @@ public class VentanaVenta extends JFrame {
 		modelo.addColumn("Seleccionar");
 
 		scrollPane.setViewportView(table);
+		
+		txtNivel = new JTextField();
+		txtNivel.setEditable(false);
+		txtNivel.setBounds(21, 10, 155, 28);
+		contentPane.add(txtNivel);
+		txtNivel.setColumns(10);
+		
+		txtNombreEmpleado = new JTextField();
+		txtNombreEmpleado.setEditable(false);
+		txtNombreEmpleado.setColumns(10);
+		txtNombreEmpleado.setBounds(190, 10, 212, 28);
+		contentPane.add(txtNombreEmpleado);
+		
+		txtNumEmpleado = new JTextField();
+		txtNumEmpleado.setEditable(false);
+		txtNumEmpleado.setColumns(10);
+		txtNumEmpleado.setBounds(412, 10, 171, 28);
+		contentPane.add(txtNumEmpleado);
 
 		// -------------LISTENER-------------------
 		
@@ -189,9 +209,9 @@ public class VentanaVenta extends JFrame {
 		});
 		
 		btnRecarga.addActionListener(new ActionListener() {	
-			@Override
+			
 			public void actionPerformed(ActionEvent e) {
-				controlVenta.recarga();
+				controlVenta.recarga(empleado);
 			}
 		});
 	
@@ -199,9 +219,17 @@ public class VentanaVenta extends JFrame {
 	}
 
 	// Muestra la ventana
-	public void muestra(ControlVenta controlVenta) {
-
-		this.controlVenta = controlVenta;
+	public void muestra(ControlVenta control, Empleado empleado) {
+		String id = String.valueOf(empleado.getIdEmpleado());
+		this.control = control;
+		this.empleado = empleado;
+		this.txtNombreEmpleado
+				.setText("Nombre: " + empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+		this.txtNivel.setText("Cargo: " + empleado.getNivel());
+		this.txtNumEmpleado.setText("ID: " +id);
+		setVisible(true);
+		this.controlVenta = control;
+		this.empleado = empleado;
 
 		setVisible(true);
 
@@ -232,7 +260,7 @@ public class VentanaVenta extends JFrame {
 	}
 
 	/**
-	 * Método que recorre la tabla
+	 * MÃ©todo que recorre la tabla
 	 * 
 	 * @return venta de tipo lista
 	 */
@@ -268,6 +296,24 @@ public class VentanaVenta extends JFrame {
             JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
         }	
 	}
+	/**
+	 * Agrega los datos a la tabla de venta y obtiene el total
+	 * @param recarga
+	 */
+	public void agregaRecarga(Recarga recarga) {
+		// TODO Auto-generated method stub
+		String a[] = new String[4];
+		a[0] = recarga.getCompania();
+		a[1] = recarga.getCelular();
+		a[2] = String.valueOf(recarga.getMonto());
+		a[3] = "Selecciona para quitar ";
+		modelo.addRow(a);
+		table.setModel(modelo);
+		total = total + recarga.getMonto();
+		textTotal.setText(String.valueOf(total));
+		
+	}
 
 
 }
+

@@ -5,21 +5,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Entity
 @Data
-
+@Component
 public class Recarga {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int celular;
+	private String celular;
 	private int monto;
-	private String compañia;
+	private String compania;
 	public Recarga() {}
-	public Recarga(int celular, int monto, String compañia) {
+	public Recarga(String celular, int monto, String compania) {
 		this.celular = celular;
-		this.compañia = compañia;
+		this.compania = compania;
 		this.monto = monto;
 	}
 }
+
