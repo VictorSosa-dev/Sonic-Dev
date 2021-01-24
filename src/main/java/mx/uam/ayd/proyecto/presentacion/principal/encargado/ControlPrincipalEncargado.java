@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.presentacion.actualizaInventario.ControlActualiza;
 import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
@@ -40,6 +41,9 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlInventario controlInventario;
+	
+	@Autowired
+	private ControlActualiza controlActualiza;
 
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -97,5 +101,8 @@ public class ControlPrincipalEncargado {
 		controlInventario.inicia(empleado);
 		ventana.oculta();		
 	}
-
+	
+	public void muestraVentanaActualiza(Empleado empleado) {
+		controlActualiza.inicia(empleado);
+	}
 }

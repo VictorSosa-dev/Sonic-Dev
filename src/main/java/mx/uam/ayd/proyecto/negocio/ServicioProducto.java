@@ -220,5 +220,23 @@ public class ServicioProducto {
 		}
 		
 	}
+	
+	/**
+	 * Se actualiza el numero de piezas en el inventario
+	 * @param producto
+	 * @param nuevasPiezas
+	 */
+	public void actualizaInventarioNuevo(Producto producto, int nuevasPiezas) {
+		
+		if(producto == null) {
+			throw new IllegalArgumentException("No se encuentra el producto");
+		}
+		try {
+			producto.setPiezas(nuevasPiezas);
+			productoRepository.save(producto);
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "No se actualizaron las piezas");
+		}
+	}
 
 }

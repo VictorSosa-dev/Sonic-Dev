@@ -102,7 +102,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 				control.busqueda();
 			}
 		});
-		btnNewButtonBusqueda.setBounds(10, 11, 349, 23);
+		btnNewButtonBusqueda.setBounds(10, 11, 192, 23);
 		panel_1.add(btnNewButtonBusqueda);
 		
 		JButton btnNuevoPedidoCliente = new JButton("Pedido cliente");
@@ -132,6 +132,16 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnInventario.setBounds(201, 89, 158, 23);
 		panel_1.add(btnInventario);
+		contentPane.add(panel_2);
+		
+		JButton btnActulizar = new JButton("Actulizar Inventario");
+		btnActulizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.muestraVentanaActualiza(empleado);
+			}
+		});
+		btnActulizar.setBounds(228, 11, 131, 23);
+		panel_1.add(btnActulizar);
 		contentPane.add(panel_2);
 	}
 
