@@ -39,8 +39,29 @@ public class ServicioPedidoProveedor {
 		List<PedidoProveedor> pedidos = pedidoProveedorRepository.findByFechaDeCreacion(fechaF);
 		return pedidos;
 	}
+	
+	public PedidoProveedor addPedidoProveedor(String fechaCreacion, int piezas, float precioTotal){
+		List<PedidoProveedor> pedidos = pedidoProveedorRepository.findByFechaDeCreacion(fechaCreacion);
+		PedidoProveedor pedido = new PedidoProveedor();
 
-
+		pedido.setFechaDeCreacion(fechaCreacion);
+		pedido.setTotalProductos(piezas);
+		pedido.setPrecioTotal(precioTotal);
+		
+		if(fechaCreacion == null && piezas == 0 && precioTotal == 0.0) {
+			throw new IllegalArgumentException("No pueden ser nulos");
+		}
+		
+		for (PedidoProveedor pedidoProveedor : pedidos) {
+			pedidos.add(pedido);
+		}
+		/*if(pedido == null) {
+			throw new IllegalArgumentException("No se encontro el pedido");
+		}*/
+		pedidoProveedorRepository.save(pedido);
+		return pedido;
+	}
+	
 	public List<PedidoProveedor> obtenerPedidoSinFechaDeRecepcion() {
 		String sinFecha = null;
 		List<PedidoProveedor> listaPedidosSinFecha = new ArrayList<>();

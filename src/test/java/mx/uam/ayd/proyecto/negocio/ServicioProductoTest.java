@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 import java.util.LinkedList;
-
+import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
@@ -20,14 +20,6 @@ import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 
 @ExtendWith(MockitoExtension.class)
 class ServicioProductoTest {
-
-	@BeforeEach
-	void setUp() throws Exception {
-	}
-
-	@AfterEach
-	void tearDown() throws Exception {
-	}
 	
 	@Mock
 	private ProductoRepository productoRepository;
@@ -37,7 +29,31 @@ class ServicioProductoTest {
 	// no están satisfechas en tiempo de pruebas
 	@InjectMocks
 	private ServicioProducto servicio;
+	
+	private Producto producto1 = new Producto();
+	private Producto producto2 = new Producto();
+	
+	@BeforeEach
+	void setUp() throws Exception {
+		
+		producto1.setNombre("AJOLOTIUS");
+		producto1.setCompuesto("Miel de abeja");
+		producto1.setReceta("No");
+		producto1.setUbicacion("Estante 2");
+		producto1.setPiezas(2);
+		producto1.setPrecio(50);
+		
+		producto2.setNombre("DICLOFENACO");
+		producto2.setCompuesto("Diclofenaco sodico");
+		producto2.setReceta("No");
+		producto2.setUbicacion("Estante 2");
+		producto2.setPiezas(10);
+		producto2.setPrecio(45);
+	}
 
+	@AfterEach
+	void tearDown() throws Exception {
+	}
 	
 	@Test
 	void testBuscarProductos() {
@@ -103,6 +119,25 @@ class ServicioProductoTest {
 		int o = p1.getPiezas();
 		
 		assertNotEquals(8,o);
+	}
+	
+	@Test
+	void testRecuperarProductosEscasez() {
+		//Prueba 1: 
+		List<Producto> productos = servicio.obtenerProductos();
+		assertTrue(productos.isEmpty());
+		//Prueba 2:
+		LinkedList <Producto> lista = new LinkedList <> ();
+		lista.add(producto1);
+		lista.add(producto2);
+		when(productoRepository.findAll()).thenReturn(lista);
+		
+		productoRepository.save(producto1);
+		productoRepository.save(producto2);
+		
+		productos = servicio.recuperarProductosEscazes();
+		
+		assertEquals(1, productos.size());
 	}
 	
 }

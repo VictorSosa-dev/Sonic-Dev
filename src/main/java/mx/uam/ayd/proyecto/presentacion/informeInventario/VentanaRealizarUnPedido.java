@@ -24,6 +24,7 @@ import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import mx.uam.ayd.proyecto.presentacion.principal.encargado.ControlPrincipalEncargado;
 @Slf4j
 @SuppressWarnings("serial")
 @Component
@@ -34,12 +35,11 @@ public class VentanaRealizarUnPedido extends JFrame {
 	private JTextField textEmpleado;
 	private JTextField textNumEmpleado;
 	private ControlRealizarUnPedido controlRealizarUnPedido;
+	private ControlPrincipalEncargado controlPrincipalEncargado;
 	Empleado empleado;
 	private Producto producto;
-	//private TableColumn checkColumn;
 	
 	//tabla inventario
-	//private List<Producto> productos = new ArrayList<>();
 	DefaultTableModel modeloInventario = new DefaultTableModel();
 	private JTable tabla_Inventario= new JTable(modeloInventario) {
 		public boolean isCellEditable(int rowIndex, int vColIndex) {
@@ -124,6 +124,7 @@ public class VentanaRealizarUnPedido extends JFrame {
 				int nuevasPiezas = 0; //param por pasar con el nuevo #de pzas
 				Object totalPiezas = null; //#de pzas
 				String a, nombre;
+				float precioT = 0;
 				for(int i = 0; i < tabla_Inventario.getRowCount(); i++){
 					totalPiezas = tabla_Inventario.getValueAt(i,1); //obtiene el total de piezas
 					a = String.valueOf(totalPiezas);
@@ -131,36 +132,20 @@ public class VentanaRealizarUnPedido extends JFrame {
 						nuevasPiezas = Integer.valueOf(a);
 						nombre = (String) tabla_Inventario.getValueAt(i,0);
 						System.out.println(nombre + " " + nuevasPiezas);
-						controlRealizarUnPedido.mandaPedido(nombre, nuevasPiezas);
+						precioT = controlRealizarUnPedido.calculaPrecioTotal(nombre, nuevasPiezas);
+						controlRealizarUnPedido.mandaPedido(empleado, nombre, nuevasPiezas, precioT);
+						//oculta();
+						
 					}else{
 						nombre = (String) tabla_Inventario.getValueAt(i,0);
 						System.out.println(nuevasPiezas + ", " + nombre);
 						//controlRealizarUnPedido.mandaPedido(nombre, nuevasPiezas);
 					}
 				}
-				/*List<Producto> productos = new ArrayList<>();
-				String valor = "";
-				int pzas = 0;
-				for(int i = 0; i < tabla_Inventario.getRowCount(); i++) {
-						valor = String.valueOf(tabla_Inventario.getValueAt(i,1));
-						pzas = Integer.parseInt(valor);
-						producto.getNombre();
-						producto.setPiezas(pzas);
-						productos.add(producto);
-						System.out.println(productos);
-						System.out.println(valor);
-						System.out.println(pzas);
-					if(pzas < 30) {
-						muestraDialogoConMensaje("debes de poner una cantidad mayor a 30");
-					}else {
-						controlRealizarUnPedido.mandaPedido();
-					}
-					
-				}*/
 			}
 		});
 		
-		JButton btnCancelar = new JButton("Cancelar");
+		JButton btnCancelar = new JButton("Regresar");
 		btnCancelar.setBounds(290, 11, 89, 23);
 		panel_4.add(btnCancelar);
 		btnCancelar.addActionListener(new ActionListener() {
@@ -191,15 +176,6 @@ public class VentanaRealizarUnPedido extends JFrame {
 		tabla_Inventario.setModel(modeloInventario);
 		this.producto = producto;
 	}
-	/*public void llenaTabla(Producto producto) {
-		String a[] = new String[4];
-		a[0] = producto.getNombre();
-		//a[1] = "30";
-		a[1] = String.valueOf(producto.getPiezas());
-		modeloInventario.addRow(a);
-		tabla_Inventario.setModel(modeloInventario);
-		this.producto = producto;
-	}*/
 	
 	private void limpiaTabla() {
 		int filas = tabla_Inventario.getRowCount();
@@ -216,10 +192,23 @@ public class VentanaRealizarUnPedido extends JFrame {
 	public void muestraDialogoConMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje);
 	}
-
+	
 	public void oculta() {
 		limpiaTabla();
 		setVisible(false);
 	}
-
+	//prueba
+	public List<Producto> recorrerTabla() {
+		List<Producto> lista = new ArrayList<>();
+		Producto producto;
+		try {
+			for(int i = 0; i < tabla_Inventario.getRowCount(); i++) {
+				producto = controlRealizarUnPedido.obtenerProducto((String) tabla_Inventario.getValueAt(i, 0));
+				lista.add(producto);
+			}
+		}catch(Exception e){
+			JOptionPane.showConfirmDialog(null, "Error al leer la tabla");
+		}
+		return lista;
+	}
 }

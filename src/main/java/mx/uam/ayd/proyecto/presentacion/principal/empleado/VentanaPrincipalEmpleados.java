@@ -89,7 +89,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 				control.agregaPedidoCliente(empleado);
 			}
 		});
-		btnNuevoPedidoCliente.setBounds(199, 89, 160, 23);
+		btnNuevoPedidoCliente.setBounds(258, 89, 101, 23);
 		panel_1.add(btnNuevoPedidoCliente);
 		
 		JButton btnNewButtonBusqueda = new JButton("Busqueda");
@@ -107,8 +107,18 @@ public class VentanaPrincipalEmpleados extends JFrame {
 				control.iniciaRecepcionMercancia(empleado);
 			}
 		});
-		btnRecepcionMercancia.setBounds(10, 89, 179, 23);
+		btnRecepcionMercancia.setBounds(155, 78, 93, 23);
 		panel_1.add(btnRecepcionMercancia);
+		contentPane.add(panel_2);
+		
+		JButton btnActualiza = new JButton("Actualiza Inventario");
+		btnActualiza.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.muestraVentanaActualiza(empleado);
+			}
+		});
+		btnActualiza.setBounds(10, 89, 143, 23);
+		panel_1.add(btnActualiza);
 		contentPane.add(panel_2);
 	}
 
@@ -121,6 +131,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		setVisible(true);
 
 	}
+	
 
 	public void oculta() {
 		setVisible(false);

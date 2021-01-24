@@ -10,13 +10,30 @@ import org.junit.jupiter.api.Test;
 class PruductoTest {
 
 	DetalleVenta detalleVenta;
-
+	private Producto producto1 = new Producto();
+	private Producto producto2 = new Producto();
 	@BeforeEach
 	void setUp() throws Exception {
 		// Este método se ejecuta antes de la ejecución
 		// de cada metodo de prueba, es útil para
 		// establecer las precondiciones
 		detalleVenta = new DetalleVenta();
+		
+		// Producto CON Escasez
+		producto1.setNombre("AJOLOTIUS");
+		producto1.setCompuesto("Miel de abeja");
+		producto1.setReceta("No");
+		producto1.setUbicacion("Estante 2");
+		producto1.setPiezas(2);
+		producto1.setPrecio(50);
+
+		//Producto SIN Escasez
+		producto2.setNombre("DICLOFENACO");
+		producto2.setCompuesto("Diclofenaco sodico");
+		producto2.setReceta("No");
+		producto2.setUbicacion("Estante 2");
+		producto2.setPiezas(10);
+		producto2.setPrecio(45);
 
 	}
 
@@ -51,6 +68,15 @@ class PruductoTest {
 			venta.addDetalleVenta(null);
 
 		});
+	}
+	
+	@Test
+	public final void testIsEscacez() {
+		// Caso 1: Corroborar que regresa true cuando existe escasez en un producto
+		assertTrue(producto1.isEscasez());
+		
+		// Caso 2: Corroborar que regresa false cuando No existe escasez en un producto
+		assertFalse(producto2.isEscasez());
 	}
 
 }

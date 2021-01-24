@@ -40,8 +40,7 @@ public class PedidoProveedor {
 	public PedidoProveedor() {
 	}
 
-	public PedidoProveedor(String fechaDeCreacion, int totalProductos,
-			float precioTotal) {
+	public PedidoProveedor(String fechaDeCreacion, int totalProductos, float precioTotal) {
 		this.fechaDeCreacion = fechaDeCreacion;
 		this.fechaDeRecepcion = null;
 		this.empleadoRecibe = null;
@@ -57,15 +56,13 @@ public class PedidoProveedor {
 	 * @return regresa true si el detalle de pedido se agrego correctamente y false si no
 	 * @throws IllegalArgumentException si el detalle es nulo
 	 */
-	
 	public boolean addDetallePedidoProveedor(DetallePedidoProveedor detallePedido) {
-		if (detallePedido == null) {
-			throw new IllegalArgumentException("El detalle de venta no puede ser null");
+		if(detallePedido == null) {
+			throw new IllegalArgumentException("El detalle de pedido al proveedor no puede ser null");
 		}
-		if (detallesPedidoProveedor.contains(detallePedido)) {
+		if(detallesPedidoProveedor.contains(detallePedido)) {
 			return false;
 		}
-
 		return detallesPedidoProveedor.add(detallePedido);
 	}
 }

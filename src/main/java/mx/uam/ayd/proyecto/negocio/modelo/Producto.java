@@ -43,7 +43,11 @@ public class Producto {
 	@OneToMany(targetEntity = DetalleVenta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProducto")
 	private final List<DetalleVenta> ventas = new ArrayList<>();
-
+	
+	@OneToMany(targetEntity = DetalleVenta.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "idProducto")
+	private final List<DetallePedidoProveedor> detallePedidos = new ArrayList<>();
+	
 	public Producto() {
 	}
 
@@ -75,6 +79,19 @@ public class Producto {
 
 		return ventas.add(detalleVenta);
 	}
+	
+	public boolean addDetallePedidoProveedor(DetallePedidoProveedor detallePedido) {
+
+		if (detallePedido == null) {
+			throw new IllegalArgumentException("El detalle de venta no puede ser null");
+		}
+		if (detallePedidos.contains(detallePedido)) {
+			return false;
+		}
+
+		return detallePedidos.add(detallePedido);
+	}
+
 
 	public Boolean isEscasez() {
 		if(this.getPiezas() < MINIMO) { 

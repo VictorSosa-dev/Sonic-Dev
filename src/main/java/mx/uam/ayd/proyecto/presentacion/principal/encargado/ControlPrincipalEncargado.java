@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.presentacion.actualizaInventario.ControlActualiza;
 import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.informeInventario.ControlInformeInventario;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.inventario.ControlInventario;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
+import mx.uam.ayd.proyecto.presentacion.pedidoRealizado.ControlPedidoRealizado;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 
 @Component
@@ -44,8 +46,13 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlInventario controlInventario;
+	
+	@Autowired
+	private ControlActualiza controlActualiza;
 
-
+	@Autowired
+	private ControlPedidoRealizado controlPedidoRealizado;
+	
 	/**
 	 * Inicia el flujo de control de la ventana principal
 	 * 
@@ -112,5 +119,18 @@ public class ControlPrincipalEncargado {
 		controlInventario.inicia(empleado);
 		ventana.oculta();		
 	}
-
+	
+	public void muestraVentanaActualiza(Empleado empleado) {
+		controlActualiza.inicia(empleado);
+	}
+	
+	/**
+	 * Inicia la ventana que muestra los productos a los cuales
+	 * se le realizo un pedido al proveedor
+	 * @param empleado nombre del empleado encargado de realizar el pedido
+	 */
+	public void pedidosRealizados(Empleado empleado) {
+		controlPedidoRealizado.inicia(empleado);
+		//ventana.oculta();
+	}
 }
