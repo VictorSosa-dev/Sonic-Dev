@@ -57,9 +57,9 @@ public class ControlPrincipalEncargado {
 	 * Método que arranca la historia de usuario "agregar productos para la venta"
 	 * 
 	 */
-	public void agregarProductos() {
+	public void agregarProductos(Empleado empleado) {
 
-		controlVenta.inicia();
+		controlVenta.inicia(empleado);
 	}
 
 	public void iniciaCierreVenta(Empleado empleado) {
