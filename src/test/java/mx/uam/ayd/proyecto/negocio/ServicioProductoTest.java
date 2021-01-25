@@ -1,8 +1,13 @@
 package mx.uam.ayd.proyecto.negocio;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -167,7 +172,122 @@ class ServicioProductoTest {
 		});
 	
 	}
+	
+	/**
+	 * Test al metodo obtener productos
+	 */
+	@Test
+	void testObtenerProducto() {
 
+		// Prueba 1: El método regresa una lista vacia en caso de no haber productos
+		List<Producto> listaProductos = servicio.obtenerProductos();
+		assertEquals(0, listaProductos.size());
+
+		// Prueba 2: El metodo regresa la lista de productos en caso de haber.
+		Producto producto1 = new Producto();
+		producto1.setNombre("aspirina");
+		producto1.setCompuesto("ff");
+		producto1.setReceta("Si");
+		producto1.setUbicacion("aqui");
+		producto1.setPrecio(20);
+		producto1.setPiezas(5);
+		Producto producto2 = new Producto();
+		producto2.setNombre("paracetamol");
+		producto2.setCompuesto("ff");
+		producto2.setReceta("Si");
+		producto2.setUbicacion("aqui");
+		producto2.setPrecio(20);
+		producto2.setPiezas(5);
+
+		List<Producto> listaProductosAct = new ArrayList<Producto>();
+		listaProductosAct.add(producto1);
+		listaProductosAct.add(producto2);
+
+		when(productoRepository.findAll()).thenReturn(listaProductosAct);
+		listaProductos = servicio.obtenerProductos();
+
+		assertEquals(2, listaProductos.size());
+	}
+	
+	/**
+	 * Prueba para actualizar un producto
+	 */
+	@Test
+	void testActualizarProducto() {
+		// Prueba 1: El producto a actualizar esta vacio
+		Producto producto = null;
+		assertFalse(servicio.actualizarProducto(producto));
+
+		// Prueba 2: El producto fue actualizado
+		Producto producto1 = new Producto();
+		producto1.setNombre("aspirina");
+		producto1.setCompuesto("ff");
+		producto1.setReceta("Si");
+		producto1.setUbicacion("aqui");
+		producto1.setPrecio(20);
+		producto1.setPiezas(5);
+
+		when(productoRepository.save(producto1)).thenReturn(producto1);
+		assertTrue(servicio.actualizarProducto(producto1));
+	}
+	
+	/**
+	 * Prueba para eliminar multiples productos
+	 */
+	@Test
+	void eliminaProductos() {
+		//Prueba 1: La lista de productos es nula
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			servicio.eliminaProductos(null);
+		});
+		
+		//Prueba 2: La lista de nombres esta vacia
+		List<String> listaNombres = new ArrayList<String>();
+		assertFalse(servicio.eliminaProductos(listaNombres));
+		
+		//Prueba 3: se eliminan todos los productos 
+		List<String> listaNombresLlena = new ArrayList<String>();
+		listaNombresLlena.add("aspirina");
+		listaNombresLlena.add("paracetamol");
+		
+		Producto producto1 = new Producto();
+		producto1.setNombre("aspirina");
+		producto1.setCompuesto("ff");
+		producto1.setReceta("Si");
+		producto1.setUbicacion("aqui");
+		producto1.setPrecio(20);
+		producto1.setPiezas(5);
+		Producto producto2 = new Producto();
+		producto2.setNombre("paracetamol");
+		producto2.setCompuesto("ff");
+		producto2.setReceta("Si");
+		producto2.setUbicacion("aqui");
+		producto2.setPrecio(20);
+		producto2.setPiezas(5);
+		
+		when(productoRepository.findByNombre("aspirina")).thenReturn(producto1);
+		when(productoRepository.findByNombre("paracetamol")).thenReturn(producto2);
+		
+		assertTrue(servicio.eliminaProductos(listaNombresLlena));
+	}
+	
+	/**
+	 * Prueba para agregar producto
+	 */
+	@Test
+	void testAgregarProducto() {
+		Producto producto = new Producto();
+		producto.setNombre("paracetamol");
+		producto.setCompuesto("ff");
+		producto.setReceta("Si");
+		producto.setUbicacion("aqui");
+		producto.setPrecio(20);
+		producto.setPiezas(5);
+		
+		when(productoRepository.save(producto)).thenReturn(producto);
+		
+		assertTrue(servicio.agregarProducto(producto));
+	}
 
 	
 }

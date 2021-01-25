@@ -121,12 +121,12 @@ public class ServicioProducto {
 	 * @return false si el producto no fue actualizado, true si fue actualizado
 	 */
 	public boolean actualizarProducto(Producto producto) {
-		Producto productoN = productoRepository.save(producto);
-		if (productoN == null) {
-			log.warn(">>> NO SE ACTUALIZÓ EL PRODUCTO: " + producto.getIdProducto() + ": " + producto.getNombre());
+		if (producto == null) {
+			log.warn(">>> El producto esta vacio");
 			return false;
 		} else {
-			log.info(">>> SE ACTUALIZÓ EL PRODUCTO: " + producto.getIdProducto() + ": " + producto.getNombre());
+			Producto productoN = productoRepository.save(producto);
+			log.info(">>> Se actualizó el producto: " + producto.getIdProducto() + ": " + producto.getNombre());
 			return true;
 		}
 	}
@@ -142,6 +142,11 @@ public class ServicioProducto {
 		Producto producto;
 		String nombreActual = null;
 		int contEliminados = 0;
+		if (listaNombres == null) {
+			throw new IllegalArgumentException("La lista de nombres esta nula");
+		} else if (listaNombres.isEmpty()) {
+			return false;
+		}
 		try {
 			for (String nombre : listaNombres) {
 				nombreActual = nombre;
