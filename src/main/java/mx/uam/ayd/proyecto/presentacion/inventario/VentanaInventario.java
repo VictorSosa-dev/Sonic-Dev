@@ -144,7 +144,7 @@ public class VentanaInventario extends JFrame {
 					}
 					if (contSel == 1) {
 						control.iniciaEditar(nombre, empleado);
-					} else if (contNoSel == 7) {
+					} else if (contNoSel == tabla_productos.getRowCount()) {
 						JOptionPane.showMessageDialog(null, "No has seleccionado ningun producto!", "Error!",
 								JOptionPane.WARNING_MESSAGE);
 					} else {
