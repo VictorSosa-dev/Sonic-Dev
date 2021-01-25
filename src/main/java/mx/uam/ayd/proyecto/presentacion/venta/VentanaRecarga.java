@@ -124,6 +124,15 @@ public class VentanaRecarga extends JFrame {
 			
 		
 		numTelefono = new JTextField();
+		numTelefono.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char caracter = e.getKeyChar();
+				if (((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
+					e.consume();
+				}
+			}
+		});
 		numTelefono.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		numTelefono.setBounds(170, 105, 163, 28);
 		contentPane.add(numTelefono);
