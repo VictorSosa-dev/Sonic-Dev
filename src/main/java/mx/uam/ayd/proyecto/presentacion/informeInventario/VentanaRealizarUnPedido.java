@@ -55,7 +55,7 @@ public class VentanaRealizarUnPedido extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaRealizarUnPedido() {
-		
+		setResizable(false);
 		setTitle("FARMAPASS");
 		setBounds(100, 100, 450, 420);
 		contentPane = new JPanel();
@@ -158,7 +158,7 @@ public class VentanaRealizarUnPedido extends JFrame {
 	public void muestra(ControlRealizarUnPedido controlRealizarUnPedido, Empleado empleado, List<Producto> productos) {
 		this.controlRealizarUnPedido = controlRealizarUnPedido;
 		this.empleado = empleado;
-		this.textEmpleado.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+		this.textEmpleado.setText(empleado.getNombre() + " " + empleado.getApellido());
 		this.textCargo.setText(empleado.getNivel());
 		this.textNumEmpleado.setText(Long.toString(empleado.getIdEmpleado()));
 		limpiaTabla();

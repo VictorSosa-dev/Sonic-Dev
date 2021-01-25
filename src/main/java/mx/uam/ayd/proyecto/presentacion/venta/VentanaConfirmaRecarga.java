@@ -174,7 +174,7 @@ public class VentanaConfirmaRecarga extends JFrame {
 		this.control = control;
 		this.empleado = empleado;
 		this.txtNombreEmpleado
-				.setText("Nombre: " + empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+				.setText("Nombre: " + empleado.getNombre() + " " + empleado.getApellido());
 		this.txtNivel.setText("Cargo: " + empleado.getNivel());
 		this.txtNumEmpleado.setText("ID: " +id);
 		this.Compania.setText(comp);;

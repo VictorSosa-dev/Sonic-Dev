@@ -154,7 +154,7 @@ public class VentanaPedidoRealizado extends JFrame {
 		this.empleado = empleado;
 		this.pedidos = pedidos;
 		this.textCargo.setText(empleado.getNivel());
-		this.textEmpleado.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+		this.textEmpleado.setText(empleado.getNombre() + " " + empleado.getApellido());
 		this.textId.setText(Long.toString(empleado.getIdEmpleado()));
 		limpiaTabla();
 		for (PedidoProveedor pedidoProveedor : pedidos) {

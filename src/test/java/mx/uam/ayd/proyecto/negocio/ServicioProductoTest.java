@@ -140,4 +140,34 @@ class ServicioProductoTest {
 		assertEquals(1, productos.size());
 	}
 	
+	@Test
+	void testActualizaInventarioNuevo() {
+		//Prueba 1: Se actualiza la cantidad de piezas de un prodcuto
+		int nuevasPiezas = 12;	
+		Producto p1 = new Producto();
+		p1.setNombre("aspirina");
+		p1.setCompuesto("ff");
+		p1.setReceta("Si");
+		p1.setUbicacion("aqui");
+		p1.setPrecio(20);
+		p1.setPiezas(5);
+		
+		servicio.actualizaInventarioNuevo(p1, nuevasPiezas);
+		
+		int p = p1.getPiezas();
+		assertEquals(12, p);
+		
+		//Prueba 2: Se recibio un valor nulo en
+		//en el parametro producto
+		
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+
+			servicio.actualizaInventarioNuevo(null, nuevasPiezas);
+
+		});
+	
+	}
+
+
+	
 }

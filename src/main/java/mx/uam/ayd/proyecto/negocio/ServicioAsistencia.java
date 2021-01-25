@@ -59,5 +59,10 @@ public class ServicioAsistencia {
 		 asistenciaRepository.save(asistenciaAEditar);
 	}
 
+	public void eliminarAsistencia(Empleado empleado) {
+		asistenciaRepository.deleteByEmpleado(empleado);
+		
+	}
+
 
 }

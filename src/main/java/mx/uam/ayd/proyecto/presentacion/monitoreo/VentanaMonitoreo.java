@@ -40,6 +40,7 @@ public class VentanaMonitoreo extends JFrame {
 	
 	//Metodo de presentacion de la ventana MOnitoreo
 	public VentanaMonitoreo() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 564, 425);
 		contentPane = new JPanel();

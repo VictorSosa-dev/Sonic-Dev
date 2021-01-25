@@ -221,7 +221,7 @@ public class VentanaActualiza extends JFrame{
 		
 		this.controlActualiza = controlActualiza;
 		this.empleado = empleado;
-		this.textNombre.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+		this.textNombre.setText(empleado.getNombre() + " " + empleado.getApellido());
 		this.textNivel.setText(empleado.getNivel());
 		this.textId.setText(String.valueOf(empleado.getIdEmpleado()));
 		setVisible(true);		

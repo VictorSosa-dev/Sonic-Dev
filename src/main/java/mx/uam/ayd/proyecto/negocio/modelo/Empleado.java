@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+import org.hibernate.annotations.SQLDelete;
+
 import lombok.Data;
 
 @Entity
@@ -27,13 +29,14 @@ public class Empleado {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idEmpleado;
 	private String nombre;
-	private String apellidoP;
-	private String apellidoM;
+	private String apellido;
+	private int edad;
 	private String correo;
-	private String celular;
+	private String telefono;
 	private String nivel;
 	private String usuario;
 	private String password;
+	private String direccion;
 	
 	@OneToMany(targetEntity = PedidoCliente.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idEmpleado")
@@ -41,16 +44,18 @@ public class Empleado {
 	
 	
 	public Empleado() {}
-	public Empleado(String nombre, String apellidoP, String apellidoM, String correo, String celular, String nivel,
+	public Empleado(String nombre, String apellido, int edad, String direccion, String correo, String telefono, String nivel,
 			String usuario, String password) {
 		this.nombre = nombre;
-		this.apellidoP = apellidoP;
-		this.apellidoM = apellidoM;
+		this.apellido = apellido;
+		this.edad = edad;
+		this.direccion = direccion;
 		this.correo = correo;
-		this.celular = celular;
+		this.telefono = telefono;
 		this.nivel = nivel;
 		this.usuario = usuario;
 		this.password = password;
+		
 	}
 	
 	/**

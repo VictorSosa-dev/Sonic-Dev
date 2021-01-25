@@ -401,7 +401,7 @@ public class VentanaEditarProducto extends JFrame {
 		this.empleado = empleado;
 		this.producto = producto;
 		this.txtNombreEmpleado
-				.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+				.setText(empleado.getNombre() + " " + empleado.getApellido());
 		this.txtNivel.setText(empleado.getNivel() + ":");
 		this.txtIdEmp.setText(String.valueOf(empleado.getIdEmpleado()));
 		

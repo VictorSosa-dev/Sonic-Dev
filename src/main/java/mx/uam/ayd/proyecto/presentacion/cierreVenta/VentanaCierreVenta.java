@@ -228,7 +228,7 @@ public class VentanaCierreVenta extends JFrame {
 		this.control = control;
 		this.empleado = empleado;
 		this.txtNombreEmpleado
-				.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+				.setText(empleado.getNombre() + " " + empleado.getApellido());
 		this.txtNivel.setText(empleado.getNivel());
 		setVisible(true);
 	}

@@ -52,7 +52,7 @@ public class VentanaInformeInventario extends JFrame {
 	public VentanaInformeInventario() {
 		
 		setTitle("FARMAPASS");
-		
+		setResizable(false);
 		setBounds(100, 100, 450, 316);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -193,7 +193,7 @@ public class VentanaInformeInventario extends JFrame {
 	public void muestra(ControlInformeInventario controlInformeInventario, Empleado empleado, List<Producto> productos) {
 		this.controlInformeInventario = controlInformeInventario;
 		this.empleado = empleado;
-		this.textEmpleado.setText(empleado.getNombre() + " " + empleado.getApellidoP() + " " + empleado.getApellidoM());
+		this.textEmpleado.setText(empleado.getNombre() + " " + empleado.getApellido());
 		this.textCargo.setText(empleado.getNivel());
 		this.textNumEmpleado.setText(Long.toString(empleado.getIdEmpleado()));
 		
