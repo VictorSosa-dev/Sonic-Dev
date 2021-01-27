@@ -23,7 +23,7 @@ import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmple
 /**
  * 
  * Clase principal que arranca la aplicación
- * 
+ * Rama de trabajo sobre la HU-05 Control de empleados
  * @author SosaPiña ingenieria 
  *
  */
