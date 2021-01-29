@@ -335,13 +335,16 @@ public class VentanaCobro extends JFrame {
 					JOptionPane.showMessageDialog(null, "La venta no se puede realizar porque la cantidad Recida es incorrecta");
 				}else {
 					controlCobro.obtenerLista(total);
-
 					controlCobro.termina();
 					
 				}
-				System.out.println(textFieldCambio.getText());
-				System.out.println(textFieldRecibi.getText());
-				generarTicket();
+				log.info(">>>Recibi: $", textFieldRecibi.getText());
+				log.info(">>>Cambio: $", textFieldCambio.getText());
+				//generarTicketEfectivo();
+				generarTicketTarjeta();
+				ventanaVenta.limpia();
+
+				
 			}
 			
 			
@@ -350,10 +353,9 @@ public class VentanaCobro extends JFrame {
 	}
 	
 	
-	public void generarTicket() {
+	public void generarTicketEfectivo() {
 		
-		Rectangle pageSize = new Rectangle(150.0F, 300.0F);
-		List<String> listaProductos = new ArrayList<>();
+		Rectangle pageSize = new Rectangle(300.0F, 550.0F);
 		
 		LocalDateTime ahora= LocalDateTime.now();
 		int anio= ahora.getYear();
@@ -370,15 +372,15 @@ public class VentanaCobro extends JFrame {
 				 				"AV.PERIFERICO 390\n" +
 				 				"LA PURISIMA, IZTAPALAPA, CIUDAD DE MEXICO";
 		String gracias = "¡GRACIAS POR SU COMPRA!\n";
-		String footer = "Le Atendio: " + empleado.getNombre() + " " + empleado.getApellido();
+		String footer = "\nLe Atendio: " + empleado.getNombre() + " " + empleado.getApellido();
 		
-		List<Producto> productos= ventanaVenta.recorrerTabla2();
+		List<Producto> productos = ventanaVenta.recorrerTabla();
 		
-		String total = "Total\t\t"+" $ \t\t" + textFieldTotal.getText();
-		String efectivo = "Efectivo " + "$" + textFieldRecibi.getText();
-		String cambio = "Cambio " + "$" + textFieldCambio.getText();
+		String total = "Total              "+" $          " + textFieldTotal.getText();
+		String efectivo = "Efectivo         " + " $          " + textFieldRecibi.getText();
+		String cambio = "Cambio          " + " $          " + textFieldCambio.getText();
 		
-		Document documento = new Document();
+		Document documento = new Document(pageSize);
 		
 		
 		try {
@@ -388,70 +390,198 @@ public class VentanaCobro extends JFrame {
 			
 			documento.open();
 			
-			Paragraph parrafo = new Paragraph();
-			Paragraph parrafoP = new Paragraph();
+			Paragraph parrafoTitulo = new Paragraph();
+			Paragraph parrafoProductos = new Paragraph();
 
-			Paragraph parrafoF = new Paragraph();
-			Paragraph parrafoT = new Paragraph();
-			Paragraph parrafoE = new Paragraph();
-			Paragraph parrafoC = new Paragraph();
+			Paragraph parrafoFecha = new Paragraph();
+			Paragraph parrafoTotal = new Paragraph();
+			Paragraph parrafoEfectivo = new Paragraph();
+			Paragraph parrafoCambio = new Paragraph();
 
-			Paragraph parrafo2 = new Paragraph();
-			Paragraph parrafo3 = new Paragraph();
-
-
-			parrafo.setAlignment(Paragraph.ALIGN_CENTER);
-			parrafoP.setAlignment(Paragraph.ALIGN_CENTER);
-
-			parrafoF.setAlignment(Paragraph.ALIGN_CENTER);
-			parrafoT.setAlignment(Paragraph.ALIGN_LEFT);
-			parrafoE.setAlignment(Paragraph.ALIGN_LEFT);
-
-			parrafoC.setAlignment(Paragraph.ALIGN_LEFT);
+			Paragraph parrafoEmpleado = new Paragraph();
+			Paragraph parrafoGracias = new Paragraph();
 
 
-			parrafo2.setAlignment(Paragraph.ALIGN_LEFT);
-			parrafo3.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoTitulo.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoProductos.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoFecha.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoTotal.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoEfectivo.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoCambio.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoEmpleado.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoGracias.setAlignment(Paragraph.ALIGN_CENTER);
 
-			parrafo.add(header);
-			parrafoF.add(fecha + "    " + horainical);
-			parrafoT.add(total);
-			parrafoE.add(efectivo);
-			parrafoC.add(cambio);
-
-			parrafo2.add(footer);
-			parrafo3.add(gracias);
-			parrafoP.add(productos.toString());
-			parrafo.setFont(FontFactory.getFont("Tahoma", 10, Font.BOLD, BaseColor.DARK_GRAY));
+			parrafoTitulo.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoProductos.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoFecha.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoTotal.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoEfectivo.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoCambio.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoEmpleado.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+			parrafoGracias.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
 			
+			parrafoTitulo.add(header);
+			parrafoFecha.add(fecha + "    " + horainical);
+			parrafoTotal.add(total);
+			parrafoEfectivo.add(efectivo);
+			parrafoCambio.add(cambio);
+			parrafoEmpleado.add(footer);
+			parrafoGracias.add(gracias);
+			for (int i = 0; i < productos.size(); i++) {
+				parrafoProductos.add("\n"+String.valueOf(productos.get(i).getNombre().toLowerCase()) + "          $          " + productos.get(i).getPrecio());
+			}
+		
+			
+
 			Barcode39 code = new Barcode39();
 			code.setCode("1234567890");
 			Image img = code.createImageWithBarcode(pdf.getDirectContent(), BaseColor.BLACK, BaseColor.BLACK);
 			img.setAlignment(Chunk.ALIGN_UNDEFINED);
-			documento.add(new Paragraph("============================================="));
+			documento.add(new Paragraph("================================"));
 			
-			documento.add(parrafo);
-			documento.add(parrafoF);
-			documento.add(parrafoP);
-
-			documento.add(parrafoT);
-			documento.add(parrafoE);
-			documento.add(parrafoC);
+			documento.add(parrafoTitulo);
+			documento.add(parrafoFecha);
+			documento.add(new Paragraph("================================"));
+			documento.add(parrafoProductos);
 			documento.add(new Paragraph("   "));
-
-			documento.add(parrafo3);
-			documento.add(parrafo2);
-			documento.add(img);
-			documento.add(new Paragraph(" "));
-
 			
+			documento.add(parrafoTotal);
+			documento.add(parrafoEfectivo);
+			documento.add(parrafoCambio);
+			documento.add(new Paragraph("   "));
+			
+			documento.add(new Paragraph("================================"));
+			documento.add(parrafoGracias);
+			documento.add(parrafoEmpleado);
+			documento.add(new Paragraph(" "));
+			documento.add(img);
+			documento.add(new Paragraph("   "));
+			documento.add(new Paragraph("\n\n================================"));
+
 			documento.close();
 			
 		} catch (Exception e2) {
-			// TODO: handle exception
+            JOptionPane.showMessageDialog(null, "Error al generar el ticket.");
+
 		}
 	}
 	
+	public void generarTicketTarjeta() {
+		
+		Rectangle pageSize = new Rectangle(300.0F, 550.0F);
+		
+		LocalDateTime ahora= LocalDateTime.now();
+		int anio= ahora.getYear();
+		int mes = ahora.getMonthValue();
+		int dia= ahora.getDayOfMonth();
+		int hora= ahora.getHour();
+		int minuto= ahora.getMinute();
+		int segundo=ahora.getSecond();
+		List<Integer> numbers = new ArrayList<>(40);
+		for (int i=1;i<=10;i++){
+		   numbers.add(i);
+		}
+		
+
+		String horainical= hora+":"+minuto+":"+segundo;
+		String fecha=dia+"/"+mes+"/"+anio;
+		
+		String header = "FARMAPASS\n" +
+				 				"AV.PERIFERICO 390\n" +
+				 				"LA PURISIMA, IZTAPALAPA, CIUDAD DE MEXICO";
+		String gracias = "¡GRACIAS POR SU COMPRA!\n";
+		String footer = "\nLe Atendio: " + empleado.getNombre() + " " + empleado.getApellido();
+		
+		List<Producto> productos = ventanaVenta.recorrerTabla();
+		
+		String total = "Total              "+" $          " + textFieldTotal.getText();
+		String tarjeta = "\nTarjeta:         " + "          " + textFieldRecibi.getText();
+		String pagoAprobado = "\nPAGO APROBADO";
+		Document documento = new Document(pageSize);
+		
+		
+		try {
+			
+			String ruta = System.getProperty("user.home");
+			PdfWriter pdf = PdfWriter.getInstance(documento, new FileOutputStream("Ticket.pdf"));
+			
+			documento.open();
+			
+			Paragraph parrafoTitulo = new Paragraph();
+			Paragraph parrafoProductos = new Paragraph();
+
+			Paragraph parrafoFecha = new Paragraph();
+			Paragraph parrafoTotal = new Paragraph();
+			Paragraph parrafoTarjeta = new Paragraph();
+			Paragraph parrafoPagoAprobado = new Paragraph();
+
+			Paragraph parrafoEmpleado = new Paragraph();
+			Paragraph parrafoGracias = new Paragraph();
+
+
+			parrafoTitulo.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoProductos.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoFecha.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoTotal.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoTarjeta.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoPagoAprobado.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoEmpleado.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoGracias.setAlignment(Paragraph.ALIGN_CENTER);
+
+			parrafoTitulo.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoProductos.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoFecha.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoTotal.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoTarjeta.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoPagoAprobado.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			parrafoEmpleado.setFont(FontFactory.getFont("Tahoma", 12, Font.BOLD, BaseColor.BLACK));
+			parrafoGracias.setFont(FontFactory.getFont("Tahoma", 14, Font.BOLD, BaseColor.BLACK));
+			
+			parrafoTitulo.add(header);
+			parrafoFecha.add(fecha + "    " + horainical);
+			parrafoTotal.add(total);
+			parrafoTarjeta.add(tarjeta);
+			parrafoPagoAprobado.add(pagoAprobado);
+			parrafoEmpleado.add(footer);
+			parrafoGracias.add(gracias);
+			for (int i = 0; i < productos.size(); i++) {
+				parrafoProductos.add("\n"+String.valueOf(productos.get(i).getNombre().toLowerCase()) + "          $          " + productos.get(i).getPrecio());
+			}
+		
+			
+
+			Barcode39 code = new Barcode39();
+			code.setCode(String.valueOf(numbers));
+			Image img = code.createImageWithBarcode(pdf.getDirectContent(), BaseColor.BLACK, BaseColor.BLACK);
+			img.setAlignment(Chunk.ALIGN_UNDEFINED);
+			documento.add(new Paragraph("================================"));
+			
+			documento.add(parrafoTitulo);
+			documento.add(parrafoFecha);
+			documento.add(new Paragraph("================================"));
+			documento.add(parrafoProductos);
+			documento.add(new Paragraph("   "));
+			
+			documento.add(parrafoTotal);
+			documento.add(parrafoTarjeta);
+			documento.add(parrafoPagoAprobado);
+			documento.add(new Paragraph("   "));
+			
+			documento.add(new Paragraph("================================"));
+			documento.add(parrafoGracias);
+			documento.add(parrafoEmpleado);
+			documento.add(new Paragraph(" "));
+			documento.add(img);
+			documento.add(new Paragraph("   "));
+			documento.add(new Paragraph("\n\n================================"));
+
+			documento.close();
+			
+		} catch (Exception e2) {
+            JOptionPane.showMessageDialog(null, "Error al generar el ticket.");
+
+		}
+	}
 	
 	
 	

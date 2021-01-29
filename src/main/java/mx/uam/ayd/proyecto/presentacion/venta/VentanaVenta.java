@@ -136,6 +136,7 @@ public class VentanaVenta extends JFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlVenta.buscarProducto(txtIngresaProducto.getText());
+				txtIngresaProducto.setText("");
 
 			}
 		});
@@ -174,8 +175,10 @@ public class VentanaVenta extends JFrame {
 				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()), empleado);
 				btnBuscar.setEnabled(false);
 			}
+			
 		});
-		
+		limpia();
+
 		table.addComponentListener(new ComponentListener() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -273,8 +276,6 @@ public class VentanaVenta extends JFrame {
 			for (int i = 0; i < table.getRowCount(); i++) {
 				producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
 				lista.add(producto);
-				System.out.println(lista.get(i).getNombre());
-
 			}
 		} catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al leer la tabla.");
@@ -284,26 +285,6 @@ public class VentanaVenta extends JFrame {
 
 	}
 	
-	
-	public List<Producto> recorrerTabla2() {
-		List<Producto> lista = new ArrayList<>();
-		Producto producto;
-		
-		try {
-			for (int i = 0; i < table.getRowCount(); i++) {
-				producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
-				lista.add(producto);
-				Object lista2 = lista.get(i).getNombre().toString();
-				lista.add((Producto) lista2);
-			}
-		} catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al leer la tabla.");
-        }	
-
-		return lista;
-
-	}
-
 	public void limpia() {
 		textTotal.setText("");
 		txtIngresaProducto.setText("");
