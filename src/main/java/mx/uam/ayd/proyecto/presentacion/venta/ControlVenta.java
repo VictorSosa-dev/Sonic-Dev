@@ -46,6 +46,7 @@ public class ControlVenta {
 	private ServicioDetalleVenta servicioDetalleVenta;
 
 	private List<Producto> listaProductos = new ArrayList<>();
+	
 
 	/**
 	 * Inicia la historia de usuario: Agregar productos para la venta
@@ -140,8 +141,8 @@ public class ControlVenta {
 	 * 
 	 * @param total
 	 */
-	public void muentraCobro(float total) {
-		controlCobro.inicia(total);
+	public void muentraCobro(float total, Empleado empleado) {
+		controlCobro.inicia(total, empleado);
 	}
 
 	/**
@@ -172,6 +173,34 @@ public class ControlVenta {
 		actulizaInventarioMenos(listaProductos);
 		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
 		controlCobro.muestraDialogo();
+	}
+	
+	public void obtenerListaN(float total) {
+
+		listaProductos = ventanaVenta.recorrerTabla2();
+		Venta venta = new Venta();
+		Calendar fecha = new GregorianCalendar();
+		int ano = fecha.get(Calendar.YEAR);
+		int mes = fecha.get(Calendar.MONTH);
+		int dia = fecha.get(Calendar.DAY_OF_MONTH);
+		String fechaF = ano + "/" + mes + "/" + dia;
+		venta.setFecha(fechaF);
+		venta.setTotal(total);
+		actulizaInventarioMenos(listaProductos);
+		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
+		controlCobro.muestraDialogo();
+	}
+	
+	
+	
+	
+	
+	public void obtenerListaProductos() {
+		listaProductos = ventanaVenta.recorrerTabla();
+		Venta venta = new Venta();		
+		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
+		actulizaInventarioMenos(listaProductos);
+
 	}
 
 	public void limpiarTabla() {

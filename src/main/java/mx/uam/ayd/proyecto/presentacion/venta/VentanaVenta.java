@@ -171,7 +171,7 @@ public class VentanaVenta extends JFrame {
 
 		btnCobrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()));
+				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()), empleado);
 				btnBuscar.setEnabled(false);
 			}
 		});
@@ -230,6 +230,7 @@ public class VentanaVenta extends JFrame {
 		setVisible(true);
 		this.controlVenta = control;
 		this.empleado = empleado;
+		limpia();
 
 		setVisible(true);
 
@@ -270,10 +271,30 @@ public class VentanaVenta extends JFrame {
 		
 		try {
 			for (int i = 0; i < table.getRowCount(); i++) {
-	
 				producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
-	
 				lista.add(producto);
+				System.out.println(lista.get(i).getNombre());
+
+			}
+		} catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al leer la tabla.");
+        }	
+
+		return lista;
+
+	}
+	
+	
+	public List<Producto> recorrerTabla2() {
+		List<Producto> lista = new ArrayList<>();
+		Producto producto;
+		
+		try {
+			for (int i = 0; i < table.getRowCount(); i++) {
+				producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
+				lista.add(producto);
+				Object lista2 = lista.get(i).getNombre().toString();
+				lista.add((Producto) lista2);
 			}
 		} catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al leer la tabla.");

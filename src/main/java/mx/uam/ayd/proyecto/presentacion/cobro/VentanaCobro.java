@@ -7,6 +7,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileOutputStream;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -20,15 +26,42 @@ import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.border.EmptyBorder;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.Barcode39;
+import com.itextpdf.text.pdf.PdfWriter;
+
+import lombok.extern.slf4j.Slf4j;
+import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import mx.uam.ayd.proyecto.presentacion.controlEmpleados.VentanaControlEmpleados;
+import mx.uam.ayd.proyecto.presentacion.venta.ControlRecarga;
+import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
+import mx.uam.ayd.proyecto.presentacion.venta.VentanaVenta;
+
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSeparator;
 import javax.swing.JProgressBar;
-
+@Slf4j
 @SuppressWarnings("serial")
 @Component
 public class VentanaCobro extends JFrame {
+	
+	@Autowired
+	private ControlVenta controlVenta;
+	
+	@Autowired
+	private VentanaVenta ventanaVenta;
 
 	private JPanel contentPane;
 	private JTextField textFieldTotal;
@@ -36,6 +69,14 @@ public class VentanaCobro extends JFrame {
 	private JTextField textFieldCambio;
 	private ControlCobro controlCobro;
 	private float total;
+	private float recibi;
+	private float cambio;
+	public Empleado empleado;
+	
+	
+	Producto producto;
+
+	
 	
 
 	
@@ -122,6 +163,15 @@ public class VentanaCobro extends JFrame {
 		textFieldTotal.setColumns(10);
 		
 		textFieldRecibi = new JTextField();
+		textFieldRecibi.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				char caracter = e.getKeyChar();
+				if (((caracter < '0') || (caracter > '9')) && (caracter != '\b')) {
+					e.consume();
+				}
+			}
+		});
 		textFieldRecibi.setColumns(10);
 		
 		textFieldCambio = new JTextField();
@@ -285,23 +335,135 @@ public class VentanaCobro extends JFrame {
 					JOptionPane.showMessageDialog(null, "La venta no se puede realizar porque la cantidad Recida es incorrecta");
 				}else {
 					controlCobro.obtenerLista(total);
-					textFieldRecibi.setText("");
-					textFieldCambio.setText("");
-					controlCobro.limpiarTabla();
+
 					controlCobro.termina();
+					
 				}
-				
+				System.out.println(textFieldCambio.getText());
+				System.out.println(textFieldRecibi.getText());
+				generarTicket();
 			}
+			
+			
 		});
 		
 	}
 	
 	
+	public void generarTicket() {
+		
+		Rectangle pageSize = new Rectangle(150.0F, 300.0F);
+		List<String> listaProductos = new ArrayList<>();
+		
+		LocalDateTime ahora= LocalDateTime.now();
+		int anio= ahora.getYear();
+		int mes = ahora.getMonthValue();
+		int dia= ahora.getDayOfMonth();
+		int hora= ahora.getHour();
+		int minuto= ahora.getMinute();
+		int segundo=ahora.getSecond();
+		
+		String horainical= hora+":"+minuto+":"+segundo;
+		String fecha=dia+"/"+mes+"/"+anio;
+		
+		String header = "FARMAPASS\n" +
+				 				"AV.PERIFERICO 390\n" +
+				 				"LA PURISIMA, IZTAPALAPA, CIUDAD DE MEXICO";
+		String gracias = "¡GRACIAS POR SU COMPRA!\n";
+		String footer = "Le Atendio: " + empleado.getNombre() + " " + empleado.getApellido();
+		
+		List<Producto> productos= ventanaVenta.recorrerTabla2();
+		
+		String total = "Total\t\t"+" $ \t\t" + textFieldTotal.getText();
+		String efectivo = "Efectivo " + "$" + textFieldRecibi.getText();
+		String cambio = "Cambio " + "$" + textFieldCambio.getText();
+		
+		Document documento = new Document();
+		
+		
+		try {
+			
+			String ruta = System.getProperty("user.home");
+			PdfWriter pdf = PdfWriter.getInstance(documento, new FileOutputStream("Ticket.pdf"));
+			
+			documento.open();
+			
+			Paragraph parrafo = new Paragraph();
+			Paragraph parrafoP = new Paragraph();
+
+			Paragraph parrafoF = new Paragraph();
+			Paragraph parrafoT = new Paragraph();
+			Paragraph parrafoE = new Paragraph();
+			Paragraph parrafoC = new Paragraph();
+
+			Paragraph parrafo2 = new Paragraph();
+			Paragraph parrafo3 = new Paragraph();
+
+
+			parrafo.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoP.setAlignment(Paragraph.ALIGN_CENTER);
+
+			parrafoF.setAlignment(Paragraph.ALIGN_CENTER);
+			parrafoT.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafoE.setAlignment(Paragraph.ALIGN_LEFT);
+
+			parrafoC.setAlignment(Paragraph.ALIGN_LEFT);
+
+
+			parrafo2.setAlignment(Paragraph.ALIGN_LEFT);
+			parrafo3.setAlignment(Paragraph.ALIGN_CENTER);
+
+			parrafo.add(header);
+			parrafoF.add(fecha + "    " + horainical);
+			parrafoT.add(total);
+			parrafoE.add(efectivo);
+			parrafoC.add(cambio);
+
+			parrafo2.add(footer);
+			parrafo3.add(gracias);
+			parrafoP.add(productos.toString());
+			parrafo.setFont(FontFactory.getFont("Tahoma", 10, Font.BOLD, BaseColor.DARK_GRAY));
+			
+			Barcode39 code = new Barcode39();
+			code.setCode("1234567890");
+			Image img = code.createImageWithBarcode(pdf.getDirectContent(), BaseColor.BLACK, BaseColor.BLACK);
+			img.setAlignment(Chunk.ALIGN_UNDEFINED);
+			documento.add(new Paragraph("============================================="));
+			
+			documento.add(parrafo);
+			documento.add(parrafoF);
+			documento.add(parrafoP);
+
+			documento.add(parrafoT);
+			documento.add(parrafoE);
+			documento.add(parrafoC);
+			documento.add(new Paragraph("   "));
+
+			documento.add(parrafo3);
+			documento.add(parrafo2);
+			documento.add(img);
+			documento.add(new Paragraph(" "));
+
+			
+			documento.close();
+			
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
+	}
+	
+	
+	
+	
 	//Métodos que ocupa la ventana
-	public void muestra(ControlCobro controlCobro, float total) {
+	public void muestra(ControlCobro controlCobro, float total, Empleado empleado) {
 		textFieldTotal.setText(String.valueOf(total));
+		this.empleado = empleado;
+		
 		this.controlCobro = controlCobro;
 		this.total=total;
+		textFieldRecibi.setText("");
+		textFieldCambio.setText("");
 		setVisible(true);
 	}
 
