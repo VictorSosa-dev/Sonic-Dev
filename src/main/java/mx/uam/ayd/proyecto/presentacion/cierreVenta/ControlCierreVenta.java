@@ -123,6 +123,7 @@ public class ControlCierreVenta {
 	}
 
 	public void cerrarSesion(Empleado empleado) {
+		controlMonitoreo.registrarCerrar(empleado);
 		controlInicioSesion.inicia();
 		ventana.oculta();
 		

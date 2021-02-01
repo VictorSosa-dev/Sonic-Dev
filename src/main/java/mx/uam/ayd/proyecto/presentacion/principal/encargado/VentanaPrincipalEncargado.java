@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.presentacion.asistencia.controlAsistencias;
 import mx.uam.ayd.proyecto.presentacion.controlEmpleados.ControlEmpleados;
 
 import javax.swing.JTextField;
@@ -34,6 +35,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 	private JTextField txtNivel;
 	
 	private ControlEmpleados control2;
+	//private ControlPrincipalEncargado controlPrincipalEncargado;
 
 	public VentanaPrincipalEncargado() {
 		setResizable(false);
@@ -184,6 +186,15 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnControlEmpleado.setBounds(228, 90, 158, 21);
 		panel_1.add(btnControlEmpleado);
+		
+		JButton btnNewButton = new JButton("Control de Asistencias");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				control.asistenciasEmp(empleado);
+			}
+		});
+		btnNewButton.setBounds(10, 131, 192, 21);
+		panel_1.add(btnNewButton);
 		contentPane.add(panel_2);
 	}
 
