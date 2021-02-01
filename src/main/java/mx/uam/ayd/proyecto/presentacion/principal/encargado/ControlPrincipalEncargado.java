@@ -13,6 +13,7 @@ import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.inventario.ControlInventario;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.pedidoRealizado.ControlPedidoRealizado;
+import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlReporteEmpleados;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 
 @Component
@@ -56,6 +57,9 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlEmpleados controlEmpleados;
+	
+	@Autowired
+	private ControlReporteEmpleados controlReporteEmpleados;
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -140,5 +144,13 @@ public class ControlPrincipalEncargado {
 	public void pedidosRealizados(Empleado empleado) {
 		controlPedidoRealizado.inicia(empleado);
 		//ventana.oculta();
+	}
+	
+	/**
+	 * Inicia la ventana relacionada a la HU-14
+	 * @param empleado nombre del empleado encargado de realizar el reporte
+	 */
+	public void generarReporte(Empleado empleado) {
+		controlReporteEmpleados.inicia(empleado);
 	}
 }

@@ -184,6 +184,18 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnControlEmpleado.setBounds(228, 90, 158, 21);
 		panel_1.add(btnControlEmpleado);
+		/**
+		 * Boton que inicia la HU-14
+		 */
+		JButton btnReporte = new JButton("Generar reporte");
+		btnReporte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.generarReporte(empleado);
+				oculta();
+			}
+		});
+		btnReporte.setBounds(396, 123, 158, 23);
+		panel_1.add(btnReporte);
 		contentPane.add(panel_2);
 	}
 

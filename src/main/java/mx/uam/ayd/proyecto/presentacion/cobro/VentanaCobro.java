@@ -81,7 +81,7 @@ public class VentanaCobro extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGap(44)
 					.addComponent(btnRegresar)
-					.addPreferredGap(ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 186, Short.MAX_VALUE)
 					.addComponent(btnFinalizar)
 					.addGap(52))
 		);
