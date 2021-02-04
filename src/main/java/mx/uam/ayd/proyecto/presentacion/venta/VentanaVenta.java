@@ -58,6 +58,7 @@ public class VentanaVenta extends JFrame {
 	
 	public VentanaVenta() {
 		setTitle("Venta");
+		setResizable(false);
 		setBounds(100, 100, 619, 365);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
