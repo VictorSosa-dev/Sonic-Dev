@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 
 /*
@@ -26,8 +27,8 @@ public class ControlCobro {
 	 * 
 	 * Inicia historia de usuario: Forma de cobro
 	 */
-	public void inicia(float total) {
-		ventanaCobro.muestra(this, total);
+	public void inicia(float total, Empleado empleado) {
+		ventanaCobro.muestra(this, total, empleado);
 	}
 
 	public void termina() {

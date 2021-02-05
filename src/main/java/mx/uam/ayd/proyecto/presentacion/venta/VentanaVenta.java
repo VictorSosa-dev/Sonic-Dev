@@ -58,6 +58,7 @@ public class VentanaVenta extends JFrame {
 	
 	public VentanaVenta() {
 		setTitle("Venta");
+		setResizable(false);
 		setBounds(100, 100, 619, 365);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -136,6 +137,7 @@ public class VentanaVenta extends JFrame {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlVenta.buscarProducto(txtIngresaProducto.getText());
+				txtIngresaProducto.setText("");
 
 			}
 		});
@@ -171,11 +173,13 @@ public class VentanaVenta extends JFrame {
 
 		btnCobrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()));
+				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()), empleado);
 				btnBuscar.setEnabled(false);
 			}
+			
 		});
-		
+		limpia();
+
 		table.addComponentListener(new ComponentListener() {
 			@Override
 			public void componentResized(ComponentEvent e) {
@@ -230,6 +234,7 @@ public class VentanaVenta extends JFrame {
 		setVisible(true);
 		this.controlVenta = control;
 		this.empleado = empleado;
+		limpia();
 
 		setVisible(true);
 
@@ -270,9 +275,7 @@ public class VentanaVenta extends JFrame {
 		
 		try {
 			for (int i = 0; i < table.getRowCount(); i++) {
-	
 				producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
-	
 				lista.add(producto);
 			}
 		} catch (Exception e) {
@@ -282,7 +285,7 @@ public class VentanaVenta extends JFrame {
 		return lista;
 
 	}
-
+	
 	public void limpia() {
 		textTotal.setText("");
 		txtIngresaProducto.setText("");
