@@ -42,6 +42,8 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 /**
  * Ventana que lleva el flujo del control de Asistencias
  * @author Luis Cristofer Alvarado Gabriel
@@ -130,6 +132,7 @@ public class ventanaAsistencias extends JFrame {
 		barrabuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
+				
 				TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<TableModel>(modelo);
 				tablaAsistencias.setRowSorter(elQueOrdena);
 				//botonBuscar.setEnabled(barrabuscar.getText().length() != 0);
