@@ -74,7 +74,6 @@ public class ventanaAsistencias extends JFrame {
 	
 	
 	private Asistencia asistencia;
-	private JButton btnReportar;
 	private JLabel lblNewLabel;
 	private JLabel lblNombre;
 	/**
@@ -171,35 +170,11 @@ public class ventanaAsistencias extends JFrame {
 		botonRegresar.setBounds(10, 10, 125, 30);
 		panel_3.add(botonRegresar);
 		
-		btnReportar = new JButton("Reportar");
-		btnReportar.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		btnReportar.setBounds(501, 10, 125, 30);
-		panel_3.add(btnReportar);
-		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 134, 636, 231);
 		contentPane.add(scrollPane);
 		
 		tablaAsistencias = new JTable();
-		tablaAsistencias.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentHidden(ComponentEvent e) {
-			}
-			@Override
-			public void componentMoved(ComponentEvent e) {
-			}
-			@Override
-			public void componentResized(ComponentEvent e) {
-				if(tablaAsistencias.getRowCount() == 0){
-					btnReportar.setEnabled(false);
-				}else {
-					btnReportar.setEnabled(true);
-				}
-			}
-			@Override
-			public void componentShown(ComponentEvent e) {
-			}
-		});
 		tablaAsistencias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tablaAsistencias.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		modelo.addColumn("Nombre");
