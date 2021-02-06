@@ -15,6 +15,7 @@ import mx.uam.ayd.proyecto.datos.EmpleadoRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Grupo;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import mx.uam.ayd.proyecto.presentacion.asistencia.controlAsistencias;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.inventario.ControlCargarArchivo;
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
@@ -23,7 +24,7 @@ import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmple
 /**
  * 
  * Clase principal que arranca la aplicación
- * 
+ * Rama de trabajo sobre la HU-05 Control de empleados
  * @author SosaPiña ingenieria 
  *
  */
@@ -55,6 +56,8 @@ public class ProyectoApplication {
 	
 	@Autowired
 	ControlCargarArchivo controlCargarArchivo;
+	@Autowired
+	private controlAsistencias controlAsistencia;
 
 	public static void main(String[] args) {
 
@@ -67,7 +70,7 @@ public class ProyectoApplication {
 
 	@PostConstruct
 	public void inicia() {
-
+		
 		inicializaBD();
 		controlInicioSesion.inicia();
 	}

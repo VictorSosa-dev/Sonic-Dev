@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.actualizaInventario.ControlActualiza;
+import mx.uam.ayd.proyecto.presentacion.asistencia.controlAsistencias;
 import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
 import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.controlEmpleados.ControlEmpleados;
@@ -60,6 +61,9 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ControlReporteEmpleados controlReporteEmpleados;
+	
+	@Autowired
+	private controlAsistencias controlAsistencias;
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -152,5 +156,12 @@ public class ControlPrincipalEncargado {
 	 */
 	public void generarReporte(Empleado empleado) {
 		controlReporteEmpleados.inicia(empleado);
+	}
+	
+
+	public void asistenciasEmp(Empleado empleado) {
+		// TODO Auto-generated method stub
+		//controlAsistencias.iniciaAsistencias(empleado);
+		controlAsistencias.inicia(empleado);
 	}
 }

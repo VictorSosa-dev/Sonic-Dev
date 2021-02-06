@@ -197,6 +197,19 @@ public class VentanaPrincipalEncargado extends JFrame {
 		btnReporte.setBounds(396, 123, 158, 23);
 		panel_1.add(btnReporte);
 		contentPane.add(panel_2);
+		
+		/**
+		 * Boton que inicia la HU-05
+		 */
+		JButton btnNewButton = new JButton("Control de Asistencias");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				control.asistenciasEmp(empleado);
+			}
+		});
+		btnNewButton.setBounds(10, 131, 192, 21);
+		panel_1.add(btnNewButton);
+		contentPane.add(panel_2);
 	}
 
 	public void muestra(ControlPrincipalEncargado control, Empleado empleado) {

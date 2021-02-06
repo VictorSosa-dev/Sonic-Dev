@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import mx.uam.ayd.proyecto.negocio.ServicioEmpleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.presentacion.agregarUsuario.ControlAgregarUsuario;
+import mx.uam.ayd.proyecto.presentacion.asistencia.controlAsistencias;
 import mx.uam.ayd.proyecto.presentacion.listarUsuarios.ControlListarUsuarios;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmpleados;
@@ -41,6 +42,9 @@ public class ControlInicioSesion {
 	
 	@Autowired
 	private ControlMonitoreo controlmonitoreo;
+	@Autowired
+	private controlAsistencias controlAsistencia;
+	
 
 	
 	
@@ -49,7 +53,7 @@ public class ControlInicioSesion {
 	 * 
 	 */
 	public void inicia() {
-
+		controlAsistencia.iniciaTablaEmpleados(servicioEmpleado);
 		ventana.muestra(this);
 	}
 
@@ -73,13 +77,16 @@ public class ControlInicioSesion {
 
 	public void validaUsuario(String usuario, String password) {
 		try {
+			
 			Empleado empleado = servicioEmpleado.validaUsuario(usuario, password);
 			if(empleado.getNivel().equals("empleado")) {
 				controlmonitoreo.registrarInicio(empleado);
+				controlAsistencia.asistencia(empleado);
 				controlPrincipalEmpleados.inicia(empleado);
 				ventana.oculta();
 			} if(empleado.getNivel().equals("encargado")) {
 				controlmonitoreo.registrarInicio(empleado);
+				controlAsistencia.asistencia(empleado);
 				controlPrincipalEncargado.inicia(empleado);
 				ventana.oculta();
 			}
