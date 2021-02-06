@@ -135,7 +135,7 @@ public class ventanaAsistencias extends JFrame {
 				TableRowSorter<TableModel> elQueOrdena = new TableRowSorter<TableModel>(modelo);
 				tablaAsistencias.setRowSorter(elQueOrdena);
 				//botonBuscar.setEnabled(barrabuscar.getText().length() != 0);
-				elQueOrdena.setRowFilter(RowFilter.regexFilter(barrabuscar.getText(), 0));
+				elQueOrdena.setRowFilter(RowFilter.regexFilter(barrabuscar.getText(), 1));
 			}
 		});
 		barrabuscar.setColumns(10);
@@ -177,12 +177,11 @@ public class ventanaAsistencias extends JFrame {
 		tablaAsistencias = new JTable();
 		tablaAsistencias.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tablaAsistencias.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		modelo.addColumn("Nombre");
 		modelo.addColumn("ID");
+		modelo.addColumn("Nombre");
 		modelo.addColumn("Cargo");
 		modelo.addColumn("Telefono");
 		modelo.addColumn("Asistencias");
-		modelo.addColumn("");
 		scrollPane.setViewportView(tablaAsistencias);
 		
 	}
@@ -207,6 +206,7 @@ public class ventanaAsistencias extends JFrame {
 				.setText("Nombre: " + empleado.getNombre() + " " + empleado.getApellido());
 		this.encargo.setText("Cargo: " + empleado.getNivel());
 		this.idEmpleado.setText("ID: " +id);
+		barrabuscar.setText("");
 		setVisible(true);
 	}
 	
@@ -222,12 +222,11 @@ public class ventanaAsistencias extends JFrame {
 		
 		if(tablaAsistencias.getRowCount() == 0) {
 			for(Empleado emp:empl) {
-				a[0] = emp.getNombre()+ " " +emp.getApellido();
-				a[1] = String.valueOf(emp.getIdEmpleado());
+				a[0] = String.valueOf(emp.getIdEmpleado());
+				a[1] = emp.getNombre()+ " " +emp.getApellido();
 				a[2] = emp.getNivel();
 				a[3] = emp.getTelefono();
 				a[4] = String.valueOf(asistenciaNum);
-				a[5] = "Seleccione para reportar";
 				modelo.addRow(a);
 			}
 			tablaAsistencias.setModel(modelo);
