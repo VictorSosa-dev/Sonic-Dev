@@ -110,7 +110,7 @@ public class VentanaPedidoRealizado extends JFrame {
 		panel_2.setLayout(null);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 414, 2);
+		scrollPane.setBounds(0, 0, 414, 125);
 		panel_2.add(scrollPane);
 		
 		table = new JTable(modeloPedidos) {
@@ -174,6 +174,8 @@ public class VentanaPedidoRealizado extends JFrame {
 		a[4] = pedido.getPrecioTotal();
 		modeloPedidos.addRow(a);
 		tabla_Pedidos.setModel(modeloPedidos);
+		scrollPane.setViewportView(tabla_Pedidos);
+
 		//this.pedido = pedido;
 	}
 	

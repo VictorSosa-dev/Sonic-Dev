@@ -30,7 +30,7 @@ public class ControlPedidoRealizado {
 	List<PedidoProveedor> pedidos = new ArrayList<>();
 	
 	public void inicia(Empleado empleado) {
-		pedidos = servicioPedidoProveedor.recuperaPedidos();
+		pedidos = servicioPedidoProveedor.obtenerPedidos();
 		//pedidos = servicioPedidoProveedor.obtenerPedidoSinFechaDeRecepcion();
 		ventanaPedidoRealizado.muestra(this, empleado, pedidos);
 	}

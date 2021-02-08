@@ -56,7 +56,7 @@ public class ControlRecepcionMercancia {
 		} else {
 			List<DetallePedidoProveedor> detallesPedidoProveedor = pedidosProveedor.get(0).getDetallesPedidoProveedor();
 			for (DetallePedidoProveedor detallePedidoProveedor : detallesPedidoProveedor) {
-				productos.add(detallePedidoProveedor.getProducto());
+				//productos.add(detallePedidoProveedor.getProducto());
 				listaPiezas.add(detallePedidoProveedor.getNumeroPiezas());
 			}
 			ventana.agregarDatosTabla(productos, listaPiezas);
