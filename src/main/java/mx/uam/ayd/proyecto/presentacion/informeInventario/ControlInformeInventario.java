@@ -23,7 +23,10 @@ public class ControlInformeInventario {
 	private VentanaInformeInventario ventanaInformeInventario;
 	
 	@Autowired
-	ControlPrincipalEncargado controlPrincipalEncargado;
+	private ControlPrincipalEncargado controlPrincipalEncargado;
+	
+	@Autowired
+	private ControlPedidos controlPedidos;
 	
 	public void inicia(Empleado empleado) {
 		List<Producto> productos = servicioProducto.recuperarProductosEscazes();
@@ -48,6 +51,11 @@ public class ControlInformeInventario {
 			controlPrincipalEncargado.inicia(empleado);
 			ventanaInformeInventario.oculta();
 		}
+	}
+
+	public void iniciaPedidos(Empleado empleado) {
+		ventanaInformeInventario.oculta();
+		controlPedidos.inicia(empleado);
 	}
 	
 }

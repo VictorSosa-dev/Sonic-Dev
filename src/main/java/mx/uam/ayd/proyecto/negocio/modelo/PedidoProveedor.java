@@ -35,9 +35,10 @@ public class PedidoProveedor {
 	
 	@OneToMany(targetEntity = DetallePedidoProveedor.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idPedidoProveedor")
-	private final List<DetallePedidoProveedor> detallesPedidoProveedor = new ArrayList<>();
+	private List<DetallePedidoProveedor> detallesPedidoProveedor = new ArrayList<>();
 	
 	public PedidoProveedor() {
+		this.estado = "PENDIENTE";
 	}
 
 	public PedidoProveedor(String fechaDeCreacion, int totalProductos, float precioTotal) {

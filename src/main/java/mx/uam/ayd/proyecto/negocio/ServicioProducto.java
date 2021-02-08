@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.DetallePedidoProveedor;
 import mx.uam.ayd.proyecto.negocio.modelo.DetalleVenta;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.presentacion.inventario.ControlCargarArchivo;
@@ -243,8 +244,6 @@ public class ServicioProducto {
 		return productos;
 	}
 	/**
-=======
->>>>>>> f04f6dc9994b990082dc72e247b583475a8fc7bf
 	 * Se actualiza el numero de piezas en el inventario
 	 * @param producto
 	 * @param nuevasPiezas
@@ -260,6 +259,12 @@ public class ServicioProducto {
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "No se actualizaron las piezas");
 		}
+	}
+
+	public Producto obtenerProductoPorPedidoProveedor(DetallePedidoProveedor detallePedidoProveedor) {
+		Producto producto = productoRepository.findByDetallePedidos(detallePedidoProveedor);
+		System.out.println("Del detalle de pedido: " + detallePedidoProveedor.getIdPedido() + " Obtenemos + " + producto);
+		return producto;
 	}
 
 }
