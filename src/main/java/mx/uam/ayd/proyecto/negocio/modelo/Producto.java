@@ -1,11 +1,7 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
-/**
- * @author VictorSosa
- */
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -42,11 +38,11 @@ public class Producto {
 
 	@OneToMany(targetEntity = DetalleVenta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProducto")
-	private final List<DetalleVenta> ventas = new ArrayList<>();
+	private final Set<DetalleVenta> ventas = new HashSet<>();
 	
-	@OneToMany(targetEntity = DetalleVenta.class, fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@OneToMany(targetEntity = DetallePedidoProveedor.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idProducto")
-	private final List<DetallePedidoProveedor> detallePedidos = new ArrayList<>();
+	private final Set<DetallePedidoProveedor> detallePedidos = new HashSet<>();
 	
 	public Producto() {
 	}
@@ -81,14 +77,12 @@ public class Producto {
 	}
 	
 	public boolean addDetallePedidoProveedor(DetallePedidoProveedor detallePedido) {
-
 		if (detallePedido == null) {
 			throw new IllegalArgumentException("El detalle de venta no puede ser null");
 		}
 		if (detallePedidos.contains(detallePedido)) {
 			return false;
 		}
-
 		return detallePedidos.add(detallePedido);
 	}
 
