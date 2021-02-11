@@ -209,6 +209,14 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnNewButton.setBounds(10, 131, 192, 21);
 		panel_1.add(btnNewButton);
+		
+		JButton btnReporteVentas = new JButton("Control de Asistencias");
+		btnReporteVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnReporteVentas.setBounds(10, 164, 192, 21);
+		panel_1.add(btnReporteVentas);
 		contentPane.add(panel_2);
 	}
 
