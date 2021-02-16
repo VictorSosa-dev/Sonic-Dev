@@ -72,6 +72,22 @@ public class ServicioReporteEmpleadosTest {
 	}
 	
 	@Test
+	void testRecuperaReportesPorEmpleado() {
+		//1.- Corroborar que regresa una lista vacia si no hay reportes
+		Empleado empleado = new Empleado();
+		List<ReporteEmpleados> reportes = servicioReporteEmpleados.recuperaReportesPorEmpleado(empleado);
+		assertTrue(reportes.isEmpty());
+		
+		//2.- Corroborar que regresa una lista con los reportes si existe al menos un reporte
+		reportes.add(reporte1);
+		when(reporteEmpleadosRepository.findByEmpleado(empleado)).thenReturn(reportes);
+		reporteEmpleadosRepository.save(reporte1);
+		reportes = servicioReporteEmpleados.recuperaReportesPorEmpleado(empleado);
+		assertEquals(1, reportes.size());
+		
+	}
+	
+	@Test
 	void testRegistroReporteConEmpleado() {
 		//1- Guarda un reporte
 		Empleado pruebaEmpleado = new Empleado("Karina", "Vergara Guzman", 20, "Av. Patito","karina@gmail.com", "5587388643", "empleado", "anver", "123456789");

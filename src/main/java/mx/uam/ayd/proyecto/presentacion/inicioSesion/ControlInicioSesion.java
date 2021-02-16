@@ -79,15 +79,18 @@ public class ControlInicioSesion {
 		try {
 			
 			Empleado empleado = servicioEmpleado.validaUsuario(usuario, password);
+			
 			if(empleado.getNivel().equals("empleado")) {
 				controlmonitoreo.registrarInicio(empleado);
 				controlAsistencia.asistencia(empleado);
 				controlPrincipalEmpleados.inicia(empleado);
+				controlPrincipalEmpleados.mostrarReportes(empleado);
 				ventana.oculta();
 			} if(empleado.getNivel().equals("encargado")) {
 				controlmonitoreo.registrarInicio(empleado);
 				controlAsistencia.asistencia(empleado);
 				controlPrincipalEncargado.inicia(empleado);
+				controlPrincipalEncargado.mostrarReportes(empleado);
 				ventana.oculta();
 			}
 		} catch (Exception e) {

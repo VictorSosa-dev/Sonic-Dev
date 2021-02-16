@@ -15,6 +15,7 @@ import javax.swing.border.EtchedBorder;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlNumReporte;
 
 @SuppressWarnings("serial")
 @Component
@@ -25,6 +26,8 @@ public class VentanaPrincipalEmpleados extends JFrame {
 	private Empleado empleado;
 	private JTextField txtNombreEmpleado;
 	private JTextField txtNivel;
+	
+	private ControlNumReporte controlNumReporte;
 
 	public VentanaPrincipalEmpleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -128,6 +131,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		this.txtNombreEmpleado
 				.setText(empleado.getNombre() + " " + empleado.getApellido());
 		this.txtNivel.setText(empleado.getNivel() + ":");
+		
 		setVisible(true);
 
 	}

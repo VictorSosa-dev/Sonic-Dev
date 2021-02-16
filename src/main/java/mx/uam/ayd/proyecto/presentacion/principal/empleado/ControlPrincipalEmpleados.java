@@ -1,9 +1,16 @@
 package mx.uam.ayd.proyecto.presentacion.principal.empleado;
 
+import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import lombok.extern.slf4j.Slf4j;
+import mx.uam.ayd.proyecto.negocio.ServicioEmpleado;
+import mx.uam.ayd.proyecto.negocio.ServicioReporteEmpleados;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
+import mx.uam.ayd.proyecto.negocio.modelo.ReporteEmpleados;
 import mx.uam.ayd.proyecto.presentacion.PedidoCliente.ControlPedidoCliente;
 import mx.uam.ayd.proyecto.presentacion.actualizaInventario.ControlActualiza;
 import mx.uam.ayd.proyecto.presentacion.busqueda.ControlBusqueda;
@@ -11,7 +18,12 @@ import mx.uam.ayd.proyecto.presentacion.cierreVenta.ControlCierreVenta;
 import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.recepcionMercancia.ControlRecepcionMercancia;
+import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlNumReporte;
+import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaNumReporte;
+import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaReporte;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
+
+@Slf4j
 @Component
 public class ControlPrincipalEmpleados {
 
@@ -20,6 +32,9 @@ public class ControlPrincipalEmpleados {
 
 	@Autowired
 	private VentanaPrincipalEmpleados ventana;
+	
+	@Autowired
+	private VentanaNumReporte ventanaNumReporte;
 	
 	@Autowired
 	private ControlCierreVenta controlCierreVenta;
@@ -42,12 +57,33 @@ public class ControlPrincipalEmpleados {
 	@Autowired
 	private ControlActualiza controlActualiza;
 	
+	@Autowired
+	private ControlNumReporte controlNumReporte;
+	
+	@Autowired
+	private ServicioReporteEmpleados servicioReporteEmpleados;
+	
+	@Autowired
+	private ServicioEmpleado servicioEmpleado;
+	
 	/**
 	 * Inicia el flujo de control de la ventana principal
 	 * 
 	 */
 	public void inicia(Empleado empleado) {
 		ventana.muestra(this, empleado);
+		
+	}
+	
+	public void mostrarReportes(Empleado empleado) {
+		List<ReporteEmpleados> reportes = servicioReporteEmpleados.recuperaReportesPorEmpleado(empleado);
+
+		if(reportes.isEmpty()) {
+			log.info(">>>NO TIENES NINGUN REPORTE");
+		} else {
+			ventanaNumReporte.muestra(controlNumReporte, empleado);
+
+		}
 	}
 
 	/**
@@ -87,7 +123,8 @@ public class ControlPrincipalEmpleados {
 		ventana.oculta();
 		
 	}
-	
+
+ 	
 	public void muestraVentanaActualiza(Empleado empleado) {
 		controlActualiza.inicia(empleado);
 	}

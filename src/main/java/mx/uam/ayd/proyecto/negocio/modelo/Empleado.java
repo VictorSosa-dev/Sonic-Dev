@@ -1,7 +1,9 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -41,8 +43,7 @@ public class Empleado {
 	@OneToMany(targetEntity = PedidoCliente.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idEmpleado")
 	private final List <PedidoCliente> pedidosCliente = new ArrayList <> ();
-	
-	
+		
 	public Empleado() {}
 	public Empleado(String nombre, String apellido, int edad, String direccion, String correo, String telefono, String nivel,
 			String usuario, String password) {
