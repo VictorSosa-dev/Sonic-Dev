@@ -190,6 +190,11 @@ public class VentanaReporteVenta extends JFrame {
 		setVisible(true);
 	}
 	
+	/**
+	 * Llena la tabla con los datos de laas ventas del dia.
+	 * @param venta
+	 * @param size
+	 */
 	public void llenaTablaVentas(Venta venta, int size) {
 		ventas.add(venta);
 		String a[] = new String[5];
