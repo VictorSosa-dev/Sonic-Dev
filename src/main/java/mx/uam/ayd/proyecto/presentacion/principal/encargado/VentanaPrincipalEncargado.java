@@ -156,7 +156,7 @@ public class VentanaPrincipalEncargado extends JFrame {
 
 		contentPane.add(panel_2);
 		
-		JButton btnActulizar = new JButton("Actulizar Inventario");
+		JButton btnActulizar = new JButton("Actualizar Inventario");
 		btnActulizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.muestraVentanaActualiza(empleado);
@@ -210,9 +210,13 @@ public class VentanaPrincipalEncargado extends JFrame {
 		btnNewButton.setBounds(10, 131, 192, 21);
 		panel_1.add(btnNewButton);
 		
-		JButton btnReporteVentas = new JButton("Control de Asistencias");
+		/**
+		 * Boton que inicia la HU-12 Reporte de Venta
+		 */
+		JButton btnReporteVentas = new JButton("Reporte de Ventas");
 		btnReporteVentas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				control.reporteVenta(empleado);
 			}
 		});
 		btnReporteVentas.setBounds(10, 164, 192, 21);
