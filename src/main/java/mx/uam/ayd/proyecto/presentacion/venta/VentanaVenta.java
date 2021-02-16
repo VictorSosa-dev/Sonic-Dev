@@ -45,17 +45,17 @@ public class VentanaVenta extends JFrame {
 	Producto producto;
 	private Empleado empleado;
 	private DefaultTableModel modelo = new DefaultTableModel() {
-		@Override 
-		public boolean isCellEditable(int row, int column) { 
-			return false; 
-			} 
+		@Override
+		public boolean isCellEditable(int row, int column) {
+			return false;
+		}
 	};
 	private JTextField txtNivel;
 	private JTextField txtNombreEmpleado;
 	private JTextField txtNumEmpleado;
+	@SuppressWarnings("unused")
 	private ControlVenta control;
-	
-	
+
 	public VentanaVenta() {
 		setTitle("Venta");
 		setResizable(false);
@@ -104,7 +104,6 @@ public class VentanaVenta extends JFrame {
 		contentPane.add(scrollPane);
 
 		table = new JTable(modelo);
-		
 
 		modelo.addColumn("Nombre");
 		modelo.addColumn("Compuesto");
@@ -112,19 +111,19 @@ public class VentanaVenta extends JFrame {
 		modelo.addColumn("Seleccionar");
 
 		scrollPane.setViewportView(table);
-		
+
 		txtNivel = new JTextField();
 		txtNivel.setEditable(false);
 		txtNivel.setBounds(21, 10, 155, 28);
 		contentPane.add(txtNivel);
 		txtNivel.setColumns(10);
-		
+
 		txtNombreEmpleado = new JTextField();
 		txtNombreEmpleado.setEditable(false);
 		txtNombreEmpleado.setColumns(10);
 		txtNombreEmpleado.setBounds(190, 10, 212, 28);
 		contentPane.add(txtNombreEmpleado);
-		
+
 		txtNumEmpleado = new JTextField();
 		txtNumEmpleado.setEditable(false);
 		txtNumEmpleado.setColumns(10);
@@ -132,8 +131,8 @@ public class VentanaVenta extends JFrame {
 		contentPane.add(txtNumEmpleado);
 
 		// -------------LISTENER-------------------
-		
-		//Listener para buscar un articulo
+
+		// Listener para buscar un articulo
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlVenta.buscarProducto(txtIngresaProducto.getText());
@@ -141,8 +140,8 @@ public class VentanaVenta extends JFrame {
 
 			}
 		});
-		
-		//Listener para habilitar el boton de buscar
+
+		// Listener para habilitar el boton de buscar
 		txtIngresaProducto.addKeyListener(new KeyAdapter() {
 			public void keyReleased(KeyEvent e) {
 				btnBuscar.setEnabled(txtIngresaProducto.getText().length() != 0);
@@ -150,13 +149,12 @@ public class VentanaVenta extends JFrame {
 			}
 
 		});
-		
-		
+
 		btnQuitarDeLista.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int x = table.getSelectedRow();
 				int y = table.getSelectedColumn();
-				
+
 				try {
 					Object a = table.getValueAt(x, y - 1);
 					float r = Float.parseFloat(a.toString());
@@ -166,7 +164,6 @@ public class VentanaVenta extends JFrame {
 				} catch (Exception e2) {
 					JOptionPane.showMessageDialog(null, "No se ha seleccionado ningun producto para quitar");
 				}
-				
 
 			}
 		});
@@ -176,17 +173,17 @@ public class VentanaVenta extends JFrame {
 				controlVenta.muentraCobro(Float.parseFloat(textTotal.getText()), empleado);
 				btnBuscar.setEnabled(false);
 			}
-			
+
 		});
 		limpia();
 
 		table.addComponentListener(new ComponentListener() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				if(table.getRowCount() == 0){
+				if (table.getRowCount() == 0) {
 					btnQuitarDeLista.setEnabled(false);
 					btnCobrar.setEnabled(false);
-				}else {
+				} else {
 					btnQuitarDeLista.setEnabled(true);
 					btnCobrar.setEnabled(true);
 				}
@@ -195,30 +192,29 @@ public class VentanaVenta extends JFrame {
 			@Override
 			public void componentMoved(ComponentEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void componentShown(ComponentEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void componentHidden(ComponentEvent e) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 		});
-		
-		btnRecarga.addActionListener(new ActionListener() {	
-			
+
+		btnRecarga.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				controlVenta.recarga(empleado);
 			}
 		});
-	
 
 	}
 
@@ -227,10 +223,9 @@ public class VentanaVenta extends JFrame {
 		String id = String.valueOf(empleado.getIdEmpleado());
 		this.control = control;
 		this.empleado = empleado;
-		this.txtNombreEmpleado
-				.setText("Nombre: " + empleado.getNombre() + " " + empleado.getApellido());
+		this.txtNombreEmpleado.setText("Nombre: " + empleado.getNombre() + " " + empleado.getApellido());
 		this.txtNivel.setText("Cargo: " + empleado.getNivel());
-		this.txtNumEmpleado.setText("ID: " +id);
+		this.txtNumEmpleado.setText("ID: " + id);
 		setVisible(true);
 		this.controlVenta = control;
 		this.empleado = empleado;
@@ -272,35 +267,37 @@ public class VentanaVenta extends JFrame {
 	public List<Producto> recorrerTabla() {
 		List<Producto> lista = new ArrayList<>();
 		Producto producto;
-		
+
 		try {
 			for (int i = 0; i < table.getRowCount(); i++) {
 				producto = controlVenta.obtenerProducto((String) table.getValueAt(i, 0));
 				lista.add(producto);
 			}
 		} catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al leer la tabla.");
-        }	
+			JOptionPane.showMessageDialog(null, "Error al leer la tabla.");
+		}
 
 		return lista;
 
 	}
-	
+
 	public void limpia() {
 		textTotal.setText("");
 		txtIngresaProducto.setText("");
-		total=0;
+		total = 0;
 		int filas = table.getRowCount();
 		try {
-			for (int i = 0; filas>i ; i++) {
+			for (int i = 0; filas > i; i++) {
 				modelo.removeRow(0);
 			}
 		} catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
-        }	
+			JOptionPane.showMessageDialog(null, "Error al limpiar la tabla.");
+		}
 	}
+
 	/**
 	 * Agrega los datos a la tabla de venta y obtiene el total
+	 * 
 	 * @param recarga
 	 */
 	public void agregaRecarga(Recarga recarga) {
@@ -314,9 +311,7 @@ public class VentanaVenta extends JFrame {
 		table.setModel(modelo);
 		total = total + recarga.getMonto();
 		textTotal.setText(String.valueOf(total));
-		
+
 	}
 
-
 }
-

@@ -158,8 +158,9 @@ public class ControlVenta {
 	 * MÃ©todo que obtien los producto de la venta
 	 * 
 	 * @param total
+	 * @param empleado 
 	 */
-	public void obtenerLista(float total) {
+	public void obtenerLista(float total, Empleado empleado) {
 
 		listaProductos = ventanaVenta.recorrerTabla();
 		Venta venta = new Venta();
@@ -171,17 +172,10 @@ public class ControlVenta {
 		venta.setFecha(fechaF);
 		venta.setTotal(total);
 		actulizaInventarioMenos(listaProductos);
-		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
+		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos, empleado);
+		System.out.println("Las ventas del empleado: " + empleado.getNombre() + " son: " + empleado.getVentas());
 		controlCobro.muestraDialogo();
-	}
-	
-	
-	public void obtenerListaProductos() {
-		listaProductos = ventanaVenta.recorrerTabla();
-		Venta venta = new Venta();		
-		servicioDetalleVenta.agregarDetalleVenta(venta, listaProductos);
-		actulizaInventarioMenos(listaProductos);
-
+		System.out.println(empleado.getVentas());
 	}
 
 	public void limpiarTabla() {
