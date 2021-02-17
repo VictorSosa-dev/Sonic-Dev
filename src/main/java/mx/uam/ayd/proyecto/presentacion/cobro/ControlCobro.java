@@ -1,11 +1,5 @@
 package mx.uam.ayd.proyecto.presentacion.cobro;
 
-/**
- * @author VictorSosa
- */
-
-import javax.swing.JFrame;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -39,9 +33,10 @@ public class ControlCobro {
 	 * Método para obtener un lista de los productos de la venta.
 	 * 
 	 * @param total
+	 * @param empleado 
 	 */
-	public void obtenerLista(float total) {
-		controlVenta.obtenerLista(total);
+	public void obtenerLista(float total, Empleado empleado) {
+		controlVenta.obtenerLista(total, empleado);
 	}
 	/**
 	 * Método que muestra los dialogos de la ventana
