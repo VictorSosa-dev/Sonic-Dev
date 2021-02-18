@@ -61,7 +61,7 @@ public class ControlReporteVenta {
 		ventana.muestra(this, emp);
 	}
 	
-	public void inciaGeneraReporteVenta(Empleado empleado, int idVenta) {
+	public void inciaGeneraReporteVenta(Empleado empleado, long idVenta) {
 		controlGeneraReporteVenta.inicia(empleado, idVenta);
 	}
 	

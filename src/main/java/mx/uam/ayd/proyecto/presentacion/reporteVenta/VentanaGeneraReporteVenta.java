@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
+import mx.uam.ayd.proyecto.negocio.modelo.Venta;
 
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -51,7 +52,8 @@ public class VentanaGeneraReporteVenta extends JFrame {
 	private int mes = fech.get(Calendar.MONTH) + 1;
 	private int dia = fech.get(Calendar.DAY_OF_MONTH);
 	private String fechaF = ano + "/" + mes + "/" + dia;
-	private int idVenta;
+	private long idVenta;
+	private Venta venta;
 
 	private DefaultTableModel modeloDetalleVenta = new DefaultTableModel() {
 		@Override
@@ -127,15 +129,20 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		btnCancelar.setBounds(465, 0, 85, 21);
 		panelBotones.add(btnCancelar);
 		
-		JButton btnNewButton = new JButton("Generar Reporte");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnGeneraReporte = new JButton("Generar Reporte");
+		btnGeneraReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String comentario = textComentario.getText();
+				if(textComentario.getText().equals("")) {
+					JOptionPane.showMessageDialog(null, "No se ha agregado un comentario al reporte.", 
+							"Atención", JOptionPane.WARNING_MESSAGE);
+				}else {
+					controlGeneraReporteVenta.generaReporteVenta(venta, idVenta, textComentario.getText(), empleado);
+				}
 			}
 		});
-		btnNewButton.setBackground(Color.GREEN);
-		btnNewButton.setBounds(560, 0, 131, 21);
-		panelBotones.add(btnNewButton);
+		btnGeneraReporte.setBackground(Color.GREEN);
+		btnGeneraReporte.setBounds(560, 0, 131, 21);
+		panelBotones.add(btnGeneraReporte);
 		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(5, 84, 701, 214);
@@ -200,9 +207,10 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		scrollPane.setViewportView(table);
 	}
 	
-	public void muestra(ControlGeneraReporteVenta control, Empleado emp) {
+	public void muestra(ControlGeneraReporteVenta control, Empleado emp, Venta ventaSel) {
 		this.controlGeneraReporteVenta = control;
 		this.empleado = emp;
+		this.venta = ventaSel;
 		//this.fecha.setText(fechaF);
 		this.cargo.setText(empleado.getNivel());
 		this.nombreEmpleado.setText(empleado.getNombre() + " " + empleado.getApellido());
@@ -211,9 +219,10 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		setVisible(true);
 	}
 	
-	public void llenaDatosVenta(Producto producto, int idVenta, int articulos) {
-		this.textIdVenta.setText(String.valueOf(idVenta));
+	public void llenaDatosVenta(Producto producto, long idVenta2, int articulos) {
+		this.textIdVenta.setText(String.valueOf(idVenta2));
 		this.textArticulos.setText(String.valueOf(articulos));
+		this.idVenta = idVenta2;
 		String a[] = new String[3];
 		a[0] = producto.getNombre();
 		a[1] = producto.getCompuesto();
