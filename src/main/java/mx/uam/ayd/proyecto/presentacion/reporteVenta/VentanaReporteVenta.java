@@ -160,6 +160,7 @@ public class VentanaReporteVenta extends JFrame {
 		JButton btnReportes = new JButton("Reportes");
 		btnReportes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				control.muestraReportesVenta(empleado);
 			}
 		});
 		btnReportes.setFont(new Font("Tahoma", Font.PLAIN, 10));

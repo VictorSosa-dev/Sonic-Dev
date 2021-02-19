@@ -37,6 +37,8 @@ public class ControlReporteVenta {
 	ServicioProducto servicioProducto;
 	@Autowired
 	ControlGeneraReporteVenta controlGeneraReporteVenta;
+	@Autowired
+	ControlMuestraReportesVenta controlMuestraReportesVenta;
 	
 	private Calendar fecha = new GregorianCalendar();
 	private int ano = fecha.get(Calendar.YEAR);
@@ -61,8 +63,22 @@ public class ControlReporteVenta {
 		ventana.muestra(this, emp);
 	}
 	
+	/**
+	 * Metodo que lleva hacia el control de generar el reporte
+	 * de una venta identificado con el ID de la venta.
+	 * @param empleado
+	 * @param idVenta
+	 */
 	public void inciaGeneraReporteVenta(Empleado empleado, long idVenta) {
 		controlGeneraReporteVenta.inicia(empleado, idVenta);
 	}
 	
+	/**
+	 * Metodo que lleva a la ventana para mostrar los reportes
+	 * de venta que se han hecho
+	 * @param empleado
+	 */
+	public void muestraReportesVenta(Empleado empleado) {
+		controlMuestraReportesVenta.inicia(empleado);
+	}
 }

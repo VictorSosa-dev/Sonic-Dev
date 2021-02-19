@@ -30,7 +30,12 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Ventana que lleva el flujo del control para generar un reporte
+ * de venta.
+ * @author Luis Cristofer Alvarado Gabriel
+ * @since 18/02/2021
+ */
 @Component
 @SuppressWarnings("serial")
 public class VentanaGeneraReporteVenta extends JFrame {
@@ -42,7 +47,7 @@ public class VentanaGeneraReporteVenta extends JFrame {
 	private JTextField textComentario;
 	private JTextField textIdVenta;
 	private JTextField fechaV;
-	private JTextField textArticulos;
+	private JTextField textEmpleadoVenta;
 	private JTable table;
 	private ControlGeneraReporteVenta controlGeneraReporteVenta;
 	private Empleado empleado;
@@ -120,7 +125,7 @@ public class VentanaGeneraReporteVenta extends JFrame {
 				textIdVenta.setText("");
 				textComentario.setText("");
 				fechaV.setText("");
-				textArticulos.setText("");
+				textEmpleadoVenta.setText("");
 				setVisible(false);
 			}
 		});
@@ -129,6 +134,11 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		btnCancelar.setBounds(465, 0, 85, 21);
 		panelBotones.add(btnCancelar);
 		
+		/**
+		 * Boton que llama al control para generar a un reporte
+		 * Si el campo de comentario del reporte está en blanco
+		 * El metodo no se llama.
+		 */
 		JButton btnGeneraReporte = new JButton("Generar Reporte");
 		btnGeneraReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -137,6 +147,9 @@ public class VentanaGeneraReporteVenta extends JFrame {
 							"Atención", JOptionPane.WARNING_MESSAGE);
 				}else {
 					controlGeneraReporteVenta.generaReporteVenta(venta, idVenta, textComentario.getText(), empleado);
+					JOptionPane.showMessageDialog(null, "Se ha hecho el reporte de la venta!", 
+							"Éxito", JOptionPane.INFORMATION_MESSAGE);
+					setVisible(false);
 				}
 			}
 		});
@@ -161,7 +174,7 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		lblFechaDeVena.setBounds(10, 37, 110, 17);
 		panel_2.add(lblFechaDeVena);
 		
-		JLabel lblEmpleado = new JLabel("Artículos:");
+		JLabel lblEmpleado = new JLabel("Empleado:");
 		lblEmpleado.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		lblEmpleado.setBounds(10, 64, 110, 17);
@@ -190,11 +203,11 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		fechaV.setBounds(130, 38, 150, 17);
 		panel_2.add(fechaV);
 		
-		textArticulos = new JTextField();
-		textArticulos.setEditable(false);
-		textArticulos.setColumns(10);
-		textArticulos.setBounds(130, 65, 150, 17);
-		panel_2.add(textArticulos);
+		textEmpleadoVenta = new JTextField();
+		textEmpleadoVenta.setEditable(false);
+		textEmpleadoVenta.setColumns(10);
+		textEmpleadoVenta.setBounds(130, 65, 150, 17);
+		panel_2.add(textEmpleadoVenta);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(290, 11, 401, 100);
@@ -219,9 +232,17 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		setVisible(true);
 	}
 	
-	public void llenaDatosVenta(Producto producto, long idVenta2, int articulos) {
+	/**
+	 * Al momento de recibir la venta seleccionada para reportar
+	 * Se llena la tabla con los datos de la venta.
+	 * @param producto
+	 * @param idVenta2
+	 * @param articulos
+	 * @param empleadoHizoVenta
+	 */
+	public void llenaDatosVenta(Producto producto, long idVenta2, int articulos, String empleadoHizoVenta) {
 		this.textIdVenta.setText(String.valueOf(idVenta2));
-		this.textArticulos.setText(String.valueOf(articulos));
+		this.textEmpleadoVenta.setText(empleadoHizoVenta);
 		this.idVenta = idVenta2;
 		String a[] = new String[3];
 		a[0] = producto.getNombre();

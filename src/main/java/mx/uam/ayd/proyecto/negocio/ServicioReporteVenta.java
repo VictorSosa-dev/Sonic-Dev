@@ -19,6 +19,15 @@ public class ServicioReporteVenta {
 	@Autowired
 	private ReporteVentasRepository reporteVentasRepository;
 	
+	/**
+	 * Metodo que registra el reporte de la venta con sus datos
+	 * y el nombre del empleado que esta haciendo el reporte.
+	 * @param venta
+	 * @param fecha
+	 * @param idVenta
+	 * @param comentario
+	 * @param empQueReporta
+	 */
 	public void registroReporteVenta(Venta venta, String fecha, long idVenta, String comentario, String empQueReporta) {
 		ReporteVenta reporte = new ReporteVenta();
 		reporte.setFecha(fecha);
@@ -29,11 +38,15 @@ public class ServicioReporteVenta {
 		reporteVentasRepository.save(reporte);
 	}
 	
-	/*public List<ReporteVenta> recuperaReportes(){
+	/**
+	 * Metodo para obtener todos los reportes de ventas que se han hecho.
+	 * @return
+	 */
+	public List<ReporteVenta> recuperaReportes(){
 		List<ReporteVenta> reportes = new ArrayList<>();
 		for (ReporteVenta reporte : reporteVentasRepository.findAll()) {
 			reportes.add(reporte);
 		}
 		return reportes;
-	}*/
+	}
 }

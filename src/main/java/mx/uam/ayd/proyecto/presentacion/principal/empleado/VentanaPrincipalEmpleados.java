@@ -38,7 +38,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(5, 45, 439, 174);
+		panel_1.setBounds(5, 45, 439, 183);
 
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(10, 238, 369, 52);
@@ -119,6 +119,15 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		});
 		btnActualiza.setBounds(49, 111, 170, 23);
 		panel_1.add(btnActualiza);
+		
+		JButton btnReporteVenta = new JButton("Reporte de Ventas");
+		btnReporteVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				control.reporteVenta(empleado);
+			}
+		});
+		btnReporteVenta.setBounds(49, 144, 170, 23);
+		panel_1.add(btnReporteVenta);
 		contentPane.add(panel_2);
 	}
 

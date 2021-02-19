@@ -13,6 +13,6 @@ public interface ReporteVentasRepository extends CrudRepository<ReporteVenta, Lo
 	public List<ReporteVenta> findByVenta(Venta venta);
 	public void deleteByVenta(Venta venta);
 	public ReporteVenta findByidReporte(long idReporte);
-	//public List<ReporteVenta> findAll();
+	public List<ReporteVenta> findAll();
 
 }
