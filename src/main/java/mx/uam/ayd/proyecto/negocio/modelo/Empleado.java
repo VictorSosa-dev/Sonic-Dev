@@ -42,11 +42,18 @@ public class Empleado {
 	
 	@OneToMany(targetEntity = PedidoCliente.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idEmpleado")
-	private final List <PedidoCliente> pedidosCliente = new ArrayList <> ();
-		
-	public Empleado() {}
-	public Empleado(String nombre, String apellido, int edad, String direccion, String correo, String telefono, String nivel,
-			String usuario, String password) {
+	
+	private final Set<PedidoCliente> pedidosCliente = new HashSet<>();
+
+	@OneToMany(targetEntity = Venta.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "idEmpleado")
+	private final Set<Venta> ventas = new HashSet<>();
+
+	public Empleado() {
+	}
+
+	public Empleado(String nombre, String apellido, int edad, String direccion, String correo, String telefono,
+			String nivel, String usuario, String password) {
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.edad = edad;
@@ -76,5 +83,22 @@ public class Empleado {
 		}
 
 		return pedidosCliente.add(pedidoCliente);
+	}
+
+	/**
+	 * addVenta: agrega una venta a la lista de ventas asociadas al empleado.
+	 * 
+	 * @param venta venta que se agrega a la lista
+	 * @return true cuando se agrega a la lista, false si la venta ya esta asociada.
+	 */
+	public boolean addVenta(Venta venta) {
+		if (venta == null) {
+			throw new IllegalArgumentException("El detalle de venta no puede ser null");
+		}
+		if (ventas.contains(venta)) {
+			return false;
+		}
+
+		return ventas.add(venta);
 	}
 }

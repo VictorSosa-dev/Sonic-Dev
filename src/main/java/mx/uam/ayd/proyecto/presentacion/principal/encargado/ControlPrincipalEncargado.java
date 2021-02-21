@@ -23,6 +23,7 @@ import mx.uam.ayd.proyecto.presentacion.principal.empleado.ControlPrincipalEmple
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlNumReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlReporteEmpleados;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaNumReporte;
+import mx.uam.ayd.proyecto.presentacion.reporteVenta.ControlReporteVenta;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 import mx.uam.ayd.proyecto.presentacion.ventaMembresia.ControlClientes;
 
@@ -87,6 +88,9 @@ public class ControlPrincipalEncargado {
 	@Autowired
 	private ServicioReporteEmpleados servicioReporteEmpleados;
 
+	
+	@Autowired
+	private ControlReporteVenta controlReporteVenta;
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -206,4 +210,12 @@ public class ControlPrincipalEncargado {
 		ventana.oculta();
 	}
 	
+	
+	/**
+	 * Inicia la ventana relacionada con la HU-12
+	 * @param emp
+	 */
+	public void reporteVenta(Empleado emp) {
+		controlReporteVenta.inicia(emp);
+	}
 }

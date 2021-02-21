@@ -9,15 +9,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.datos.DetalleVentaRepository;
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
 import mx.uam.ayd.proyecto.datos.VentaRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.DetalleVenta;
+import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.negocio.modelo.Venta;
 
-@Slf4j
 @Service
 public class ServicioDetalleVenta {
 	@Autowired
@@ -41,8 +40,9 @@ public class ServicioDetalleVenta {
 	 * 
 	 * @param venta
 	 * @param listaProductos
+	 * @param empleado 
 	 */
-	public boolean agregarDetalleVenta(Venta venta, List<Producto> listaProductos) {
+	public boolean agregarDetalleVenta(Venta venta, List<Producto> listaProductos, Empleado empleado) {
 		
 		if(venta == null && listaProductos.size()==0) {
 			throw new NullPointerException("Se recibió una venta null y una lista vacia");
@@ -57,6 +57,7 @@ public class ServicioDetalleVenta {
 			ventaRepository.save(venta);
 			productoRepository.save(producto);
 		}
+		empleado.addVenta(venta);
 		return true;
 
 	}

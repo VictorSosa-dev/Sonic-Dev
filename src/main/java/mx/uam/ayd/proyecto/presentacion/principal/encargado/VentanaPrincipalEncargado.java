@@ -219,6 +219,19 @@ public class VentanaPrincipalEncargado extends JFrame {
 		btnClientes.setBounds(396, 151, 158, 23);
 		panel_1.add(btnClientes);
 		contentPane.add(panel_2);
+		
+		/**
+		 * Boton que inicia la HU-12 Reporte de Venta
+		 */
+		JButton btnReporteVentas = new JButton("Reporte de Ventas");
+		btnReporteVentas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				control.reporteVenta(empleado);
+			}
+		});
+		btnReporteVentas.setBounds(10, 164, 192, 21);
+		panel_1.add(btnReporteVentas);
+		contentPane.add(panel_2);
 	}
 
 	public void muestra(ControlPrincipalEncargado control, Empleado empleado) {

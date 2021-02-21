@@ -58,6 +58,7 @@ public class VentanaVenta extends JFrame {
 	private JTextField txtNombreCliente; //JTextField que se usara para mostrar el nombre de un cliente registrado
 	Cliente cliente;
 	
+
 	public VentanaVenta() {
 		setTitle("Venta");
 		setResizable(false);

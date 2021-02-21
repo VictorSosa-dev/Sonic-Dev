@@ -143,6 +143,17 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		btnVentaMembresia.setBounds(380, 12, 139, 23);
 		panel_1.add(btnVentaMembresia);
 		contentPane.add(panel_2);
+		
+		
+		JButton btnReporteVenta = new JButton("Reporte de Ventas");
+		btnReporteVenta.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				control.reporteVenta(empleado);
+			}
+		});
+		btnReporteVenta.setBounds(49, 144, 170, 23);
+		panel_1.add(btnReporteVenta);
+		contentPane.add(panel_2);
 	}
 
 	public void muestra(ControlPrincipalEmpleados control, Empleado empleado) {
