@@ -64,4 +64,8 @@ public class ControlReporteEmpleados {
 		controlMuestraReportes.inicia(empleado);
 	}
 	
+	public void muestraReportePorEmpleado(Empleado empleado) {
+		controlMuestraReportes.reportePorEmpleado(empleado);
+	}
+	
 }

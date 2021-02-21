@@ -46,4 +46,21 @@ public class ServicioReporteEmpleados {
 		return reportes;
 	}
 	
+	/**
+	 * Metodo que recupera todos los reportes realizados
+	 * por el empleado con nivel encargado
+	 * @return una lista de reportes de un empleado en especifico 
+	 */
+	public List<ReporteEmpleados> recuperaReportesPorEmpleado(Empleado empleado){//@
+		List<ReporteEmpleados> reportes = new ArrayList<>();
+		
+		for (ReporteEmpleados reporte : reporteEmpleadosRepository.findByEmpleado(empleado)) {
+			reportes.add(reporte);
+		}
+		
+		return reportes;
+	}
+	
+
+	
 }

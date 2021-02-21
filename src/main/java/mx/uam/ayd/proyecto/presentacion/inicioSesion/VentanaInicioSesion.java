@@ -16,6 +16,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 
 import org.springframework.stereotype.Component;
+
+import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlNumReporte;
+
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
@@ -29,6 +32,8 @@ public class VentanaInicioSesion extends JFrame {
 	private JPasswordField passwordField;
 	private String usuario;
 	private String password;
+	
+	private ControlNumReporte controlNumReporte;
 
 	/**
 	 * Launch the application.

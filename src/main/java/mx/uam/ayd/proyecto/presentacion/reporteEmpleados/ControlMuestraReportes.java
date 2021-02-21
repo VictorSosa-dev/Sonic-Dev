@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.ServicioEmpleado;
 import mx.uam.ayd.proyecto.negocio.ServicioReporteEmpleados;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.ReporteEmpleados;
@@ -22,6 +23,12 @@ public class ControlMuestraReportes {
 	@Autowired
 	private ServicioReporteEmpleados servicioReporteEmpleados;
 	
+	@Autowired
+	private ServicioEmpleado servicioEmpleado;
+	
+	@Autowired
+	private VentanaReporte ventanaReporte;
+	
 	/**
 	 * Metodo que muestra la ventana con los reportes creados
 	 * @param empleado nombre del empleado con sesion iniciada
@@ -30,6 +37,17 @@ public class ControlMuestraReportes {
 		List<ReporteEmpleados> reportes = servicioReporteEmpleados.recuperaReportes();
 		ventanaMuestraReportes.muestra(this, empleado, reportes);
 	}
+	
+	
+	public void reportePorEmpleado(Empleado empleado) {
+		List<Empleado> empleados = servicioEmpleado.recuperaEmpleados();
+		List<ReporteEmpleados> reportes = servicioReporteEmpleados.recuperaReportesPorEmpleado(empleado);
+		ventanaReporte.muestra(this, empleado,reportes);
+	}
+	
+
+
+	
 	
 	/**
 	 * Metodo que regresa a la ventana con los nombres de los empleados
