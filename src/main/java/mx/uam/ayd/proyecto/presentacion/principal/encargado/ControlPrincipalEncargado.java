@@ -24,6 +24,7 @@ import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlNumReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlReporteEmpleados;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaNumReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteVenta.ControlReporteVenta;
+import mx.uam.ayd.proyecto.presentacion.reporteInventario.ControlMuestraReportesInventario;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 import mx.uam.ayd.proyecto.presentacion.ventaMembresia.ControlClientes;
 
@@ -87,10 +88,11 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private ServicioReporteEmpleados servicioReporteEmpleados;
-
-	
 	@Autowired
 	private ControlReporteVenta controlReporteVenta;
+	@Autowired
+	private ControlMuestraReportesInventario controlMuestraReportesInventario;
+
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -218,4 +220,12 @@ public class ControlPrincipalEncargado {
 	public void reporteVenta(Empleado emp) {
 		controlReporteVenta.inicia(emp);
 	}
+	/**
+	 * Inicia la ventana relacionada la HU-11
+	 * @param empleado
+	 */
+	public void muestraReportes(Empleado empleado) {
+		controlMuestraReportesInventario.inicia(empleado);
+	}
+
 }

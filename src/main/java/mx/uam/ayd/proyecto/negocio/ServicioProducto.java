@@ -23,7 +23,7 @@ import mx.uam.ayd.proyecto.presentacion.inventario.ControlCargarArchivo;
 /**
  * Servicio para entidad de producto
  * 
- * @author Ana Karina Vergara Guzmán
+ * @author Ana Karina Vergara Guzmán, Victor Manuel Sosa Piña
  *
  */
 @Slf4j
@@ -47,6 +47,7 @@ public class ServicioProducto {
 		Producto producto = productoRepository.findByNombre(nombre);
 		if (producto == null) {
 			log.warn(">>> EL PRODUCTO: " + nombre + " NO SE ENCONTRÓ.");
+			//throw new IllegalArgumentException("No se encuentra el producto");
 		} else {
 			log.info(">>> SE OBTIENE EL PRODUCTO: " + producto.getIdProducto() + ": " + producto.getNombre());
 		}
@@ -102,6 +103,9 @@ public class ServicioProducto {
 	 */
 	public List<Producto> obtenerProductos() {
 		List<Producto> listaProductos = (List<Producto>) productoRepository.findAll();
+		if(listaProductos == null) 
+			throw new IllegalArgumentException("No se encuentra el producto");
+			
 		log.info(">>> SE LEEN EN INVENTARIO: " + listaProductos.size() + " PRODUCTOS");
 		return listaProductos;
 	}
@@ -229,7 +233,6 @@ public class ServicioProducto {
 	}
 	
 	/**
-<<<<<<< HEAD
 	 * metodo que recupera los productos que estar por debajo
 	 * del minimo permitido para poder hacer un pedido
 	 * @return lista de productos escazos

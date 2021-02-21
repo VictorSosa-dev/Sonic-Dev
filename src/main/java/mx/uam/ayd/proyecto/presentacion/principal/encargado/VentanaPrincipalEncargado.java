@@ -231,6 +231,15 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnReporteVentas.setBounds(10, 164, 192, 21);
 		panel_1.add(btnReporteVentas);
+		
+		JButton btnReportesInventario = new JButton("Reportes  de Inventario");
+		btnReportesInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.muestraReportes(empleado);
+			}
+		});
+		btnReportesInventario.setBounds(228, 130, 158, 23);
+		panel_1.add(btnReportesInventario);
 		contentPane.add(panel_2);
 	}
 

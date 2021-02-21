@@ -103,7 +103,9 @@ public class VentanaPrincipalEmpleados extends JFrame {
 				control.agregaPedidoCliente(empleado);
 			}
 		});
-		btnNuevoPedidoCliente.setBounds(229, 123, 141, 23);
+
+		btnNuevoPedidoCliente.setBounds(257, 140, 141, 23);
+
 		panel_1.add(btnNuevoPedidoCliente);
 		
 		JButton btnNewButtonBusqueda = new JButton("Busqueda");
@@ -131,7 +133,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 				control.muestraVentanaActualiza(empleado);
 			}
 		});
-		btnActualiza.setBounds(49, 123, 170, 23);
+		btnActualiza.setBounds(54, 140, 170, 23);
 		panel_1.add(btnActualiza);
 		
 		JButton btnVentaMembresia = new JButton("Clientes");
@@ -153,8 +155,18 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		});
 		btnReporteVenta.setBounds(49, 144, 170, 23);
 		panel_1.add(btnReporteVenta);
+		JButton btnReporteInventario = new JButton("Reporte Inventario");
+		btnReporteInventario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.iniciaReporte(empleado);
+			}
+		});
+		btnReporteInventario.setBounds(49, 106, 349, 23);
+		panel_1.add(btnReporteInventario);
+
 		contentPane.add(panel_2);
 	}
+	
 
 	public void muestra(ControlPrincipalEmpleados control, Empleado empleado) {
 		this.control = control;

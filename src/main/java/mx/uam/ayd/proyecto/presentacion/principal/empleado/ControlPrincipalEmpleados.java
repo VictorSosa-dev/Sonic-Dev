@@ -22,6 +22,7 @@ import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlNumReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaNumReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteVenta.ControlReporteVenta;
+import mx.uam.ayd.proyecto.presentacion.reporteInventario.ControlReporteInventario;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 import mx.uam.ayd.proyecto.presentacion.ventaMembresia.ControlClientes;
 
@@ -75,6 +76,9 @@ public class ControlPrincipalEmpleados {
 	@Autowired
 	ControlReporteVenta controlReporteVenta;
 	
+	@Autowired
+	private ControlReporteInventario controlReporteInventario;
+
 	/**
 	 * Inicia el flujo de control de la ventana principal
 	 * 
@@ -96,7 +100,7 @@ public class ControlPrincipalEmpleados {
 	}
 
 	/**
-	 * Método que arranca la historia de usuario "agregar productos para la venta"
+	 * Metodo que arranca la historia de usuario "agregar productos para la venta"
 	 * 
 	 */
 	public void agregarProductos(Empleado empleado) {
@@ -138,6 +142,7 @@ public class ControlPrincipalEmpleados {
 		controlActualiza.inicia(empleado);
 	}
 	
+
 	public void iniciaClientes(Empleado empleado) {
 		controlClientes.iniciaVentana(empleado);
 		ventana.oculta();
@@ -150,4 +155,17 @@ public class ControlPrincipalEmpleados {
 		controlReporteVenta.inicia(emp);
 	}
 
+	/**
+	 * Metodo que indica al control reporte inveterario
+	 * que muestre su ventana.
+	 * Comienza la HU-11 "Como empleado generar un reporte 
+	 * acerca del inventario"
+	 * @param empleado
+	 */
+	public void iniciaReporte(Empleado empleado) {
+		controlReporteInventario.iniciaReporte(empleado);
+		
+	}
+	
+	
 }
