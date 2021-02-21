@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableModel;
 
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.modelo.Cliente;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.negocio.modelo.Recarga;
@@ -54,7 +55,8 @@ public class VentanaVenta extends JFrame {
 	private JTextField txtNombreEmpleado;
 	private JTextField txtNumEmpleado;
 	private ControlVenta control;
-	
+	private JTextField txtNombreCliente; //JTextField que se usara para mostrar el nombre de un cliente registrado
+	Cliente cliente;
 	
 	public VentanaVenta() {
 		setTitle("Venta");
@@ -130,6 +132,12 @@ public class VentanaVenta extends JFrame {
 		txtNumEmpleado.setColumns(10);
 		txtNumEmpleado.setBounds(412, 10, 171, 28);
 		contentPane.add(txtNumEmpleado);
+		
+		txtNombreCliente = new JTextField();
+		txtNombreCliente.setEditable(false);
+		txtNombreCliente.setBounds(307, 49, 276, 20);
+		contentPane.add(txtNombreCliente);
+		txtNombreCliente.setColumns(10);
 
 		// -------------LISTENER-------------------
 		
@@ -234,12 +242,37 @@ public class VentanaVenta extends JFrame {
 		setVisible(true);
 		this.controlVenta = control;
 		this.empleado = empleado;
+		txtNombreCliente.setText(""); //se limpia el campo del nombre cliente
+		txtNombreCliente.setVisible(false);
 		limpia();
-
+		
 		setVisible(true);
 
 	}
-
+	
+	/**
+	 * HU-09 Metodo que muestra la ventana con el nombre del cliente
+	 * @param control
+	 * @param empleado
+	 * @param cliente
+	 */
+	public void muestraVenta(ControlVenta control, Empleado empleado, Cliente cliente) {
+		String id = String.valueOf(empleado.getIdEmpleado());
+		this.control = control;
+		this.empleado = empleado;
+		this.cliente = cliente;
+		this.txtNombreEmpleado.setText("Nombre: " + empleado.getNombre() + " " + empleado.getApellido());
+		this.txtNivel.setText("Cargo: " + empleado.getNivel());
+		this.txtNumEmpleado.setText("ID: " +id);
+		this.txtNombreCliente.setText("Cliente: " + cliente.getNombre() + " " + cliente.getApellidos());
+		setVisible(true);
+		this.controlVenta = control;
+		this.empleado = empleado;
+		limpia();
+		txtNombreCliente.setVisible(true);
+		setVisible(true);
+	}
+	
 	// Metodos para la Ventana
 	public void llenaTabla(Producto producto) {
 		String a[] = new String[4];
@@ -256,16 +289,32 @@ public class VentanaVenta extends JFrame {
 	public void muestraDialogoConMensaje(String mensaje) {
 		JOptionPane.showMessageDialog(this, mensaje);
 	}
-
+	
+	/**
+	 * Metodo que calcula el total a pagar
+	 * donde si la venta es a un cliente registrado se le aplica el 15% de descuento
+	 * al precio total si es que este es mayor o igual a $80, en otro caso si el cliente
+	 * no esta registrado a este no se le hara un descuento
+	 * @param precio precio del producto a vender
+	 */
 	public void textTotal(float precio) {
 
 		total += precio;
-		textTotal.setText(String.valueOf(total));
-
+		
+		if(txtNombreCliente.getText().equals("")) {
+			textTotal.setText(String.valueOf(total));
+		} else {
+			if(total >= 80) { //se aplica el 15% de descuento
+				textTotal.setText(String.valueOf(total*0.85));
+			} else {
+				textTotal.setText(String.valueOf(total));
+			}
+		}
+		
 	}
 
 	/**
-	 * MÃ©todo que recorre la tabla
+	 * Metodo que recorre la tabla
 	 * 
 	 * @return venta de tipo lista
 	 */
@@ -316,7 +365,5 @@ public class VentanaVenta extends JFrame {
 		textTotal.setText(String.valueOf(total));
 		
 	}
-
-
 }
 

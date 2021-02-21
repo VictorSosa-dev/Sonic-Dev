@@ -12,6 +12,8 @@ import mx.uam.ayd.proyecto.presentacion.inicioSesion.ControlInicioSesion;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.recepcionMercancia.ControlRecepcionMercancia;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
+import mx.uam.ayd.proyecto.presentacion.ventaMembresia.ControlClientes;
+
 @Component
 public class ControlPrincipalEmpleados {
 
@@ -41,6 +43,9 @@ public class ControlPrincipalEmpleados {
 	
 	@Autowired
 	private ControlActualiza controlActualiza;
+	
+	@Autowired
+	private ControlClientes controlClientes;
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -92,6 +97,8 @@ public class ControlPrincipalEmpleados {
 		controlActualiza.inicia(empleado);
 	}
 	
-	
-
+	public void iniciaClientes(Empleado empleado) {
+		controlClientes.iniciaVentana(empleado);
+		ventana.oculta();
+	}
 }

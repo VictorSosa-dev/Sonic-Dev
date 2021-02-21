@@ -258,7 +258,7 @@ public class VentanaCierreVenta extends JFrame {
 
 	public void agregarPedido(PedidoCliente pedidoCliente, List<Producto> productos, List<Cliente> cliente) {
 		String a[] = new String[5];
-		a[0] = cliente.get(0).getNombre() + " " + cliente.get(0).getApellidoPaterno() + " " + cliente.get(0).getApellidoMaterno();
+		a[0] = cliente.get(0).getNombre() + " " + cliente.get(0).getApellidos();
 		a[1] = pedidoCliente.getFechaDeCreacion();
 		a[2] = cliente.get(0).getTelefono();
 		a[3] = "";

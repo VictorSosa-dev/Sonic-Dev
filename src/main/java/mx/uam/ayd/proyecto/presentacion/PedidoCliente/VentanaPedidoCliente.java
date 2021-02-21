@@ -41,8 +41,7 @@ public class VentanaPedidoCliente extends JFrame {
 	private JTextField txtNombreEmpleado;
 	private JTextField txtNivel;
 	private JTextField txtNombreCliente;
-	private JTextField txtAPaterno;
-	private JTextField txtAMaterno;
+	private JTextField txtApellidos;
 	private JTextField txtCorreo;
 	private JTextField txtTelefono;
 	DefaultTableModel modeloPedidoCliente = new DefaultTableModel();
@@ -86,8 +85,8 @@ public class VentanaPedidoCliente extends JFrame {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (validaVacios() && validaPiezas()) {
-					Cliente cliente = new Cliente(txtNombreCliente.getText(), txtAPaterno.getText(),
-							txtAMaterno.getText(), txtCorreo.getText(), txtTelefono.getText());
+					Cliente cliente = new Cliente(txtNombreCliente.getText(), txtApellidos.getText(),
+							 txtCorreo.getText(), txtTelefono.getText());
 					leerTabla();
 					control.agregarPedidoCliente(cliente, listaProductos, listaPiezas, empleado, fechaCreacion,
 							precioTotal);
@@ -129,30 +128,20 @@ public class VentanaPedidoCliente extends JFrame {
 		panel_datosCliente.add(txtNombreCliente);
 		txtNombreCliente.setColumns(10);
 
-		txtAPaterno = new JTextField();
-		txtAPaterno.setBounds(103, 56, 130, 20);
-		panel_datosCliente.add(txtAPaterno);
-		txtAPaterno.setColumns(10);
-
-		txtAMaterno = new JTextField();
-		txtAMaterno.setColumns(10);
-		txtAMaterno.setBounds(373, 56, 100, 20);
-		panel_datosCliente.add(txtAMaterno);
+		txtApellidos = new JTextField();
+		txtApellidos.setBounds(93, 56, 233, 20);
+		panel_datosCliente.add(txtApellidos);
+		txtApellidos.setColumns(10);
 
 		JLabel lblClienteNombre = new JLabel("Nombre(s):");
 		lblClienteNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		lblClienteNombre.setBounds(0, 28, 83, 14);
 		panel_datosCliente.add(lblClienteNombre);
 
-		JLabel lblClienteAPaterno = new JLabel("Apellido Paterno:");
-		lblClienteAPaterno.setHorizontalAlignment(SwingConstants.CENTER);
-		lblClienteAPaterno.setBounds(0, 59, 93, 14);
-		panel_datosCliente.add(lblClienteAPaterno);
-
-		JLabel lblApellidoMaterno = new JLabel("Apellido Materno:");
-		lblApellidoMaterno.setHorizontalAlignment(SwingConstants.CENTER);
-		lblApellidoMaterno.setBounds(243, 59, 120, 14);
-		panel_datosCliente.add(lblApellidoMaterno);
+		JLabel lblClienteApellidos = new JLabel("Apellidos:");
+		lblClienteApellidos.setHorizontalAlignment(SwingConstants.CENTER);
+		lblClienteApellidos.setBounds(0, 59, 93, 14);
+		panel_datosCliente.add(lblClienteApellidos);
 
 		txtCorreo = new JTextField();
 		txtCorreo.setColumns(10);
@@ -320,8 +309,7 @@ public class VentanaPedidoCliente extends JFrame {
 	public void mostrarMensajeExito() {
 		JOptionPane.showMessageDialog(null, "Se agrego el pedido.");
 		this.txtNombreCliente.setText("");
-		this.txtAPaterno.setText("");
-		this.txtAMaterno.setText("");
+		this.txtApellidos.setText("");
 		this.txtCorreo.setText("");
 		this.txtPiezas.setText("");
 		this.txtPrecioTotal.setText("");
@@ -341,7 +329,7 @@ public class VentanaPedidoCliente extends JFrame {
 	}
 
 	private boolean validaVacios() {
-		if (txtNombreCliente.getText().equals("") || txtAPaterno.getText().equals("") || txtAMaterno.getText().equals("") || txtCorreo.getText().equals("")
+		if (txtNombreCliente.getText().equals("") || txtApellidos.getText().equals("") || txtCorreo.getText().equals("")
 				|| txtTelefono.getText().equals("") || txtPiezas.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "Llena todos los campos!");
 			return false;

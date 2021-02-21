@@ -27,10 +27,10 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idCliente;
 	private String nombre;
-	private String apellidoPaterno;
-	private String apellidoMaterno;
+	private String apellidos;
 	private String correo;
 	private String telefono;
+	private String usuario;
 
 	@OneToMany(targetEntity = PedidoCliente.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "idCliente")
@@ -39,10 +39,9 @@ public class Cliente {
 	public Cliente() {
 	}
 
-	public Cliente(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String telefono) {
+	public Cliente(String nombre, String apellidos, String correo, String telefono) {
 		this.nombre = nombre;
-		this.apellidoPaterno = apellidoPaterno;
-		this.apellidoMaterno = apellidoMaterno;
+		this.apellidos = apellidos;
 		this.correo = correo;
 		this.telefono = telefono;
 	}

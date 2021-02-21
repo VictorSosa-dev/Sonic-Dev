@@ -10,5 +10,8 @@ import mx.uam.ayd.proyecto.negocio.modelo.PedidoCliente;
 public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 
 	public List<Cliente> findByPedidosCliente(PedidoCliente pedidoCliente);
-
+	
+	public Cliente findByUsuario(String usuario);
+	public Cliente findByNombre(String nombre);
+	
 }

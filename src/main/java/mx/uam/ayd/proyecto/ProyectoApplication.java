@@ -10,8 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import mx.uam.ayd.proyecto.datos.GrupoRepository;
 import mx.uam.ayd.proyecto.datos.ProductoRepository;
 import mx.uam.ayd.proyecto.datos.VentaRepository;
+import mx.uam.ayd.proyecto.datos.ClienteRepository;
 import mx.uam.ayd.proyecto.datos.DetalleVentaRepository;
 import mx.uam.ayd.proyecto.datos.EmpleadoRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Cliente;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Grupo;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
@@ -58,6 +60,9 @@ public class ProyectoApplication {
 	ControlCargarArchivo controlCargarArchivo;
 	@Autowired
 	private controlAsistencias controlAsistencia;
+	
+	@Autowired
+	ClienteRepository clienteRepository;
 
 	public static void main(String[] args) {
 
@@ -112,6 +117,41 @@ public class ProyectoApplication {
 		Grupo grupoOps = new Grupo();
 		grupoOps.setNombre("Operadores");
 		grupoRepository.save(grupoOps);
-
+		
+		//Clientes de prueba
+		Cliente cliente1 = new Cliente();
+		Cliente cliente2 = new Cliente();
+		Cliente cliente3 = new Cliente();
+		Cliente cliente4 = new Cliente();
+		
+		cliente1.setNombre("Arantza");
+		cliente1.setApellidos("Gonzalez Huerta");
+		cliente1.setCorreo("ara@gmail.com");
+		cliente1.setTelefono("5578344535");
+		cliente1.setUsuario("ara");
+		
+		cliente2.setNombre("David");
+		cliente2.setApellidos("Pineda Ramirez");
+		cliente2.setCorreo("david@gmail.com");
+		cliente2.setTelefono("5512365478");
+		cliente2.setUsuario("dad-12");
+		
+		cliente3.setNombre("Aron");
+		cliente3.setApellidos("Hernandez Hernandez");
+		cliente3.setCorreo("aron@gmail.com");
+		cliente3.setTelefono("5596325874");
+		cliente3.setUsuario("aron-21");
+		
+		cliente4.setNombre("Juan");
+		cliente4.setApellidos("Diaz Mendoza");
+		cliente4.setCorreo("jdm@gmail.com");
+		cliente4.setTelefono("5515984267");
+		cliente4.setUsuario("diaz-24");
+		
+		clienteRepository.save(cliente1);
+		clienteRepository.save(cliente2);
+		clienteRepository.save(cliente3);
+		clienteRepository.save(cliente4);
+		
 	}
 }

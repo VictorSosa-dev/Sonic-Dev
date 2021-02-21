@@ -12,8 +12,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.ServicioCliente;
 import mx.uam.ayd.proyecto.negocio.ServicioDetalleVenta;
 import mx.uam.ayd.proyecto.negocio.ServicioProducto;
+import mx.uam.ayd.proyecto.negocio.modelo.Cliente;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.negocio.modelo.Recarga;
@@ -44,7 +46,10 @@ public class ControlVenta {
 
 	@Autowired
 	private ServicioDetalleVenta servicioDetalleVenta;
-
+	
+	@Autowired
+	private ServicioCliente servicioCliente;
+	
 	private List<Producto> listaProductos = new ArrayList<>();
 	
 
@@ -207,6 +212,23 @@ public class ControlVenta {
 		ventanaVenta.agregaRecarga(recarga);
 		
 	}
-
+	
+	/**
+	 * HU-09 Metodo que inicia la ventana venta para el cliente registrado
+	 * @param empleado empleado que inicia sesion
+	 * @param cliente cliente que hara una compra
+	 */
+	public void iniciaVentaMembresia(Empleado empleado, Cliente cliente) {
+		ventanaVenta.muestraVenta(this, empleado, cliente);
+	}
+	
+	public boolean isMiembro(String nombre) {
+		Cliente miembro = servicioCliente.buscaCliente(nombre);
+		if(miembro != null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
 

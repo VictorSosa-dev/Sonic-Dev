@@ -209,6 +209,15 @@ public class VentanaPrincipalEncargado extends JFrame {
 		});
 		btnNewButton.setBounds(10, 131, 192, 21);
 		panel_1.add(btnNewButton);
+		
+		JButton btnClientes = new JButton("Clientes");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.iniciaClientes(empleado);
+			}
+		});
+		btnClientes.setBounds(396, 151, 158, 23);
+		panel_1.add(btnClientes);
 		contentPane.add(panel_2);
 	}
 
