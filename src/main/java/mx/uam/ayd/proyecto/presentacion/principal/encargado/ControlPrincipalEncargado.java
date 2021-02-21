@@ -15,6 +15,7 @@ import mx.uam.ayd.proyecto.presentacion.inventario.ControlInventario;
 import mx.uam.ayd.proyecto.presentacion.monitoreo.ControlMonitoreo;
 import mx.uam.ayd.proyecto.presentacion.pedidoRealizado.ControlPedidoRealizado;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlReporteEmpleados;
+import mx.uam.ayd.proyecto.presentacion.reporteInventario.ControlMuestraReportesInventario;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
 
 @Component
@@ -64,6 +65,9 @@ public class ControlPrincipalEncargado {
 	
 	@Autowired
 	private controlAsistencias controlAsistencias;
+	
+	@Autowired
+	private ControlMuestraReportesInventario controlMuestraReportesInventario;
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal
@@ -163,5 +167,13 @@ public class ControlPrincipalEncargado {
 		// TODO Auto-generated method stub
 		//controlAsistencias.iniciaAsistencias(empleado);
 		controlAsistencias.inicia(empleado);
+	}
+	
+	/**
+	 * Inicia la ventana relacionada la HU-11
+	 * @param empleado
+	 */
+	public void muestraReportes(Empleado empleado) {
+		controlMuestraReportesInventario.inicia(empleado);
 	}
 }

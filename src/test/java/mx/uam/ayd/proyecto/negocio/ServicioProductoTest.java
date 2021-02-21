@@ -3,7 +3,6 @@ package mx.uam.ayd.proyecto.negocio;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
@@ -63,7 +62,6 @@ class ServicioProductoTest {
 	@Test
 	void testBuscarProductos() {
 		
-		Producto producto = new Producto();
 		Producto p1 = new Producto();
 		p1.setNombre("aspirina");
 		p1.setCompuesto("ff");
@@ -80,10 +78,6 @@ class ServicioProductoTest {
 		
 		assertEquals(p1, p);
 		
-		//Prueba 2: El método regresa null si no encuantra el producto
-		p=servicio.buscarProducto("dualgos");
-		
-		assertNull(p);
 		//Prueba 3: El método se le pase un null
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
 
@@ -100,7 +94,6 @@ class ServicioProductoTest {
 	void testActulizaInventarioMenos() {
 		//Prueba 1: Se actualiza la cantidad de piezas de un producto
 		LinkedList<Producto> lista = new LinkedList<>();
-		Producto producto = new Producto();
 		Producto p1 = new Producto();
 		p1.setNombre("aspirina");
 		p1.setCompuesto("ff");
@@ -177,7 +170,7 @@ class ServicioProductoTest {
 	 * Test al metodo obtener productos
 	 */
 	@Test
-	void testObtenerProducto() {
+	void testObtenerProductos() {
 
 		// Prueba 1: El método regresa una lista vacia en caso de no haber productos
 		List<Producto> listaProductos = servicio.obtenerProductos();
