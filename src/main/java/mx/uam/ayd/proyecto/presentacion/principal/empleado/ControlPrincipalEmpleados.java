@@ -22,13 +22,10 @@ import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.ControlNumReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaNumReporte;
 import mx.uam.ayd.proyecto.presentacion.reporteEmpleados.VentanaReporte;
 import mx.uam.ayd.proyecto.presentacion.venta.ControlVenta;
-<<<<<<< HEAD
 import mx.uam.ayd.proyecto.presentacion.ventaMembresia.ControlClientes;
 
-=======
 
 @Slf4j
->>>>>>> 3ea40363e3c4138c477a045d4880f570c6145659
 @Component
 public class ControlPrincipalEmpleados {
 
@@ -63,9 +60,9 @@ public class ControlPrincipalEmpleados {
 	private ControlActualiza controlActualiza;
 	
 	@Autowired
-<<<<<<< HEAD
 	private ControlClientes controlClientes;
-=======
+	
+	@Autowired
 	private ControlNumReporte controlNumReporte;
 	
 	@Autowired
@@ -73,7 +70,6 @@ public class ControlPrincipalEmpleados {
 	
 	@Autowired
 	private ServicioEmpleado servicioEmpleado;
->>>>>>> 3ea40363e3c4138c477a045d4880f570c6145659
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal

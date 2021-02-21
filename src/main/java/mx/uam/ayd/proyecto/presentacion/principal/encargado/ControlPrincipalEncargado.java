@@ -79,14 +79,14 @@ public class ControlPrincipalEncargado {
 	private controlAsistencias controlAsistencias;
 	
 	@Autowired
-<<<<<<< HEAD
 	private ControlClientes controlClientes;
-=======
+	
+	@Autowired
 	private ControlNumReporte controlNumReporte;
 	
 	@Autowired
 	private ServicioReporteEmpleados servicioReporteEmpleados;
->>>>>>> 3ea40363e3c4138c477a045d4880f570c6145659
+
 	
 	/**
 	 * Inicia el flujo de control de la ventana principal

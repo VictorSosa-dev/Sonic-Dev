@@ -26,12 +26,12 @@ public class VentanaPrincipalEmpleados extends JFrame {
 	private Empleado empleado;
 	private JTextField txtNombreEmpleado;
 	private JTextField txtNivel;
-<<<<<<< HEAD
+
 	private JTextField txtIdEmpleado;
-=======
+
 	
 	private ControlNumReporte controlNumReporte;
->>>>>>> 3ea40363e3c4138c477a045d4880f570c6145659
+
 
 	public VentanaPrincipalEmpleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -150,13 +150,10 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		this.empleado = empleado;
 		this.txtNombreEmpleado
 				.setText(empleado.getNombre() + " " + empleado.getApellido());
-<<<<<<< HEAD
+
 		this.txtNivel.setText("Cargo: " + empleado.getNivel());
 		this.txtIdEmpleado.setText("ID: " + empleado.getIdEmpleado());
-=======
-		this.txtNivel.setText(empleado.getNivel() + ":");
-		
->>>>>>> 3ea40363e3c4138c477a045d4880f570c6145659
+
 		setVisible(true);
 
 	}
