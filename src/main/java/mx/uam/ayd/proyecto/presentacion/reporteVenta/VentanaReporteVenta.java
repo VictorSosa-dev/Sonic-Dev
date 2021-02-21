@@ -1,18 +1,12 @@
 package mx.uam.ayd.proyecto.presentacion.reporteVenta;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import org.springframework.stereotype.Component;
 
-import mx.uam.ayd.proyecto.negocio.ServicioProducto;
-import mx.uam.ayd.proyecto.negocio.modelo.DetalleVenta;
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
-import mx.uam.ayd.proyecto.negocio.modelo.Producto;
 import mx.uam.ayd.proyecto.negocio.modelo.Venta;
 
 import javax.swing.JTextField;
@@ -20,8 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import java.time.DayOfWeek;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -64,6 +56,7 @@ public class VentanaReporteVenta extends JFrame {
 	private int dia = fech.get(Calendar.DAY_OF_MONTH);
 	private String fechaF = ano + "/" + mes + "/" + dia;
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private List<Venta> ventas = new ArrayList();
 
 	private DefaultTableModel modeloVenta = new DefaultTableModel() {

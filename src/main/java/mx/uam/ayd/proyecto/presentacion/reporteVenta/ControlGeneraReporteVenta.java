@@ -10,7 +10,6 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mx.uam.ayd.proyecto.negocio.ServicioDetalleVenta;
 import mx.uam.ayd.proyecto.negocio.ServicioEmpleado;
 import mx.uam.ayd.proyecto.negocio.ServicioProducto;
 import mx.uam.ayd.proyecto.negocio.ServicioReporteVenta;

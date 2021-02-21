@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -53,14 +55,20 @@ public class ControlReporteVenta {
 	 */
 	public void inicia(Empleado emp) {
 		List<Venta> ventas = servicioVenta.obtenerVentasPorFecha(fechaF);
-		for(Venta venta : ventas) {
-			List<Producto> productos = new ArrayList<Producto>();
-			for (DetalleVenta detalleVenta : venta.getVentas()) {
-				productos.add(servicioProducto.obtenerProductoPorVenta(detalleVenta).get(0));
+		if(!ventas.isEmpty()) {
+			for(Venta venta : ventas) {
+				List<Producto> productos = new ArrayList<Producto>();
+				for (DetalleVenta detalleVenta : venta.getVentas()) {
+					productos.add(servicioProducto.obtenerProductoPorVenta(detalleVenta).get(0));
+				}
+				ventana.llenaTablaVentas(venta, productos.size());
 			}
-			ventana.llenaTablaVentas(venta, productos.size());
+			ventana.muestra(this, emp);
+		}else {
+			JOptionPane.showMessageDialog(null, "No hay ventas registradas", 
+					"Aviso", JOptionPane.INFORMATION_MESSAGE);
 		}
-		ventana.muestra(this, emp);
+		
 	}
 	
 	/**

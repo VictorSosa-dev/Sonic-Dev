@@ -1,8 +1,5 @@
 package mx.uam.ayd.proyecto.presentacion.reporteVenta;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,8 +9,6 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
 import mx.uam.ayd.proyecto.negocio.modelo.ReporteVenta;
-import mx.uam.ayd.proyecto.negocio.modelo.Venta;
-
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,6 +20,7 @@ import java.awt.Font;
 import java.util.List;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+@SuppressWarnings("serial")
 @Component
 public class VentanaMuestraReportesVenta extends JFrame {
 
@@ -34,6 +30,7 @@ public class VentanaMuestraReportesVenta extends JFrame {
 	private JTextField textIdEmpleadoSesion;
 	private JTable tablaReporteVentas;
 	private Empleado empleadoSesion;
+	@SuppressWarnings("unused")
 	private ControlMuestraReportesVenta controlMuestraReportes;
 	
 	private DefaultTableModel modeloReporteVenta = new DefaultTableModel() {

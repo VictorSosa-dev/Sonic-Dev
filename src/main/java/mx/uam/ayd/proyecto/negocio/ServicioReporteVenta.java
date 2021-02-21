@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import mx.uam.ayd.proyecto.datos.ReporteVentasRepository;
-import mx.uam.ayd.proyecto.negocio.modelo.Empleado;
-import mx.uam.ayd.proyecto.negocio.modelo.ReporteEmpleados;
 import mx.uam.ayd.proyecto.negocio.modelo.ReporteVenta;
 import mx.uam.ayd.proyecto.negocio.modelo.Venta;
 

@@ -1,8 +1,5 @@
 package mx.uam.ayd.proyecto.presentacion.reporteVenta;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -22,14 +19,13 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextArea;
 /**
  * Ventana que lleva el flujo del control para generar un reporte
  * de venta.
@@ -44,7 +40,7 @@ public class VentanaGeneraReporteVenta extends JFrame {
 	private JTextField cargo;
 	private JTextField nombreEmpleado;
 	private JTextField idEmpleado;
-	private JTextField textComentario;
+	private JTextArea textComentario;
 	private JTextField textIdVenta;
 	private JTextField fechaV;
 	private JTextField textEmpleadoVenta;
@@ -174,13 +170,13 @@ public class VentanaGeneraReporteVenta extends JFrame {
 		lblFechaDeVena.setBounds(10, 37, 110, 17);
 		panel_2.add(lblFechaDeVena);
 		
-		JLabel lblEmpleado = new JLabel("Empleado:");
-		lblEmpleado.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblEmpleado.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblEmpleado.setBounds(10, 64, 110, 17);
-		panel_2.add(lblEmpleado);
+		JLabel lblArticulos = new JLabel("Artículos:");
+		lblArticulos.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblArticulos.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblArticulos.setBounds(10, 64, 110, 17);
+		panel_2.add(lblArticulos);
 		
-		textComentario = new JTextField();
+		textComentario = new JTextArea();
 		textComentario.setBounds(10, 125, 681, 79);
 		panel_2.add(textComentario);
 		textComentario.setColumns(10);
@@ -242,7 +238,7 @@ public class VentanaGeneraReporteVenta extends JFrame {
 	 */
 	public void llenaDatosVenta(Producto producto, long idVenta2, int articulos, String empleadoHizoVenta) {
 		this.textIdVenta.setText(String.valueOf(idVenta2));
-		this.textEmpleadoVenta.setText(empleadoHizoVenta);
+		this.textEmpleadoVenta.setText(String.valueOf(articulos));
 		this.idVenta = idVenta2;
 		String a[] = new String[3];
 		a[0] = producto.getNombre();
