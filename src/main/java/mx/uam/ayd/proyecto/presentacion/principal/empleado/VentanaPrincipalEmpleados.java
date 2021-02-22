@@ -35,7 +35,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 
 	public VentanaPrincipalEmpleados() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 560, 337);
+		setBounds(100, 100, 599, 360);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -45,10 +45,10 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		panel.setBorder(new EtchedBorder(EtchedBorder.RAISED, null, null));
 
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(5, 45, 529, 174);
+		panel_1.setBounds(5, 45, 570, 183);
 
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 238, 524, 52);
+		panel_2.setBounds(10, 238, 575, 62);
 		panel_2.setLayout(null);
 
 		JButton btnCierreVenta = new JButton("Inicia cierre de venta");
@@ -59,7 +59,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 		});
 		btnCierreVenta.setForeground(new Color(255, 255, 255));
 		btnCierreVenta.setBackground(new Color(255, 0, 0));
-		btnCierreVenta.setBounds(10, 11, 156, 23);
+		btnCierreVenta.setBounds(54, 10, 156, 23);
 		panel_2.add(btnCierreVenta);
 		panel_1.setLayout(null);
 
@@ -104,7 +104,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 			}
 		});
 
-		btnNuevoPedidoCliente.setBounds(257, 140, 141, 23);
+		btnNuevoPedidoCliente.setBounds(229, 144, 141, 23);
 
 		panel_1.add(btnNuevoPedidoCliente);
 		
@@ -133,7 +133,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 				control.muestraVentanaActualiza(empleado);
 			}
 		});
-		btnActualiza.setBounds(54, 140, 170, 23);
+		btnActualiza.setBounds(380, 45, 170, 23);
 		panel_1.add(btnActualiza);
 		
 		JButton btnVentaMembresia = new JButton("Clientes");
@@ -142,7 +142,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 				control.iniciaClientes(empleado);
 			}
 		});
-		btnVentaMembresia.setBounds(380, 12, 139, 23);
+		btnVentaMembresia.setBounds(380, 12, 170, 23);
 		panel_1.add(btnVentaMembresia);
 		contentPane.add(panel_2);
 		
@@ -161,7 +161,7 @@ public class VentanaPrincipalEmpleados extends JFrame {
 				control.iniciaReporte(empleado);
 			}
 		});
-		btnReporteInventario.setBounds(49, 106, 349, 23);
+		btnReporteInventario.setBounds(49, 106, 321, 23);
 		panel_1.add(btnReporteInventario);
 
 		contentPane.add(panel_2);
